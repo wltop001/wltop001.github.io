@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>测试文章</title>
+    <link href="/2022/11/20/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/"/>
+    <url>/2022/11/20/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/</url>
+    
+    <content type="html"><![CDATA[<p>这是一篇测试文章</p><img src="/2022/11/20/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/test.jpeg" class="" title="图片引用方法一"><p><img src="/test.jpeg" alt="图片引用方法二"></p><p><img src="/images/test.jpeg" alt="图片引用方法三"></p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>原创</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Hello World</title>
     <link href="/2022/11/20/hello-world/"/>
     <url>/2022/11/20/hello-world/</url>
