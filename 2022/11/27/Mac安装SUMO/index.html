@@ -16,23 +16,22 @@
   <meta name="author" content="Leon">
   <meta name="keywords" content="">
   
-    <meta name="description" content="简介深度强化学习算法在城市交通信号控制领域的应用得到了广大研究者的广泛关注，而目前主要的算法验证还是采用交通仿真的方式开展。SUMO作为德国宇航中心开发的开源交通仿真软件，是目前在科研中最常用的开源交通仿真软件之一。然而，由于SUMO对于大规模城市路网的建模比较困难[1]，Zhang等开发了CityFlow仿真软件用于支撑各种交通信号控制算法的仿真验证。 CityFlow同样也是一个微观交通仿真软">
+    <meta name="description" content="Mac 安装SUMO环境准备 Homebrew   安装好HomeBrew后，可以将HomeBrew的源设置为国内的镜像源，这样后面安装SUMO的时候速度会更流畅  12345678910git -C &quot;$(brew --repo)&quot; remote set-url origin https:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;brew.gitgit -C &quot;$">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CityFlow学习">
-<meta property="og:url" content="http://example.com/2022/11/21/CityFlow%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:title" content="Mac安装SUMO">
+<meta property="og:url" content="http://example.com/2022/11/27/Mac%E5%AE%89%E8%A3%85SUMO/index.html">
 <meta property="og:site_name" content="不鹜虚声">
-<meta property="og:description" content="简介深度强化学习算法在城市交通信号控制领域的应用得到了广大研究者的广泛关注，而目前主要的算法验证还是采用交通仿真的方式开展。SUMO作为德国宇航中心开发的开源交通仿真软件，是目前在科研中最常用的开源交通仿真软件之一。然而，由于SUMO对于大规模城市路网的建模比较困难[1]，Zhang等开发了CityFlow仿真软件用于支撑各种交通信号控制算法的仿真验证。 CityFlow同样也是一个微观交通仿真软">
+<meta property="og:description" content="Mac 安装SUMO环境准备 Homebrew   安装好HomeBrew后，可以将HomeBrew的源设置为国内的镜像源，这样后面安装SUMO的时候速度会更流畅  12345678910git -C &quot;$(brew --repo)&quot; remote set-url origin https:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;brew.gitgit -C &quot;$">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-11-21T12:13:54.000Z">
-<meta property="article:modified_time" content="2022-11-22T06:15:36.000Z">
+<meta property="article:published_time" content="2022-11-27T02:19:35.000Z">
+<meta property="article:modified_time" content="2022-11-27T02:20:32.853Z">
 <meta property="article:author" content="Leon">
-<meta property="article:tag" content="CityFlow">
 <meta property="article:tag" content="SUMO">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>CityFlow学习 - 不鹜虚声</title>
+  <title>Mac安装SUMO - 不鹜虚声</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -214,7 +213,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="CityFlow学习"></span>
+            <span id="subtitle" data-typed-text="Mac安装SUMO"></span>
           
         </div>
 
@@ -225,8 +224,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-11-21 20:13" pubdate>
-          2022年11月21日 晚上
+        <time datetime="2022-11-27 10:19" pubdate>
+          2022年11月27日 上午
         </time>
       </span>
     
@@ -238,7 +237,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          3k 字
+          1.3k 字
         
       </span>
     
@@ -250,7 +249,7 @@
         
         
           <!-- compatible with older versions-->
-          26 分钟
+          12 分钟
         
       </span>
     
@@ -296,108 +295,67 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">CityFlow学习</h1>
+            <h1 style="display: none">Mac安装SUMO</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>深度强化学习算法在城市交通信号控制领域的应用得到了广大研究者的广泛关注，而目前主要的算法验证还是采用交通仿真的方式开展。SUMO作为德国宇航中心开发的开源交通仿真软件，是目前在科研中最常用的开源交通仿真软件之一。然而，由于SUMO对于大规模城市路网的建模比较困难[1]，Zhang等开发了CityFlow仿真软件用于支撑各种交通信号控制算法的仿真验证。</p>
-<p>CityFlow同样也是一个微观交通仿真软件，可以实时仿真城市道路车辆的行驶行为。CityFlow在SUMO仿真软件的基础上采用了多线程技术来加速仿真运行。同时，对数据结构和仿真算法也做了进一步的优化。</p>
-<p>CityFlow的核心组成部分：</p>
-<ol>
-<li>路网模型：包括Road、Lane、Segment，Intersection、RoadLink、LaneLink、Cross等</li>
-<li>车辆跟驰模型：根据前方信号灯状态、前车行驶状态等确定下一个仿真时刻当前车辆的期望速度</li>
-<li>交叉口逻辑：定义车辆在信号交叉口的微观行驶行为</li>
-<li>换道模型：决定车辆何时、以什么样的方式变换车道</li>
-</ol>
-<h2 id="安装配置CityFlow"><a href="#安装配置CityFlow" class="headerlink" title="安装配置CityFlow"></a>安装配置CityFlow</h2><h3 id="通过Docker安装"><a href="#通过Docker安装" class="headerlink" title="通过Docker安装"></a>通过Docker安装</h3><p>拉取镜像</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker pull cityflowproject/cityflow:latest<br></code></pre></td></tr></table></figure>
-
-<p>运行</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">docker <span class="hljs-built_in">run</span> -<span class="hljs-keyword">it</span> cityflowproject/cityflow:latest<br></code></pre></td></tr></table></figure>
-
-<p>测试：</p>
-<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs abnf">import cityflow<br><span class="hljs-attribute">eng</span> <span class="hljs-operator">=</span> cityflow.Engine<br></code></pre></td></tr></table></figure>
-
-<h3 id="通过源码安装"><a href="#通过源码安装" class="headerlink" title="通过源码安装"></a>通过源码安装</h3><p>也可以通过源码直接安装。基于环境要求：</p>
-<ul>
-<li>python version &gt;&#x3D; 3.5</li>
-<li>cpp dependencies</li>
+                <h1 id="Mac-安装SUMO"><a href="#Mac-安装SUMO" class="headerlink" title="Mac 安装SUMO"></a>Mac 安装SUMO</h1><h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><ul>
+<li>Homebrew</li>
 </ul>
-<p>安装依赖：</p>
-<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">sudo apt update &amp;&amp; sudo apt <span class="hljs-keyword">install </span>-y <span class="hljs-keyword">build-essential </span>cmake<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>安装好HomeBrew后，可以将HomeBrew的源设置为国内的镜像源，这样后面安装SUMO的时候速度会更流畅</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash">git -C <span class="hljs-string">&quot;<span class="hljs-subst">$(brew --repo)</span>&quot;</span> remote set-url origin https://mirrors.ustc.edu.cn/brew.git<br><br>git -C <span class="hljs-string">&quot;<span class="hljs-subst">$(brew --repo homebrew/core)</span>&quot;</span> remote set-url origin https://mirrors.ustc.edu.cn/homebrew-core.git<br><br>git -C <span class="hljs-string">&quot;<span class="hljs-subst">$(brew --repo homebrew/cask)</span>&quot;</span> remote set-url origin https://mirrors.ustc.edu.cn/homebrew-cask.git<br><br>brew update<br><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles&#x27;</span> &gt;&gt; ~/.bash_profile<br><span class="hljs-built_in">source</span> ~/.bash_profile<br></code></pre></td></tr></table></figure>
 
-<p>从github上克隆代码：</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">git clone https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/cityflow-project/</span>CityFlow.git<br></code></pre></td></tr></table></figure>
 
-<p>进入CityFlow目录，通过pip方式安装：</p>
-<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs 1c">cd CityFlow <span class="hljs-meta">&amp;&amp; pip install .</span><br></code></pre></td></tr></table></figure>
 
-<p>测试：</p>
-<h3 id="import-cityflow-eng-x3D-cityflow-Engine"><a href="#import-cityflow-eng-x3D-cityflow-Engine" class="headerlink" title="import cityflow eng &#x3D; cityflow.Engine"></a>import cityflow eng &#x3D; cityflow.Engine</h3><h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><p>Windows系统安装起来麻烦一些，官方建议是通过WSL（Windows Subsystem for Linux）或者Docker来安装</p>
-<p>装好了Windows10的Docker环境后，发现拉取docker镜像速度太慢了，隧改为虚拟机+Ubuntu系统方式</p>
-<p>测试成功</p>
-<h2 id="仿真流程"><a href="#仿真流程" class="headerlink" title="仿真流程"></a>仿真流程</h2><h3 id="创建仿真引擎"><a href="#创建仿真引擎" class="headerlink" title="创建仿真引擎"></a>创建仿真引擎</h3><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">import cityflow<br>eng = cityflow.<span class="hljs-constructor">Engine(<span class="hljs-params">config_path</span>, <span class="hljs-params">thread_num</span>=1)</span><br></code></pre></td></tr></table></figure>
+<h2 id="安装XQuartz"><a href="#安装XQuartz" class="headerlink" title="安装XQuartz"></a>安装XQuartz</h2><p>SUMO-GUI需要XQuartz才能正常显示可视化界面，因此需要首先安装xquartz</p>
+<p><code>brew install --cask xquartz</code></p>
+<h2 id="安装SUMO"><a href="#安装SUMO" class="headerlink" title="安装SUMO"></a>安装SUMO</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">brew tap dlr-ts/sumo<br>brew install sumo<br></code></pre></td></tr></table></figure>
 
-<p>参数说明：</p>
+
+
+<p>过程中安装失败，需要单独手工安装对应的库，包括不限于以下：</p>
+<blockquote>
 <ul>
-<li><code>config_path</code>：配置文件的路径</li>
-<li><code>thread_num</code>：仿真的线程数</li>
-</ul>
-<h3 id="编辑配置文件"><a href="#编辑配置文件" class="headerlink" title="编辑配置文件"></a>编辑配置文件</h3><p>配置文件包括以下内容：</p>
-<ul>
-<li><code>interval</code>：每个仿真步的时长（单位：秒）</li>
-<li><code>seed</code>：随机种子</li>
-<li><code>dir</code>：根目录</li>
-<li><code>roadnetFile</code>：路网文件的目录</li>
-<li><code>flowFile</code>：车辆需求文件的目录</li>
-<li><code>rlTrafficLight</code>：是否允许通过python API来控制仿真路网内部的交通信号灯</li>
-<li><code>saveReplay</code>：是否保存仿真记录，用于回放</li>
-</ul>
-<p>配置文件的样例如下：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;interval&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1.0</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;seed&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;dir&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;data/&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;roadnetFile&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;roadnet/testcase_roadnet_3x3.json&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;flowFile&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;flow/testcase_flow_3x3.json&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;rlTrafficLight&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;saveReplay&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;roadnetLogFile&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;frontend/web/testcase_roadnet_3x3.json&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;replayLogFile&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;frontend/web/testcase_replay_3x3.txt&quot;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
-
-
-
-<h3 id="运行仿真"><a href="#运行仿真" class="headerlink" title="运行仿真"></a>运行仿真</h3><p>单步执行仿真</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">eng.next_step()<br></code></pre></td></tr></table></figure>
-
-
-
-<h2 id="数据获取接口"><a href="#数据获取接口" class="headerlink" title="数据获取接口"></a>数据获取接口</h2><blockquote>
-<ul>
-<li>get_vehicle_count()</li>
-<li>get_vehicles(include_waiting&#x3D;False)</li>
-<li>get_lane_vehicle_count()</li>
-<li>get_lane_waiting_vehicle_count()</li>
-<li>get_lane_vehicles()</li>
-<li>get_vehicle_info(vehicle_id)</li>
-<li>get_vehicle_speed()</li>
-<li>get_vehicle_distance()</li>
-<li>get_leader(vehicle_id)</li>
-<li>get_current_time()</li>
-<li>get_average_travel_time()</li>
+<li><p>bottle</p>
+</li>
+<li><p>xorgproto</p>
+</li>
+<li><p>libxau</p>
+</li>
+<li><p>libxcb</p>
+</li>
+<li><p>libx11</p>
+</li>
+<li><p>libxext</p>
+</li>
+<li><p>libxft</p>
+</li>
+<li><p>gettext</p>
+</li>
+<li><p>libxdamage</p>
+</li>
+<li><p>……</p>
+</li>
 </ul>
 </blockquote>
-<h2 id="控制接口"><a href="#控制接口" class="headerlink" title="控制接口"></a>控制接口</h2><blockquote>
-<ul>
-<li>set_tl_phase(intersection_id, phase_id)</li>
-<li>set_vehicle_speed(vehicle_id, speed)</li>
-<li>reset(seed&#x3D;False)</li>
-<li>snapshot()</li>
-<li>load(archive)</li>
-<li>load_from_file(path)</li>
-<li>set_random_seed(seed)</li>
-<li>set_vehicle_route(vehicle_id, route)</li>
-</ul>
-</blockquote>
-<h2 id="Python接口"><a href="#Python接口" class="headerlink" title="Python接口"></a>Python接口</h2><p>为方便用户二次开发，CityFlow提供了python的二次开发调用接口pybind 。通过该接口，用户可以获取仿真过程中的各种信息，包括车道上的车辆数、车辆速度等，同时也可以对路网的交通信号灯下发指令进行控制。</p>
-<p>接口调用的示例如下：</p>
-<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">import engine<br>eng = engine.<span class="hljs-constructor">Engine(<span class="hljs-params">config_file</span>)</span><br>phase = <span class="hljs-literal">[<span class="hljs-operator">...</span>]</span><br><span class="hljs-keyword">for</span> step <span class="hljs-keyword">in</span> range(<span class="hljs-number">3600</span>):<br>    eng.set<span class="hljs-constructor">_tl_phase(&#x27;<span class="hljs-params">intersection_1_1</span>&#x27;, <span class="hljs-params">phase</span>[<span class="hljs-params">step</span>])</span><br>    eng.next<span class="hljs-constructor">_step()</span><br>    eng.get<span class="hljs-constructor">_current_time()</span><br>    eng.get<span class="hljs-constructor">_lane_vehicle_count()</span><br>    eng.get<span class="hljs-constructor">_lane_waiting_vehicle_count()</span><br>    eng.get<span class="hljs-constructor">_lane_vehicles()</span><br>    eng.get<span class="hljs-constructor">_vehicle_speed()</span><br>    # <span class="hljs-keyword">do</span> your own code<span class="hljs-operator"> ...</span><br><span class="hljs-operator">    </span>pass<br></code></pre></td></tr></table></figure>
+<h2 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h2><p>确保系统中有<strong>SUMO_HOME</strong>的环境变量，并且指向SUMO安装的位置。在终端中输入以下这段命令，</p>
+<p><code>touch ~/.bash_profile; open ~/.bash_profile</code></p>
+<p>在文件末尾追加：</p>
+<p><code>export SUMO_HOME=/usr/local/Cellar/sumo/1.15.0/share/sumo/ </code></p>
+<p>添加环境变量</p>
+<p>添加后保存退出重新启动终端，测试SUMO是否安装成功。</p>
+<p><code>echo $SUMO_HOME</code></p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>在命令行输入<code>sumo</code> 或者 <code>sumo-gui</code>，测试是否可以正常启动</p>
+<h2 id="报错问题解决"><a href="#报错问题解决" class="headerlink" title="报错问题解决"></a>报错问题解决</h2><h3 id="Library-not-loaded-‘-x2F-usr-x2F-local-x2F-opt-x2F-jpeg-turbo-x2F-lib-x2F-libjpeg-8-dylib解决办法"><a href="#Library-not-loaded-‘-x2F-usr-x2F-local-x2F-opt-x2F-jpeg-turbo-x2F-lib-x2F-libjpeg-8-dylib解决办法" class="headerlink" title="Library not loaded: ‘&#x2F;usr&#x2F;local&#x2F;opt&#x2F;jpeg-turbo&#x2F;lib&#x2F;libjpeg.8.dylib解决办法"></a>Library not loaded: ‘&#x2F;usr&#x2F;local&#x2F;opt&#x2F;jpeg-turbo&#x2F;lib&#x2F;libjpeg.8.dylib解决办法</h3><p>错误原因：在对应路径下找不到 libjpeg.8.dylib文件。</p>
+<p>解决方法: </p>
+<p>以下命令按顺序在终端进行执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">1：  wget -c http://www.ijg.org/files/jpegsrc.v8d.tar.gz<br>2：  tar xzf jpegsrc.v8d.tar.gz<br>3：　<span class="hljs-built_in">cd</span> jpeg-8d<br>4:   ./configure<br>5:   make<br>6:   <span class="hljs-comment"># cp ./.libs/libjpeg.8.dylib /usr/local/opt/jpeg/lib</span><br>7:   <span class="hljs-built_in">cp</span> ./.libs/libjpeg.8.dylib /usr/local/lib/<br></code></pre></td></tr></table></figure>
 
-<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><p>[1]  H. Zhang, S. Feng, C. Liu et. al, 《CityFlow: A Multi-Agent Reinforcement Learning Environment for Large Scale City Traffic Scenario》, <em>The World Wide Web Conference</em>, 页 3620–3624, 5月 2019, doi: <a target="_blank" rel="noopener" href="https://doi.org/10.1145/3308558.3314139">10.1145&#x2F;3308558.3314139</a>.  [2] <a target="_blank" rel="noopener" href="https://cityflow.readthedocs.io/en/latest/start.html">https://cityflow.readthedocs.io/en/latest/start.html</a></p>
-<p>[3] <a target="_blank" rel="noopener" href="https://cityflow-project.github.io/#about">https://cityflow-project.github.io/#about</a></p>
-<p>[4] <a target="_blank" rel="noopener" href="https://github.com/pixijs/pixijs">https://github.com/pixijs/pixijs</a></p>
+
+
 
                 
               </div>
@@ -431,8 +389,6 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/CityFlow/">#CityFlow</a>
-      
         <a href="/tags/SUMO/">#SUMO</a>
       
     </div>
@@ -445,8 +401,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>CityFlow学习</div>
-      <div>http://example.com/2022/11/21/CityFlow学习/</div>
+      <div>Mac安装SUMO</div>
+      <div>http://example.com/2022/11/27/Mac安装SUMO/</div>
     </div>
     <div class="license-meta">
       
@@ -458,7 +414,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年11月21日</div>
+          <div>2022年11月27日</div>
         </div>
       
       
@@ -490,18 +446,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/11/27/Mac%E5%AE%89%E8%A3%85SUMO/" title="Mac安装SUMO">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Mac安装SUMO</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/11/20/SUMO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="SUMO学习笔记">
-                        <span class="hidden-mobile">SUMO学习笔记</span>
+                      <a href="/2022/11/21/CityFlow%E5%AD%A6%E4%B9%A0/" title="CityFlow学习">
+                        <span class="hidden-mobile">CityFlow学习</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
