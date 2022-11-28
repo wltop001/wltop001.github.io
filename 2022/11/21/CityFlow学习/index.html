@@ -24,7 +24,7 @@
 <meta property="og:description" content="简介深度强化学习算法在城市交通信号控制领域的应用得到了广大研究者的广泛关注，而目前主要的算法验证还是采用交通仿真的方式开展。SUMO作为德国宇航中心开发的开源交通仿真软件，是目前在科研中最常用的开源交通仿真软件之一。然而，由于SUMO对于大规模城市路网的建模比较困难[1]，Zhang等开发了CityFlow仿真软件用于支撑各种交通信号控制算法的仿真验证。 CityFlow同样也是一个微观交通仿真软">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-21T12:13:54.000Z">
-<meta property="article:modified_time" content="2022-11-22T06:15:36.000Z">
+<meta property="article:modified_time" content="2022-11-28T02:04:10.711Z">
 <meta property="article:author" content="Leon">
 <meta property="article:tag" content="CityFlow">
 <meta property="article:tag" content="SUMO">
@@ -238,7 +238,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          3k 字
+          3.5k 字
         
       </span>
     
@@ -250,7 +250,7 @@
         
         
           <!-- compatible with older versions-->
-          26 分钟
+          29 分钟
         
       </span>
     
@@ -319,7 +319,9 @@
 <p>测试：</p>
 <figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs abnf">import cityflow<br><span class="hljs-attribute">eng</span> <span class="hljs-operator">=</span> cityflow.Engine<br></code></pre></td></tr></table></figure>
 
-<h3 id="通过源码安装"><a href="#通过源码安装" class="headerlink" title="通过源码安装"></a>通过源码安装</h3><p>也可以通过源码直接安装。基于环境要求：</p>
+
+
+<h3 id="通过源码安装"><a href="#通过源码安装" class="headerlink" title="通过源码安装"></a>通过源码安装</h3><h4 id="Ubuntu"><a href="#Ubuntu" class="headerlink" title="Ubuntu"></a>Ubuntu</h4><p>也可以通过源码直接安装。基于环境要求：</p>
 <ul>
 <li>python version &gt;&#x3D; 3.5</li>
 <li>cpp dependencies</li>
@@ -334,9 +336,19 @@
 <figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs 1c">cd CityFlow <span class="hljs-meta">&amp;&amp; pip install .</span><br></code></pre></td></tr></table></figure>
 
 <p>测试：</p>
-<h3 id="import-cityflow-eng-x3D-cityflow-Engine"><a href="#import-cityflow-eng-x3D-cityflow-Engine" class="headerlink" title="import cityflow eng &#x3D; cityflow.Engine"></a>import cityflow eng &#x3D; cityflow.Engine</h3><h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><p>Windows系统安装起来麻烦一些，官方建议是通过WSL（Windows Subsystem for Linux）或者Docker来安装</p>
+<p><code>import cityflow eng = cityflow.Engine</code></p>
+<h4 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h4><p>Windows系统安装起来麻烦一些，官方建议是通过WSL（Windows Subsystem for Linux）或者Docker来安装</p>
 <p>装好了Windows10的Docker环境后，发现拉取docker镜像速度太慢了，隧改为虚拟机+Ubuntu系统方式</p>
 <p>测试成功</p>
+<h4 id="MacOS"><a href="#MacOS" class="headerlink" title="MacOS"></a>MacOS</h4><p>先安装Cmake<br><code>brew install cmake</code></p>
+<p>从github上克隆代码：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">git clone https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/cityflow-project/</span>CityFlow.git<br></code></pre></td></tr></table></figure>
+
+<p>进入CityFlow目录，通过pip方式安装：</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs 1c">cd CityFlow <span class="hljs-meta">&amp;&amp; pip install .</span><br></code></pre></td></tr></table></figure>
+
+
+
 <h2 id="仿真流程"><a href="#仿真流程" class="headerlink" title="仿真流程"></a>仿真流程</h2><h3 id="创建仿真引擎"><a href="#创建仿真引擎" class="headerlink" title="创建仿真引擎"></a>创建仿真引擎</h3><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">import cityflow<br>eng = cityflow.<span class="hljs-constructor">Engine(<span class="hljs-params">config_path</span>, <span class="hljs-params">thread_num</span>=1)</span><br></code></pre></td></tr></table></figure>
 
 <p>参数说明：</p>
@@ -394,6 +406,19 @@
 <h2 id="Python接口"><a href="#Python接口" class="headerlink" title="Python接口"></a>Python接口</h2><p>为方便用户二次开发，CityFlow提供了python的二次开发调用接口pybind 。通过该接口，用户可以获取仿真过程中的各种信息，包括车道上的车辆数、车辆速度等，同时也可以对路网的交通信号灯下发指令进行控制。</p>
 <p>接口调用的示例如下：</p>
 <figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">import engine<br>eng = engine.<span class="hljs-constructor">Engine(<span class="hljs-params">config_file</span>)</span><br>phase = <span class="hljs-literal">[<span class="hljs-operator">...</span>]</span><br><span class="hljs-keyword">for</span> step <span class="hljs-keyword">in</span> range(<span class="hljs-number">3600</span>):<br>    eng.set<span class="hljs-constructor">_tl_phase(&#x27;<span class="hljs-params">intersection_1_1</span>&#x27;, <span class="hljs-params">phase</span>[<span class="hljs-params">step</span>])</span><br>    eng.next<span class="hljs-constructor">_step()</span><br>    eng.get<span class="hljs-constructor">_current_time()</span><br>    eng.get<span class="hljs-constructor">_lane_vehicle_count()</span><br>    eng.get<span class="hljs-constructor">_lane_waiting_vehicle_count()</span><br>    eng.get<span class="hljs-constructor">_lane_vehicles()</span><br>    eng.get<span class="hljs-constructor">_vehicle_speed()</span><br>    # <span class="hljs-keyword">do</span> your own code<span class="hljs-operator"> ...</span><br><span class="hljs-operator">    </span>pass<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="实验使用"><a href="#实验使用" class="headerlink" title="实验使用"></a>实验使用</h2><h3 id="路网文件下载"><a href="#路网文件下载" class="headerlink" title="路网文件下载"></a>路网文件下载</h3><p>打开github上的cityflow-project并下载，地址为：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/cityflow-project/CityFlow">https://github.com/cityflow-project/CityFlow</a></p>
+<p>奇怪的是我到现在还没找到路网的配置文件（1x1,1x2,2x3,….）</p>
+<h3 id="挂载文件到项目上"><a href="#挂载文件到项目上" class="headerlink" title="挂载文件到项目上"></a>挂载文件到项目上</h3><p><code>docker run -it -v /root/home/cityflow:/cityflow cityflowproject/cityflow:latest bash</code></p>
+<h3 id="退出项目"><a href="#退出项目" class="headerlink" title="退出项目"></a>退出项目</h3><p><code>ctrl+P+Q</code></p>
+<h3 id="再次进入容器"><a href="#再次进入容器" class="headerlink" title="再次进入容器"></a>再次进入容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker ps -a <br>docker <span class="hljs-built_in">exec</span> -it <span class="hljs-variable">$container_id</span> bash<br></code></pre></td></tr></table></figure>
+
+
+
+
 
 <h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><p>[1]  H. Zhang, S. Feng, C. Liu et. al, 《CityFlow: A Multi-Agent Reinforcement Learning Environment for Large Scale City Traffic Scenario》, <em>The World Wide Web Conference</em>, 页 3620–3624, 5月 2019, doi: <a target="_blank" rel="noopener" href="https://doi.org/10.1145/3308558.3314139">10.1145&#x2F;3308558.3314139</a>.  [2] <a target="_blank" rel="noopener" href="https://cityflow.readthedocs.io/en/latest/start.html">https://cityflow.readthedocs.io/en/latest/start.html</a></p>
 <p>[3] <a target="_blank" rel="noopener" href="https://cityflow-project.github.io/#about">https://cityflow-project.github.io/#about</a></p>
