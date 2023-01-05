@@ -16,22 +16,22 @@
   <meta name="author" content="Leon">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Mac 安装SUMO环境准备 Homebrew   安装好HomeBrew后，可以将HomeBrew的源设置为国内的镜像源，这样后面安装SUMO的时候速度会更流畅  12345678910git -C &quot;$(brew --repo)&quot; remote set-url origin https:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;brew.gitgit -C &quot;$">
+    <meta name="description" content="TraCI学习笔记TraCI是交通控制接口（Traffic Control Interface）的缩写，提供了一种可以在线读取SUMO仿真对象的状态以及改变仿真目标行为动作、状态的交互接口。 TraCI提供基于TCP&#x2F;IP通信的方式来与SUMO进行交互，其中SUMO作为TCP的服务端，可以使用--remote-port选项来指定服务端的监听接口。 使用TraCI启动SUMO当启动SUMO">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mac安装SUMO">
-<meta property="og:url" content="http://example.com/2022/11/27/Mac%E5%AE%89%E8%A3%85SUMO/index.html">
+<meta property="og:title" content="TraCI学习笔记">
+<meta property="og:url" content="http://example.com/2022/12/10/TraCI%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="不鹜虚声">
-<meta property="og:description" content="Mac 安装SUMO环境准备 Homebrew   安装好HomeBrew后，可以将HomeBrew的源设置为国内的镜像源，这样后面安装SUMO的时候速度会更流畅  12345678910git -C &quot;$(brew --repo)&quot; remote set-url origin https:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;brew.gitgit -C &quot;$">
+<meta property="og:description" content="TraCI学习笔记TraCI是交通控制接口（Traffic Control Interface）的缩写，提供了一种可以在线读取SUMO仿真对象的状态以及改变仿真目标行为动作、状态的交互接口。 TraCI提供基于TCP&#x2F;IP通信的方式来与SUMO进行交互，其中SUMO作为TCP的服务端，可以使用--remote-port选项来指定服务端的监听接口。 使用TraCI启动SUMO当启动SUMO">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-11-27T02:19:35.000Z">
-<meta property="article:modified_time" content="2022-12-01T05:42:12.621Z">
+<meta property="article:published_time" content="2022-12-10T08:40:51.000Z">
+<meta property="article:modified_time" content="2022-12-10T11:04:11.671Z">
 <meta property="article:author" content="Leon">
 <meta property="article:tag" content="SUMO">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Mac安装SUMO - 不鹜虚声</title>
+  <title>TraCI学习笔记 - 不鹜虚声</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -213,7 +213,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Mac安装SUMO"></span>
+            <span id="subtitle" data-typed-text="TraCI学习笔记"></span>
           
         </div>
 
@@ -224,8 +224,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-11-27 10:19" pubdate>
-          2022年11月27日 上午
+        <time datetime="2022-12-10 16:40" pubdate>
+          2022年12月10日 下午
         </time>
       </span>
     
@@ -237,7 +237,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          1.6k 字
+          491 字
         
       </span>
     
@@ -249,7 +249,7 @@
         
         
           <!-- compatible with older versions-->
-          14 分钟
+          5 分钟
         
       </span>
     
@@ -295,70 +295,28 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Mac安装SUMO</h1>
+            <h1 style="display: none">TraCI学习笔记</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Mac-安装SUMO"><a href="#Mac-安装SUMO" class="headerlink" title="Mac 安装SUMO"></a>Mac 安装SUMO</h1><h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><ul>
-<li>Homebrew</li>
-</ul>
-<blockquote>
-<p>安装好HomeBrew后，可以将HomeBrew的源设置为国内的镜像源，这样后面安装SUMO的时候速度会更流畅</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash">git -C <span class="hljs-string">&quot;<span class="hljs-subst">$(brew --repo)</span>&quot;</span> remote set-url origin https://mirrors.ustc.edu.cn/brew.git<br><br>git -C <span class="hljs-string">&quot;<span class="hljs-subst">$(brew --repo homebrew/core)</span>&quot;</span> remote set-url origin https://mirrors.ustc.edu.cn/homebrew-core.git<br><br>git -C <span class="hljs-string">&quot;<span class="hljs-subst">$(brew --repo homebrew/cask)</span>&quot;</span> remote set-url origin https://mirrors.ustc.edu.cn/homebrew-cask.git<br><br>brew update<br><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles&#x27;</span> &gt;&gt; ~/.bash_profile<br><span class="hljs-built_in">source</span> ~/.bash_profile<br></code></pre></td></tr></table></figure>
-
-
-
-<h2 id="安装XQuartz"><a href="#安装XQuartz" class="headerlink" title="安装XQuartz"></a>安装XQuartz</h2><p>SUMO-GUI需要XQuartz才能正常显示可视化界面，因此需要首先安装xquartz</p>
-<p><code>brew install --cask xquartz</code></p>
-<h2 id="安装SUMO"><a href="#安装SUMO" class="headerlink" title="安装SUMO"></a>安装SUMO</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">brew tap dlr-ts/sumo<br>brew install sumo<br></code></pre></td></tr></table></figure>
-
-
-
-<p>过程中安装失败，需要单独手工安装对应的库，包括不限于以下：</p>
-<blockquote>
+                <h1 id="TraCI学习笔记"><a href="#TraCI学习笔记" class="headerlink" title="TraCI学习笔记"></a>TraCI学习笔记</h1><p>TraCI是交通控制接口（Traffic Control Interface）的缩写，提供了一种可以在线读取SUMO仿真对象的状态以及改变仿真目标行为动作、状态的交互接口。</p>
+<p>TraCI提供基于TCP&#x2F;IP通信的方式来与SUMO进行交互，其中SUMO作为TCP的服务端，可以使用<code>--remote-port</code>选项来指定服务端的监听接口。</p>
+<h2 id="使用TraCI启动SUMO"><a href="#使用TraCI启动SUMO" class="headerlink" title="使用TraCI启动SUMO"></a>使用TraCI启动SUMO</h2><p>当启动SUMO后，客户端可以通过连接指定的端口建立TCP连接来实现仿真数据的交互。</p>
+<h2 id="仿真运行控制及数据获取"><a href="#仿真运行控制及数据获取" class="headerlink" title="仿真运行控制及数据获取"></a>仿真运行控制及数据获取</h2><p>客户端可以通过TCP连接向SUMO发送指令来控制仿真的运行、影响仿真路网中车辆的行为、获取仿真路网的状态数据等。</p>
+<p>常用的指令包括以下：</p>
 <ul>
-<li><p>bottle</p>
+<li><p><code>getVersion</code> 获取版本号，返回为列表形式，包括TraCI API版本和SUMO版本</p>
 </li>
-<li><p>xorgproto</p>
-</li>
-<li><p>libxau</p>
-</li>
-<li><p>libxcb</p>
-</li>
-<li><p>libx11</p>
-</li>
-<li><p>libxext</p>
-</li>
-<li><p>libxft</p>
-</li>
-<li><p>gettext</p>
-</li>
-<li><p>libxdamage</p>
-</li>
-<li><p>……</p>
+<li><p><code>simulationStep</code> 单步执行仿真</p>
 </li>
 </ul>
-</blockquote>
-<h2 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h2><p>确保系统中有<strong>SUMO_HOME</strong>的环境变量，并且指向SUMO安装的位置。在终端中输入以下这段命令，</p>
-<p><code>touch ~/.bash_profile; open ~/.bash_profile</code></p>
-<p>在文件末尾追加：</p>
-<p><code>export SUMO_HOME=/usr/local/Cellar/sumo/1.15.0/share/sumo/ </code></p>
-<p>添加环境变量</p>
-<p>添加后保存退出重新启动终端，测试SUMO是否安装成功。</p>
-<p><code>echo $SUMO_HOME</code></p>
-<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>在命令行输入<code>sumo</code> 或者 <code>sumo-gui</code>，测试是否可以正常启动</p>
-<h2 id="报错问题解决"><a href="#报错问题解决" class="headerlink" title="报错问题解决"></a>报错问题解决</h2><h3 id="Library-not-loaded-‘-x2F-usr-x2F-local-x2F-opt-x2F-jpeg-turbo-x2F-lib-x2F-libjpeg-8-dylib解决办法"><a href="#Library-not-loaded-‘-x2F-usr-x2F-local-x2F-opt-x2F-jpeg-turbo-x2F-lib-x2F-libjpeg-8-dylib解决办法" class="headerlink" title="Library not loaded: ‘&#x2F;usr&#x2F;local&#x2F;opt&#x2F;jpeg-turbo&#x2F;lib&#x2F;libjpeg.8.dylib解决办法"></a>Library not loaded: ‘&#x2F;usr&#x2F;local&#x2F;opt&#x2F;jpeg-turbo&#x2F;lib&#x2F;libjpeg.8.dylib解决办法</h3><p>错误原因：在对应路径下找不到 libjpeg.8.dylib文件。</p>
-<p>解决方法: </p>
-<p>以下命令按顺序在终端进行执行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">1：  wget -c http://www.ijg.org/files/jpegsrc.v8d.tar.gz<br>2：  tar xzf jpegsrc.v8d.tar.gz<br>3：　<span class="hljs-built_in">cd</span> jpeg-8d<br>4:   ./configure<br>5:   make<br>6:   <span class="hljs-comment"># cp ./.libs/libjpeg.8.dylib /usr/local/opt/jpeg/lib</span><br>7:   <span class="hljs-built_in">cp</span> ./.libs/libjpeg.8.dylib /usr/local/lib/<br></code></pre></td></tr></table></figure>
-
-<h3 id="sumo-gui启动报错"><a href="#sumo-gui启动报错" class="headerlink" title="sumo-gui启动报错"></a>sumo-gui启动报错</h3><p>运行<code>sumo-gui</code>，有可能出现报错信息，如下：</p>
-<p><code>FXApp::openDisplay: unable to open display :0.0</code></p>
-<p>出现上面告警的原因是没有启动x11进程，也就是xquartz，X11也叫做X Windows系统，它是在unix或类unix系统上（如mac os）建立图形用户界面的标准工具包和协议。</p>
-<p>在MacOS搜索<code>xQuartz.app</code>，启动后再运行<code>sumo-gui</code>命令即可</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>[1] <a target="_blank" rel="noopener" href="http://madapapa.com/wordpress/?p=305">http://madapapa.com/wordpress/?p=305</a></p>
+<p>客户端通过调用<code>simulationStep</code>函数来控制仿真的运行，如果有订阅的信息，在单步执行之后，SUMO会返回订阅的信息。</p>
+<ul>
+<li><code>close</code> 关闭连接，停止仿真并关闭SUMO</li>
+<li><code>load</code> 加载仿真</li>
+<li><code>setOrder</code> 在多客户端连接的情况下，指定客户端的执行顺序</li>
+</ul>
 
                 
               </div>
@@ -404,8 +362,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Mac安装SUMO</div>
-      <div>http://example.com/2022/11/27/Mac安装SUMO/</div>
+      <div>TraCI学习笔记</div>
+      <div>http://example.com/2022/12/10/TraCI学习笔记/</div>
     </div>
     <div class="license-meta">
       
@@ -417,7 +375,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年11月27日</div>
+          <div>2022年12月10日</div>
         </div>
       
       
@@ -449,9 +407,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/12/10/TraCI%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="TraCI学习笔记">
+                      <a href="/2023/01/05/Pandas%E6%A0%B8%E5%BF%83%E7%AC%94%E8%AE%B0/" title="Pandas核心笔记">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">TraCI学习笔记</span>
+                        <span class="hidden-mobile">Pandas核心笔记</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -459,8 +417,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/11/21/CityFlow%E5%AD%A6%E4%B9%A0/" title="CityFlow学习">
-                        <span class="hidden-mobile">CityFlow学习</span>
+                      <a href="/2022/11/27/Mac%E5%AE%89%E8%A3%85SUMO/" title="Mac安装SUMO">
+                        <span class="hidden-mobile">Mac安装SUMO</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

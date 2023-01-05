@@ -16,22 +16,22 @@
   <meta name="author" content="Leon">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Mac 安装SUMO环境准备 Homebrew   安装好HomeBrew后，可以将HomeBrew的源设置为国内的镜像源，这样后面安装SUMO的时候速度会更流畅  12345678910git -C &quot;$(brew --repo)&quot; remote set-url origin https:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;brew.gitgit -C &quot;$">
+    <meta name="description" content="创建DataFrames从字典创建： 1234import pandas as pddic &#x3D; &amp;#123;&quot;a&quot;:[1,2,3], &quot;b&quot;:[4,5,6], &quot;c&quot;:[7,8,9]&amp;#125;df &#x3D; pd.DataFrame(dic)print(df)    数据描述1234567891011121314151617# 统计某列数据出">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mac安装SUMO">
-<meta property="og:url" content="http://example.com/2022/11/27/Mac%E5%AE%89%E8%A3%85SUMO/index.html">
+<meta property="og:title" content="Pandas核心笔记">
+<meta property="og:url" content="http://example.com/2023/01/05/Pandas%E6%A0%B8%E5%BF%83%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="不鹜虚声">
-<meta property="og:description" content="Mac 安装SUMO环境准备 Homebrew   安装好HomeBrew后，可以将HomeBrew的源设置为国内的镜像源，这样后面安装SUMO的时候速度会更流畅  12345678910git -C &quot;$(brew --repo)&quot; remote set-url origin https:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;brew.gitgit -C &quot;$">
+<meta property="og:description" content="创建DataFrames从字典创建： 1234import pandas as pddic &#x3D; &amp;#123;&quot;a&quot;:[1,2,3], &quot;b&quot;:[4,5,6], &quot;c&quot;:[7,8,9]&amp;#125;df &#x3D; pd.DataFrame(dic)print(df)    数据描述1234567891011121314151617# 统计某列数据出">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-11-27T02:19:35.000Z">
-<meta property="article:modified_time" content="2022-12-01T05:42:12.621Z">
+<meta property="article:published_time" content="2023-01-05T09:19:57.000Z">
+<meta property="article:modified_time" content="2023-01-05T10:46:41.805Z">
 <meta property="article:author" content="Leon">
-<meta property="article:tag" content="SUMO">
+<meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Mac安装SUMO - 不鹜虚声</title>
+  <title>Pandas核心笔记 - 不鹜虚声</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -213,7 +213,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Mac安装SUMO"></span>
+            <span id="subtitle" data-typed-text="Pandas核心笔记"></span>
           
         </div>
 
@@ -224,8 +224,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-11-27 10:19" pubdate>
-          2022年11月27日 上午
+        <time datetime="2023-01-05 17:19" pubdate>
+          2023年1月5日 下午
         </time>
       </span>
     
@@ -237,7 +237,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          1.6k 字
+          1.5k 字
         
       </span>
     
@@ -249,7 +249,7 @@
         
         
           <!-- compatible with older versions-->
-          14 分钟
+          13 分钟
         
       </span>
     
@@ -295,70 +295,69 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Mac安装SUMO</h1>
+            <h1 style="display: none">Pandas核心笔记</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Mac-安装SUMO"><a href="#Mac-安装SUMO" class="headerlink" title="Mac 安装SUMO"></a>Mac 安装SUMO</h1><h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><ul>
-<li>Homebrew</li>
-</ul>
-<blockquote>
-<p>安装好HomeBrew后，可以将HomeBrew的源设置为国内的镜像源，这样后面安装SUMO的时候速度会更流畅</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash">git -C <span class="hljs-string">&quot;<span class="hljs-subst">$(brew --repo)</span>&quot;</span> remote set-url origin https://mirrors.ustc.edu.cn/brew.git<br><br>git -C <span class="hljs-string">&quot;<span class="hljs-subst">$(brew --repo homebrew/core)</span>&quot;</span> remote set-url origin https://mirrors.ustc.edu.cn/homebrew-core.git<br><br>git -C <span class="hljs-string">&quot;<span class="hljs-subst">$(brew --repo homebrew/cask)</span>&quot;</span> remote set-url origin https://mirrors.ustc.edu.cn/homebrew-cask.git<br><br>brew update<br><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles&#x27;</span> &gt;&gt; ~/.bash_profile<br><span class="hljs-built_in">source</span> ~/.bash_profile<br></code></pre></td></tr></table></figure>
+                <h2 id="创建DataFrames"><a href="#创建DataFrames" class="headerlink" title="创建DataFrames"></a>创建DataFrames</h2><p>从字典创建：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br>dic = &#123;<span class="hljs-string">&quot;a&quot;</span>:[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>], <span class="hljs-string">&quot;b&quot;</span>:[<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>], <span class="hljs-string">&quot;c&quot;</span>:[<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">9</span>]&#125;<br>df = pd.DataFrame(dic)<br><span class="hljs-built_in">print</span>(df)<br></code></pre></td></tr></table></figure>
 
 
 
-<h2 id="安装XQuartz"><a href="#安装XQuartz" class="headerlink" title="安装XQuartz"></a>安装XQuartz</h2><p>SUMO-GUI需要XQuartz才能正常显示可视化界面，因此需要首先安装xquartz</p>
-<p><code>brew install --cask xquartz</code></p>
-<h2 id="安装SUMO"><a href="#安装SUMO" class="headerlink" title="安装SUMO"></a>安装SUMO</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">brew tap dlr-ts/sumo<br>brew install sumo<br></code></pre></td></tr></table></figure>
+<h2 id="数据描述"><a href="#数据描述" class="headerlink" title="数据描述"></a>数据描述</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 统计某列数据出现的频次</span><br>df[<span class="hljs-string">&#x27;col&#x27;</span>].value_counts()<br><br><span class="hljs-comment"># 数据集条数</span><br><span class="hljs-built_in">len</span>(df)<br><br><span class="hljs-comment"># 每列数据的基本统计信息</span><br>df.describe()<br><br><span class="hljs-comment"># distinct values in col</span><br>df[<span class="hljs-string">&#x27;col&#x27;</span>].nunique()<br><br><span class="hljs-comment"># 显示前几行</span><br>df.head(num)<br><br><span class="hljs-comment"># 显示末尾几行</span><br>df.tail(num)<br></code></pre></td></tr></table></figure>
 
 
 
-<p>过程中安装失败，需要单独手工安装对应的库，包括不限于以下：</p>
+<p>支持的Summary Functions：</p>
 <blockquote>
 <ul>
-<li><p>bottle</p>
-</li>
-<li><p>xorgproto</p>
-</li>
-<li><p>libxau</p>
-</li>
-<li><p>libxcb</p>
-</li>
-<li><p>libx11</p>
-</li>
-<li><p>libxext</p>
-</li>
-<li><p>libxft</p>
-</li>
-<li><p>gettext</p>
-</li>
-<li><p>libxdamage</p>
-</li>
-<li><p>……</p>
-</li>
+<li><code>sum</code>  求和</li>
+<li><code>count</code>  次数</li>
+<li><code>mean</code>  均值</li>
+<li><code>median</code>  中位数</li>
+<li><code>std</code>  标准差</li>
+<li><code>min</code>  最小值</li>
+<li><code>max</code>  最大值</li>
+<li><code>var</code>  方差</li>
+<li><code>quantile([0.25, 0.75])</code>  分位数</li>
+<li><code>apply(function)</code>  对数据对象执行指定的函数运算</li>
 </ul>
 </blockquote>
-<h2 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h2><p>确保系统中有<strong>SUMO_HOME</strong>的环境变量，并且指向SUMO安装的位置。在终端中输入以下这段命令，</p>
-<p><code>touch ~/.bash_profile; open ~/.bash_profile</code></p>
-<p>在文件末尾追加：</p>
-<p><code>export SUMO_HOME=/usr/local/Cellar/sumo/1.15.0/share/sumo/ </code></p>
-<p>添加环境变量</p>
-<p>添加后保存退出重新启动终端，测试SUMO是否安装成功。</p>
-<p><code>echo $SUMO_HOME</code></p>
-<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>在命令行输入<code>sumo</code> 或者 <code>sumo-gui</code>，测试是否可以正常启动</p>
-<h2 id="报错问题解决"><a href="#报错问题解决" class="headerlink" title="报错问题解决"></a>报错问题解决</h2><h3 id="Library-not-loaded-‘-x2F-usr-x2F-local-x2F-opt-x2F-jpeg-turbo-x2F-lib-x2F-libjpeg-8-dylib解决办法"><a href="#Library-not-loaded-‘-x2F-usr-x2F-local-x2F-opt-x2F-jpeg-turbo-x2F-lib-x2F-libjpeg-8-dylib解决办法" class="headerlink" title="Library not loaded: ‘&#x2F;usr&#x2F;local&#x2F;opt&#x2F;jpeg-turbo&#x2F;lib&#x2F;libjpeg.8.dylib解决办法"></a>Library not loaded: ‘&#x2F;usr&#x2F;local&#x2F;opt&#x2F;jpeg-turbo&#x2F;lib&#x2F;libjpeg.8.dylib解决办法</h3><p>错误原因：在对应路径下找不到 libjpeg.8.dylib文件。</p>
-<p>解决方法: </p>
-<p>以下命令按顺序在终端进行执行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">1：  wget -c http://www.ijg.org/files/jpegsrc.v8d.tar.gz<br>2：  tar xzf jpegsrc.v8d.tar.gz<br>3：　<span class="hljs-built_in">cd</span> jpeg-8d<br>4:   ./configure<br>5:   make<br>6:   <span class="hljs-comment"># cp ./.libs/libjpeg.8.dylib /usr/local/opt/jpeg/lib</span><br>7:   <span class="hljs-built_in">cp</span> ./.libs/libjpeg.8.dylib /usr/local/lib/<br></code></pre></td></tr></table></figure>
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 按条件索引数据</span><br>df[df.col &gt; threshold]<br><br><span class="hljs-comment"># 按列名选择数据</span><br>df.loc[:, [col_name1, col_name2, ...]]<br><br><span class="hljs-comment"># 按照索引选择数据</span><br>df.iloc[row_slice, col_slice]<br><br><span class="hljs-comment"># 随机选取n行数据</span><br>df.sample(n=<span class="hljs-number">5</span>)<br><br><span class="hljs-comment"># 按比例随机选择数据</span><br>df.sample(frac=<span class="hljs-number">0.3</span>)<br><br><span class="hljs-comment"># 选择最大的top n</span><br>df.nlargest(n, <span class="hljs-string">&#x27;value&#x27;</span>)<br><br><span class="hljs-comment"># 选择最小的n条数据</span><br>df.nlargest(n, <span class="hljs-string">&#x27;value&#x27;</span>)<br></code></pre></td></tr></table></figure>
 
-<h3 id="sumo-gui启动报错"><a href="#sumo-gui启动报错" class="headerlink" title="sumo-gui启动报错"></a>sumo-gui启动报错</h3><p>运行<code>sumo-gui</code>，有可能出现报错信息，如下：</p>
-<p><code>FXApp::openDisplay: unable to open display :0.0</code></p>
-<p>出现上面告警的原因是没有启动x11进程，也就是xquartz，X11也叫做X Windows系统，它是在unix或类unix系统上（如mac os）建立图形用户界面的标准工具包和协议。</p>
-<p>在MacOS搜索<code>xQuartz.app</code>，启动后再运行<code>sumo-gui</code>命令即可</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>[1] <a target="_blank" rel="noopener" href="http://madapapa.com/wordpress/?p=305">http://madapapa.com/wordpress/?p=305</a></p>
+
+
+<h2 id="Reshape-Data"><a href="#Reshape-Data" class="headerlink" title="Reshape Data"></a>Reshape Data</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># gather columns into rows</span><br>pd.melt(df)<br><br><span class="hljs-comment"># spread rows into cols</span><br>df.pivot(columns=<span class="hljs-string">&#x27;var&#x27;</span>, values=<span class="hljs-string">&#x27;val&#x27;</span>)<br><br><span class="hljs-comment"># append rows</span><br>pd.concat([df1, df2])<br><br><span class="hljs-comment"># append cols</span><br>pd.concat([df1, df2], axis=<span class="hljs-number">1</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python">df.sort_values(<span class="hljs-string">&#x27;col&#x27;</span>)  <span class="hljs-comment"># 按升序排序</span><br>df.sort_values(<span class="hljs-string">&#x27;col&#x27;</span>)  <span class="hljs-comment"># 按降序排序</span><br>df.sort_index()<br>df.reset_index()<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="缺失数据处理"><a href="#缺失数据处理" class="headerlink" title="缺失数据处理"></a>缺失数据处理</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 丢弃有NA或者null数据</span><br>df.dropna()  <span class="hljs-comment"># 数据列中存在空值的行数据将被丢弃</span><br><br><span class="hljs-comment"># 填充缺失值</span><br>df.fillna(value)  <span class="hljs-comment"># 替换缺失值为value</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="分组运算"><a href="#分组运算" class="headerlink" title="分组运算"></a>分组运算</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">df.groupby(by=<span class="hljs-string">&#x27;col_name&#x27;</span>)  <span class="hljs-comment"># 对col_name列做分组，返回一个GroupBy对象</span><br>df.groupby(level=<span class="hljs-string">&#x27;row_name&#x27;</span>)  <span class="hljs-comment"># 对row_name行做分组，返回一个GroupBy对象</span><br></code></pre></td></tr></table></figure>
+
+<p>GroupBy对象的方法：</p>
+<blockquote>
+<ul>
+<li><code>size()</code>  每个组的大小</li>
+<li><code>agg(function)</code>  按照指定的function对分组数据做聚合运算  例如 mean , sum等</li>
+<li></li>
+</ul>
+</blockquote>
+<h2 id="绘图"><a href="#绘图" class="headerlink" title="绘图"></a>绘图</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># histogram for each column</span><br>df.plot.hist()<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># scatter chart using piars of points</span><br>df.plot.scatter(x=<span class="hljs-string">&#x27;w&#x27;</span>,y=<span class="hljs-string">&#x27;h&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
 
                 
               </div>
@@ -367,32 +366,11 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Traffic-Simulation/" class="category-chain-item">Traffic Simulation</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
   
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/SUMO/">#SUMO</a>
+        <a href="/tags/Python/">#Python</a>
       
     </div>
   
@@ -404,8 +382,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Mac安装SUMO</div>
-      <div>http://example.com/2022/11/27/Mac安装SUMO/</div>
+      <div>Pandas核心笔记</div>
+      <div>http://example.com/2023/01/05/Pandas核心笔记/</div>
     </div>
     <div class="license-meta">
       
@@ -417,7 +395,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年11月27日</div>
+          <div>2023年1月5日</div>
         </div>
       
       
@@ -449,18 +427,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/12/10/TraCI%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="TraCI学习笔记">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">TraCI学习笔记</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/11/21/CityFlow%E5%AD%A6%E4%B9%A0/" title="CityFlow学习">
-                        <span class="hidden-mobile">CityFlow学习</span>
+                      <a href="/2022/12/10/TraCI%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="TraCI学习笔记">
+                        <span class="hidden-mobile">TraCI学习笔记</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
