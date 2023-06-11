@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>贝叶斯统计</title>
+    <link href="/2023/06/11/%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%BB%9F%E8%AE%A1/"/>
+    <url>/2023/06/11/%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%BB%9F%E8%AE%A1/</url>
+    
+    <content type="html"><![CDATA[<p>贝叶斯统计三要素：</p><ul><li>先验概率$P(A)$</li><li>似然性$P(B|A)$</li><li>后验概率$P(A|B)$</li><li>修正因子$\frac{$P(B|A)$}{P(B)}$，标准似然度；$P(B)$一般是固定的</li></ul><p>贝叶斯公式：</p><p>$$P(A|B)&#x3D;\frac{P(B|A)P(A)}{P(B)}$$</p><p>换一个更好理解的描述</p><p>$$P(\theta|data) &#x3D; \frac{P(data|\theta)P(\theta)}{P(data)}$$</p><p>在传统贝叶斯方法中，我们在获取任何观测数据之前就已经有了确定的先验分布；然后利用观测数据对先验分布进行修正得到后验概率。</p><p>经验贝叶斯方法中先验分布并不提前给出，而是从获得的观测数据中去估计，这恰好印证了其命名中的“经验”二字。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Machine Learning</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>machine learning</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Mathtype快捷键</title>
     <link href="/2023/02/18/Mathtype%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
     <url>/2023/02/18/Mathtype%E5%BF%AB%E6%8D%B7%E9%94%AE/</url>
