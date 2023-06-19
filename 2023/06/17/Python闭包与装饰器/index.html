@@ -1,0 +1,766 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Leon">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Python闭包与装饰器闭包前置知识变量作用域：全局变量和自由变量（未在局部作用域中绑定的变量） Python作用域搜索顺序 局部变量：在函数体中赋值的变量 什么是闭包首先来说一种需要闭包的需求：  需求：在函数外部得到函数内的局部变量  解决思路：  在函数内部再定义一个函数，这样内部函数就持有了外部函数的变量，再将内部函数作为外部函数的返回值  上面的解决思路中，内部函数就形成了一个闭包。 闭">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python闭包与装饰器">
+<meta property="og:url" content="http://example.com/2023/06/17/Python%E9%97%AD%E5%8C%85%E4%B8%8E%E8%A3%85%E9%A5%B0%E5%99%A8/index.html">
+<meta property="og:site_name" content="不鹜虚声">
+<meta property="og:description" content="Python闭包与装饰器闭包前置知识变量作用域：全局变量和自由变量（未在局部作用域中绑定的变量） Python作用域搜索顺序 局部变量：在函数体中赋值的变量 什么是闭包首先来说一种需要闭包的需求：  需求：在函数外部得到函数内的局部变量  解决思路：  在函数内部再定义一个函数，这样内部函数就持有了外部函数的变量，再将内部函数作为外部函数的返回值  上面的解决思路中，内部函数就形成了一个闭包。 闭">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-17T02:11:59.000Z">
+<meta property="article:modified_time" content="2023-06-19T00:49:52.649Z">
+<meta property="article:author" content="Leon">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Python闭包与装饰器 - 不鹜虚声</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"lBUIvAuw3knldHWJiT9TpcQI-gzGzoHsz","app_key":"S9A2So5i692fqVhH42sXfLoE","server_url":"https://lbuivauw.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Wei, ITS</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.gif') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Python闭包与装饰器"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-06-17 10:11" pubdate>
+          2023年6月17日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          3.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          26 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Python闭包与装饰器</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Python闭包与装饰器"><a href="#Python闭包与装饰器" class="headerlink" title="Python闭包与装饰器"></a>Python闭包与装饰器</h1><h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><h3 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h3><p>变量作用域：全局变量和自由变量（未在局部作用域中绑定的变量）</p>
+<p>Python作用域搜索顺序</p>
+<p>局部变量：在函数体中赋值的变量</p>
+<h3 id="什么是闭包"><a href="#什么是闭包" class="headerlink" title="什么是闭包"></a>什么是闭包</h3><p>首先来说一种需要闭包的需求：</p>
+<blockquote>
+<p>需求：在函数外部得到函数内的局部变量</p>
+</blockquote>
+<p>解决思路：</p>
+<blockquote>
+<p>在函数内部再定义一个函数，这样内部函数就持有了外部函数的变量，再将内部函数作为外部函数的返回值</p>
+</blockquote>
+<p>上面的解决思路中，内部函数就形成了一个闭包。</p>
+<p>闭包的定义：</p>
+<blockquote>
+<p>在一些语言中，在函数中可以（嵌套）定义另一个函数时，如果内部的函数引用了外部的函数的变量，则可能产生闭包。闭包可以用来在<strong>一个函数与一组“私有”变量之间创建关联关系</strong>。在给定函数被多次调用的过程中，这些私有变量能够保持其持久性。</p>
+</blockquote>
+<p><strong>作用</strong>：变量作用域，内部函数可以使用外部函数的变量（不使用全局变量）</p>
+<p>闭包的作用：</p>
+<blockquote>
+<ol>
+<li><p>闭包是将外层函数内的局部变量和外层函数的外部连接起来的一座桥梁。</p>
+</li>
+<li><p>将外层函数的变量持久地保存在内存中。</p>
+</li>
+</ol>
+</blockquote>
+<p>修改外部函数的变量：</p>
+<blockquote>
+<ul>
+<li><p>修改闭包中外部函数的值，使用<code>nonlocal</code>关键字（<strong>nonlocal的作用是把变量标记为自由变量，即使在函数中为变量赋值了，也仍然是自由变量</strong>）</p>
+</li>
+<li><p>修改全局变量的值，使用<code>global</code>关键字，（修改全局变量整体时才需要，如果只修改其中元素，也不需要，例如修改全局list中的某个元素）</p>
+</li>
+</ul>
+</blockquote>
+<h2 id="装饰器"><a href="#装饰器" class="headerlink" title="装饰器"></a>装饰器</h2><h3 id="手动实现一个装饰器"><a href="#手动实现一个装饰器" class="headerlink" title="手动实现一个装饰器"></a>手动实现一个装饰器</h3><p>函数名就是一个变量名，一个引用</p>
+<p>写代码的<code>开放封闭</code>原则：已经实现且运行正常的代码不建议修改，如需要增加功能，通过扩展实现</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">需求：不修改原函数的情况下，实现对原函数增加功能扩展（例如，权限验证）</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">set_func</span>(<span class="hljs-params">func</span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">call_func</span>():<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;-----这里是权限验证1-----&quot;</span>)        <br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;-----这里是权限验证2-----&quot;</span>)<br>        func()<br>    <span class="hljs-keyword">return</span> call_func<br><br><br><span class="hljs-meta">@set_func   </span><span class="hljs-comment"># 相当于 test1 = set_func(test1)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test1</span>():<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;-----test1-----&quot;</span>)<br><br><br><span class="hljs-comment"># ret = set_func(test1)  # ret是持有call_func的引用</span><br><br><span class="hljs-comment"># 装饰器的实现过程</span><br><span class="hljs-comment"># 1. 不需要修改test1函数的内容就可以增加功能</span><br><span class="hljs-comment"># 2. 把set_func的返回值直接给test1，所以不需要修改原来调用test1的地方</span><br>test1 = set_func(test1)<br>test1()  <span class="hljs-comment"># test1被set_func装饰，先走set_func</span><br><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="有参函数、无参函数的装饰"><a href="#有参函数、无参函数的装饰" class="headerlink" title="有参函数、无参函数的装饰"></a>有参函数、无参函数的装饰</h3><ol>
+<li><p><strong>没有参数，没有返回值的装饰</strong></p>
+</li>
+<li><p><strong>有参数，没有返回值的装饰</strong></p>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">set_func</span>(<span class="hljs-params">func</span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">call_func</span>(<span class="hljs-params">a</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;-----这里是权限验证1-----&quot;</span>)        <br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;-----这里是权限验证2-----&quot;</span>)<br>        func(a)<br>    <span class="hljs-keyword">return</span> call_func<br><br><br><span class="hljs-meta">@set_func</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test1</span>(<span class="hljs-params">num</span>):<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;-----test1-----&quot;</span>)<br><br>test1(<span class="hljs-number">100</span>)<br>test1(<span class="hljs-number">200</span>)<br></code></pre></td></tr></table></figure>
+
+<p>对于不定长参数，使用<code>*args,**kwargs</code>来接收（<code>*</code>表示拆包）</p>
+<ol start="3">
+<li><strong>有参数，有返回值的装饰</strong></li>
+</ol>
+<h3 id="通用装饰器的写法"><a href="#通用装饰器的写法" class="headerlink" title="通用装饰器的写法"></a>通用装饰器的写法</h3><ol>
+<li>使用<code>*args,**kwargs</code>来接收不定长参数</li>
+<li>返回内部函数的<code>return</code>结果</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">set_func</span>(<span class="hljs-params">func</span>):<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;---开始进行装饰---&quot;</span>)<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">call_func</span>(<span class="hljs-params">*args, **kwargs</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;---这是权限验证1---&quot;</span>)<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;---这是权限验证2---&quot;</span>)<br>        <span class="hljs-keyword">return</span> func(*args, **kwargs)  <span class="hljs-comment"># 接收不定长参数</span><br>    <span class="hljs-keyword">return</span> call_func<br><br><br><span class="hljs-meta">@set_func</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test1</span>(<span class="hljs-params">num, *args, **kwargs</span>):  <span class="hljs-comment"># *表示拆包</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;---test1--- %d&quot;</span> % num)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;---test1--- &quot;</span>, args)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;---test1--- &quot;</span>, kwargs)<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;OK&quot;</span><br><br><br>ret = test1(<span class="hljs-number">100</span>)<br><span class="hljs-built_in">print</span>(ret)<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="同一个装饰器装饰多个函数"><a href="#同一个装饰器装饰多个函数" class="headerlink" title="同一个装饰器装饰多个函数"></a>同一个装饰器装饰多个函数</h3><p>用同一个装饰器可以对多个函数装饰，每装饰一个函数，就创建一个对应函数的闭包。</p>
+<p>装饰器在没有调用函数之前已经装饰了，只要遇到<code>@</code>符号，就已经开始装饰。</p>
+<h3 id="多个装饰器对同一个函数进行装饰"><a href="#多个装饰器对同一个函数进行装饰" class="headerlink" title="多个装饰器对同一个函数进行装饰"></a>多个装饰器对同一个函数进行装饰</h3><p><strong>装饰的顺序</strong>：自下而上装饰（先找下面的是不是函数，如果不是，就让下面的装饰器先装饰）</p>
+<p><strong>执行的顺序</strong>：自上而下执行</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">set_label_h1</span>(<span class="hljs-params">func</span>):<br>  <span class="hljs-keyword">def</span> <span class="hljs-title function_">call_func</span>():<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&lt;h1&gt;&quot;</span>+func()+<span class="hljs-string">&quot;&lt;/h1&gt;&quot;</span><br>  <span class="hljs-keyword">return</span> call_fun<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">set_label_td</span>(<span class="hljs-params">func</span>):<br>  <span class="hljs-keyword">def</span> <span class="hljs-title function_">call_func</span>():<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&lt;td&gt;&quot;</span>+func()+<span class="hljs-string">&quot;&lt;/td&gt;&quot;</span><br>  <span class="hljs-keyword">return</span> call_fun<br><br><span class="hljs-meta">@set_label_h1</span><br><span class="hljs-meta">@set_label_td</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test</span>():<br>  <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;haha&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="类装饰器"><a href="#类装饰器" class="headerlink" title="类装饰器"></a>类装饰器</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Test</span>(<span class="hljs-title class_ inherited__">object</span>):<br>  <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, func</span>):<br>    self.func = func<br>  <span class="hljs-keyword">def</span> <span class="hljs-title function_">__call__</span>(<span class="hljs-params">self</span>):<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;这里是装饰器添加的功能&quot;</span>)<br>    <span class="hljs-keyword">return</span> self.func<br> <br><span class="hljs-meta">@Test</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_str</span>():<br>  <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;haha&quot;</span><br><br><span class="hljs-built_in">print</span>(get_str())<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="带参数的装饰"><a href="#带参数的装饰" class="headerlink" title="带参数的装饰"></a>带参数的装饰</h3><p>形式如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-meta">@set_func(<span class="hljs-params">params</span>)  </span><span class="hljs-comment"># 带params参数的装饰器</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test</span>()：<br>	<span class="hljs-keyword">pass</span><br></code></pre></td></tr></table></figure>
+
+<p>带有参数的装饰器的执行流程：</p>
+<blockquote>
+<ol>
+<li>调用函数，并且把实参传进去</li>
+<li>把函数返回的结果当做装饰器对下面的函数进行装饰</li>
+</ol>
+</blockquote>
+<p>示例代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">set_level</span>(<span class="hljs-params">level_num</span>):  <span class="hljs-comment"># 用于保存传进来的参数</span><br>  <span class="hljs-keyword">def</span> <span class="hljs-title function_">set_func</span>(<span class="hljs-params">func</span>):  <span class="hljs-comment"># 用于保存函数引用</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">call_func</span>(<span class="hljs-params">*args, **kwargs</span>):<br>      <span class="hljs-keyword">if</span> level_num == <span class="hljs-number">1</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;---权限级别1，验证---&quot;</span>)<br>      <span class="hljs-keyword">elif</span> level_num == <span class="hljs-number">2</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;---权限级别2，验证---&quot;</span>)<br>    <span class="hljs-keyword">return</span> func()<br>  <span class="hljs-keyword">return</span> set_func<br><br><span class="hljs-meta">@set_level(<span class="hljs-params"><span class="hljs-number">1</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test1</span>():<br>  <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;---test1---&quot;</span>)<br>  <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;OK&quot;</span><br><br><span class="hljs-meta">@set_level(<span class="hljs-params"><span class="hljs-number">2</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test2</span>():<br>  <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;---test1---&quot;</span>)<br>  <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;OK&quot;</span><br><br>test1()<br>test2()<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="装饰器应用"><a href="#装饰器应用" class="headerlink" title="装饰器应用"></a>装饰器应用</h2><p>web框架中的路由功能</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Python/">#Python</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Python闭包与装饰器</div>
+      <div>http://example.com/2023/06/17/Python闭包与装饰器/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Leon</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年6月17日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/06/12/Latex%E5%86%99%E8%AE%BA%E6%96%87/" title="Latex写论文">
+                        <span class="hidden-mobile">Latex写论文</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>I</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>ITS</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
