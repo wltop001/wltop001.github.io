@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>Python日志记录</title>
+    <link href="/2023/06/23/Python%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95/"/>
+    <url>/2023/06/23/Python%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Python日志模块使用"><a href="#Python日志模块使用" class="headerlink" title="Python日志模块使用"></a>Python日志模块使用</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> logging<br><br><span class="hljs-comment"># create logger</span><br>logger = logging.getLogger()<br>logger.setLevel(logging.INFO)<br><br><span class="hljs-comment"># create a handler, for writing log file</span><br>logfile = <span class="hljs-string">&quot;./log.txt&quot;</span><br>fh = logging.FileHandler(logfile, mode=<span class="hljs-string">&quot;a&quot;</span>)<br>fh.setLevel(logging.DEBUG)<br><br><span class="hljs-comment"># create a handler, for console</span><br>ch = logging.StreamHandler()<br>fh.setLevel(logging.WARNING)<br><br><span class="hljs-comment"># define the format</span><br>formatter = logging.Formatter(<span class="hljs-string">&quot;%(asctime)s - %(filename)s[line:%(lineno)d] - %(levelname)s: %(message)s&quot;</span>)<br>fh.setFormatter(formatter)<br>ch.setFormatter(formatter) <br><br><span class="hljs-comment"># add handler to logger</span><br>logger.addHandler(fh)<br>logger.addHandler(ch)<br><br><span class="hljs-comment"># 日志</span><br>logger.debug(<span class="hljs-string">&quot;这是 logger debug message&quot;</span>)<br>logger.info(<span class="hljs-string">&quot;这是 logger info message&quot;</span>)<br>logger.warning(<span class="hljs-string">&quot;这是 logger warning message&quot;</span>)<br>logger.error(<span class="hljs-string">&quot;这是 logger error message&quot;</span>)<br>logger.critical(<span class="hljs-string">&quot;这是 logger critical message&quot;</span>)<br><br><br><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>Python</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Python</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Python闭包与装饰器</title>
     <link href="/2023/06/17/Python%E9%97%AD%E5%8C%85%E4%B8%8E%E8%A3%85%E9%A5%B0%E5%99%A8/"/>
     <url>/2023/06/17/Python%E9%97%AD%E5%8C%85%E4%B8%8E%E8%A3%85%E9%A5%B0%E5%99%A8/</url>
