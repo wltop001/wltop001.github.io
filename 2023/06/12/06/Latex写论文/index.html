@@ -1,0 +1,892 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Leon">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Latex写论文之前一直都用Word写论文，后来被同学和年轻老师安利了Latex，决定试下。结果一试才发现，相见恨晚啊，公式编辑、参考文献管理，排版，方便太多了。 在此也记录以下边学边用中的笔记，供日后查阅。 简介LaTeX是什么？   LaTeX（&#x2F;ˈlɑːtɛx&#x2F;，常被读作&#x2F;ˈlɑːtɛk&#x2F;或&#x2F;ˈleɪtɛk&#x2F;） 是一种基于TeX的高">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Latex写论文">
+<meta property="og:url" content="http://example.com/2023/06/12/06/Latex%E5%86%99%E8%AE%BA%E6%96%87/index.html">
+<meta property="og:site_name" content="不鹜虚声">
+<meta property="og:description" content="Latex写论文之前一直都用Word写论文，后来被同学和年轻老师安利了Latex，决定试下。结果一试才发现，相见恨晚啊，公式编辑、参考文献管理，排版，方便太多了。 在此也记录以下边学边用中的笔记，供日后查阅。 简介LaTeX是什么？   LaTeX（&#x2F;ˈlɑːtɛx&#x2F;，常被读作&#x2F;ˈlɑːtɛk&#x2F;或&#x2F;ˈleɪtɛk&#x2F;） 是一种基于TeX的高">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-12T09:33:16.000Z">
+<meta property="article:modified_time" content="2023-10-15T11:23:51.069Z">
+<meta property="article:author" content="Leon">
+<meta property="article:tag" content="Research">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Latex写论文 - 不鹜虚声</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"lBUIvAuw3knldHWJiT9TpcQI-gzGzoHsz","app_key":"S9A2So5i692fqVhH42sXfLoE","server_url":"https://lbuivauw.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Wei, ITS</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/traffic_light.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Latex写论文"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-06-12 17:33" pubdate>
+          2023年6月12日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          5.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          44 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Latex写论文</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Latex写论文"><a href="#Latex写论文" class="headerlink" title="Latex写论文"></a>Latex写论文</h1><p>之前一直都用Word写论文，后来被同学和年轻老师安利了Latex，决定试下。结果一试才发现，相见恨晚啊，公式编辑、参考文献管理，排版，方便太多了。</p>
+<p>在此也记录以下边学边用中的笔记，供日后查阅。</p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>LaTeX是什么？</p>
+<blockquote>
+<p> LaTeX（&#x2F;ˈlɑːtɛx&#x2F;，常被读作&#x2F;ˈlɑːtɛk&#x2F;或&#x2F;ˈleɪtɛk&#x2F;） 是一种基于TeX的高品质排版系统，由美国计算机科学家莱斯利·兰伯特在20世纪80年代初期开发，非常适用于生成高印刷质量的科技和数学、物理文档，尤其擅长于复杂表格和数学公式的排版。LaTeX是科学文献交流和出版的事实标准。</p>
+</blockquote>
+<p>LaTeX排版在论文投稿中的优点在于： </p>
+<blockquote>
+<ol>
+<li>投稿期刊给出了论文模板，作者只需编辑自己的内容即可得到符合期刊要求的外观。 </li>
+<li>投稿期刊被拒搞转而投稿新的期刊时，只需更换新期刊的模板文件，无需更改原内容，节省了大量重新排版的时间。 </li>
+<li>公式、图表、参考文献的引用均为自动化编号，使用简洁高效。</li>
+</ol>
+</blockquote>
+<h3 id="模板文件介绍"><a href="#模板文件介绍" class="headerlink" title="模板文件介绍"></a>模板文件介绍</h3><p>LaTeX论文模板文件一般包括<code>.tex</code> <code>.cls</code> <code>.bib</code> <code>.bst</code> <code>.eps</code>等类型文件</p>
+<blockquote>
+<ul>
+<li><code>.tex</code> 文件为latex源文件</li>
+<li><code>.cls</code>文件是latex2e的全文样式文件，决定了论文最终的排版效果</li>
+<li><code>.bib</code> 文件是参考文献的<a target="_blank" rel="noopener" href="https://cloud.tencent.com/solution/database?from=20065&from_column=20065">数据库</a>，保存有参考文献的元数据</li>
+<li><code>.bst</code>文件是用 bibtex 处理参考文献 <code>*.bib</code>文件时的输出格式模板，即定义了参考文献的排版效果 </li>
+<li><code>.eps</code>文件即LaTeX插入的图片文件格式</li>
+</ul>
+</blockquote>
+<h3 id="文件基本组成"><a href="#文件基本组成" class="headerlink" title="文件基本组成"></a>文件基本组成</h3><p>一个LaTeX文件由以下几部分组成：</p>
+<ul>
+<li>导言区：定义文档的标题、作者，需要引用的宏包以及文档的其他信息</li>
+<li>文档类</li>
+<li>注释：由<code>%</code>标识，注释的内容不会被编译器编译</li>
+</ul>
+<h3 id="常用标识"><a href="#常用标识" class="headerlink" title="常用标识"></a>常用标识</h3><ul>
+<li><code>\documentclass</code>：定义所使用的样式文件</li>
+<li><code>\begin&#123;document&#125;</code>，<code>\end&#123;document&#125;</code>，文档开始和结束标志，用于包裹文档内容</li>
+<li><code>\section</code>：章标题内容</li>
+<li><code>\subsection</code>：节标题内容</li>
+<li><code>\subsubsection</code>：小节标题内容</li>
+</ul>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>常用的Latex编辑排版环境主要推荐两类软件方案：（</p>
+<ul>
+<li>CTeX套装</li>
+<li>TeX Live+TeXstudio</li>
+</ul>
+<p>MacOS：</p>
+<ul>
+<li>MacTex + TexStudio</li>
+<li>Visual Studio Code</li>
+<li>Overleaf在线编写</li>
+</ul>
+<h2 id="插图"><a href="#插图" class="headerlink" title="插图"></a>插图</h2><p>插入图片的代码如下：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs latex"><span class="hljs-keyword">\usepackage</span>&#123;graphicx&#125;<span class="hljs-comment">%导言区需加入picture宏包</span><br><span class="hljs-comment">%文档正文图片代码</span><br><span class="hljs-keyword">\begin</span>&#123;figure&#125;[htb]<br>   <span class="hljs-keyword">\centering</span>			<span class="hljs-comment">%居中对齐</span><br>   <span class="hljs-comment">% Requires \usepackage&#123;graphicx&#125;</span><br>   <span class="hljs-keyword">\includegraphics</span>[width=5cm]&#123;myfigure.eps&#125;    <span class="hljs-comment">%图片文件名myfigure.eps，width指定图片宽度</span><br>   <span class="hljs-keyword">\caption</span>&#123;the framework of the proposed method&#125; <span class="hljs-comment">%图说明</span><br>   <span class="hljs-keyword">\label</span>&#123;figure1&#125;    <span class="hljs-comment">%图标签，正文中用\ref&#123;figure1&#125;引用</span><br><span class="hljs-keyword">\end</span>&#123;figure&#125;<br></code></pre></td></tr></table></figure>
+
+<p>注意：图片必须在工程的目录下</p>
+<p><code>.eps</code>格式</p>
+<p>python中生成的图不需要后续处理，则可以直接用python导出eps格式。</p>
+<p>如果需要后续处理，可以先导成<code>svg</code>格式，再使用PPT或Visio做后续处理</p>
+<p>想要插入的图居中，可以使用下面的包：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs latex"><span class="hljs-keyword">\usepackage</span>[justification=centering]&#123;caption&#125; <span class="hljs-comment">%全局图片标题居中</span><br></code></pre></td></tr></table></figure>
+
+<p>图片位置选项：</p>
+<blockquote>
+<ul>
+<li><code>h</code>：当前位置。将图形放置在正文文本中给出该图形环境的地方。如果本页所剩的页面不够，这一参数将不起作用。</li>
+<li><code>t</code>：顶部。将图形放置在页面的顶部。</li>
+<li><code>b</code>：底部。将图形放置在页面的底部。</li>
+<li><code>p</code>：浮动页。将图形放置在一只允许有浮动对象的页面上。</li>
+</ul>
+</blockquote>
+<p>一般使用<code>[htb]</code>这样的组合，只用<code>[h]</code>是没有用的。这样组合的意思就是latex会尽量满足排在前面的浮动格式，就是<code>h-t-b</code>这个顺序，让排版的效果尽量好。<br><code>!h</code> 只是试图放在当前位置。如果页面剩下的部分放不下，还是会跑到下一页的。一般页言，用 [!h] 选项经常会出现不能正确放置的问题，所以常用<code>[ht]</code>、<code>[htbp]</code> 等。</p>
+<p>如果你确实需要把图片放在当前位置，不容改变，可以用float宏包的[H]选项。不过如果这样做，出现放不下的问题时需要手工调整。使用格式如下：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs latex"><span class="hljs-keyword">\usepackage</span>&#123;float&#125;<br></code></pre></td></tr></table></figure>
+
+<p>图片对应的设置为（在位置选项中使用大写H）：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs latex"><span class="hljs-keyword">\begin</span>&#123;figure&#125;[H]<br>foo  <br><span class="hljs-keyword">\end</span>&#123;figure&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="插表"><a href="#插表" class="headerlink" title="插表"></a>插表</h2><figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs latex"><span class="hljs-keyword">\begin</span>&#123;table&#125;[!]<br><span class="hljs-keyword">\label</span>&#123;table1&#125;<br><span class="hljs-keyword">\caption</span>&#123;my first table&#125;<br><span class="hljs-keyword">\centering</span><br><span class="hljs-keyword">\begin</span>&#123;tabular&#125;&#123;|c|c|r|&#125;<br>	<span class="hljs-keyword">\hline</span><br>	system<span class="hljs-built_in">&amp;</span> version<span class="hljs-built_in">&amp;</span> edit<span class="hljs-keyword">\\</span><br>	<span class="hljs-keyword">\hline</span><br>	Windows <span class="hljs-built_in">&amp;</span> MikTeX <span class="hljs-built_in">&amp;</span> TexMakerX <span class="hljs-keyword">\\</span><br>	<span class="hljs-keyword">\hline</span><br>	Unix/Linux <span class="hljs-built_in">&amp;</span> teTeX <span class="hljs-built_in">&amp;</span> Kile <span class="hljs-keyword">\\</span><br>	<span class="hljs-keyword">\hline</span><br>	Mac OS <span class="hljs-built_in">&amp;</span> MacTeX <span class="hljs-built_in">&amp;</span> TeXShop <span class="hljs-keyword">\\</span><br>	<span class="hljs-keyword">\hline</span><br>	common<span class="hljs-built_in">&amp;</span> TeX Live <span class="hljs-built_in">&amp;</span> TeXworks <span class="hljs-keyword">\\</span><br>	<span class="hljs-keyword">\hline</span><br><span class="hljs-keyword">\end</span>&#123;tabular&#125;<br><span class="hljs-keyword">\end</span>&#123;table&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<p>可视化网站：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs latex">网站：https://www.tablesgenerator.com/<br></code></pre></td></tr></table></figure>
+
+
+
+<p>这里推荐一个<a target="_blank" rel="noopener" href="https://tableconvert.com/excel-to-yaml">快速生成Latex代码的在线工具</a>，可以将excel、csv等表格直接生成Latex代码，然后自己再微调一下。</p>
+<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><p>LaTeX 中的列表是封闭的环境，列表中的每个项目可以取一行文字到一个完整的段落。在 LaTeX 中有三种列表类型：</p>
+<ul>
+<li><code>itemize</code>  无需列表</li>
+<li><code>enumerate</code>  有序列表</li>
+<li><code>desciption</code>  描述列表</li>
+</ul>
+<h3 id="创建列表"><a href="#创建列表" class="headerlink" title="创建列表"></a>创建列表</h3><figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs latex"><span class="hljs-keyword">\begin</span>&#123;&lt;类型&gt;&#125;<br>	<span class="hljs-keyword">\item</span><br>	...<br><span class="hljs-keyword">\end</span>&#123;&lt;类型&gt;&#125;<br></code></pre></td></tr></table></figure>
+
+<p>只需要将上面的<code>&lt;类型&gt;</code>替换为对应的列表类型即可。例如：</p>
+<ol>
+<li>创建有序列表</li>
+</ol>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs latex"><span class="hljs-keyword">\begin</span>&#123;itemize&#125;<br>    <span class="hljs-keyword">\item</span> Mircosoft<br>    <span class="hljs-keyword">\item</span> Google<br>    <span class="hljs-keyword">\item</span> Apple<br><span class="hljs-keyword">\end</span>&#123;itemize&#125;<br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>有序列表</li>
+</ol>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs latex"><span class="hljs-keyword">\begin</span>&#123;enumerate&#125;<br>    <span class="hljs-keyword">\item</span> Mircosoft<br>    <span class="hljs-keyword">\item</span> Google<br>    <span class="hljs-keyword">\item</span> Apple<br><span class="hljs-keyword">\end</span>&#123;enumerate&#125;<br></code></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>描述列表</li>
+</ol>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs latex"><span class="hljs-keyword">\begin</span>&#123;description&#125;<br>    <span class="hljs-keyword">\item</span>[Microsoft] Code name MS<br>    <span class="hljs-keyword">\item</span>[Google] Code name GG<br><span class="hljs-keyword">\end</span>&#123;description&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="设置列表符号样式"><a href="#设置列表符号样式" class="headerlink" title="设置列表符号样式"></a>设置列表符号样式</h3><ol>
+<li>各个项目单独设置</li>
+</ol>
+<p>将需要的样式名称封闭在方括号内，并放在控制序列 <code>\item</code> 之后，如下例：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs latex"><span class="hljs-comment">% 方式一</span><br><span class="hljs-keyword">\begin</span>&#123;itemize&#125;<br>    <span class="hljs-keyword">\item</span>[<span class="hljs-built_in">$</span><span class="hljs-keyword">\ast</span><span class="hljs-built_in">$</span>] Asterisk<br>    <span class="hljs-keyword">\item</span>[<span class="hljs-built_in">$</span><span class="hljs-keyword">\diamond</span><span class="hljs-built_in">$</span>] Diamond<br>    <span class="hljs-keyword">\item</span>[<span class="hljs-built_in">$</span><span class="hljs-keyword">\circ</span><span class="hljs-built_in">$</span>] Circle<br>    <span class="hljs-keyword">\item</span>[<span class="hljs-built_in">$</span><span class="hljs-keyword">\cdot</span><span class="hljs-built_in">$</span>] period<br>    <span class="hljs-keyword">\item</span>[<span class="hljs-built_in">$</span><span class="hljs-keyword">\bullet</span><span class="hljs-built_in">$</span>] Bullet (default)<br>    <span class="hljs-keyword">\item</span>[--] Dash<br>    <span class="hljs-keyword">\item</span>[<span class="hljs-built_in">$</span>-<span class="hljs-built_in">$</span>] Another dash<br><span class="hljs-keyword">\end</span>&#123;itemize&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<ol start="2">
+<li>为整个列表设置</li>
+</ol>
+<p>将需要的样式名称以 <code>label=</code> 前缀并封闭在方括号内，放在控制序列 <code>\begin</code> 之后，如下例：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs latex"><span class="hljs-comment">% 方式二</span><br><span class="hljs-keyword">\begin</span>&#123;enumerate&#125;[label=<span class="hljs-keyword">\Alph</span>*.]<br>    <span class="hljs-keyword">\item</span> Microsoft<br>    <span class="hljs-keyword">\item</span> Google<br>    <span class="hljs-keyword">\item</span> Apple<br><span class="hljs-keyword">\end</span>&#123;enumerate&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<ol start="3">
+<li>为整个文档设置</li>
+</ol>
+<p>该方式将改变整个文档的默认样式。使用 <code>\renewcommand</code> 来设置项目标签的值，下例分别为四个嵌套深度的项目标签设置了不同的样式。</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs latex"><span class="hljs-comment">% 方式三</span><br><span class="hljs-keyword">\renewcommand</span>&#123;<span class="hljs-keyword">\labelitemi</span>&#125;&#123;<span class="hljs-built_in">$</span><span class="hljs-keyword">\ast</span><span class="hljs-built_in">$</span>&#125;<br><span class="hljs-keyword">\renewcommand</span>&#123;<span class="hljs-keyword">\labelitemii</span>&#125;&#123;<span class="hljs-built_in">$</span><span class="hljs-keyword">\diamond</span><span class="hljs-built_in">$</span>&#125;<br><span class="hljs-keyword">\renewcommand</span>&#123;<span class="hljs-keyword">\labelitemiii</span>&#125;&#123;<span class="hljs-built_in">$</span><span class="hljs-keyword">\bullet</span><span class="hljs-built_in">$</span>&#125;<br><span class="hljs-keyword">\renewcommand</span>&#123;<span class="hljs-keyword">\labelitemiv</span>&#125;&#123;<span class="hljs-built_in">$</span>-<span class="hljs-built_in">$</span>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="数学公式"><a href="#数学公式" class="headerlink" title="数学公式"></a>数学公式</h2><p>公式分为三种：</p>
+<ol>
+<li><strong>段落内公式</strong></li>
+<li><strong>单独一行无编号公式</strong></li>
+<li><strong>独占一行带编号公式</strong>：</li>
+</ol>
+<p>此类公式需要使用 <code>\equation</code> 环境完成，代码及效果如下</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs latex"><span class="hljs-keyword">\begin</span>&#123;equation&#125;<br><span class="hljs-keyword">\label</span>&#123;equ1&#125;        <span class="hljs-comment">%标签equ1，文中使用\ref&#123;equ1&#125;引用</span><br>x = &#123;a<span class="hljs-built_in">^</span>2&#125; + &#123;b<span class="hljs-built_in">^</span>2&#125;<br><span class="hljs-keyword">\end</span>&#123;equation&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<p>想要插入的公式居中，可以用这个包</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs latex"><span class="hljs-keyword">\usepackage</span>&#123;amsmath&#125; <span class="hljs-comment">%公式居中</span><br></code></pre></td></tr></table></figure>
+
+<p>在线编辑Latex公式（支持图片识别）：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">https://www.latexlive.com/##<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><code>*.bib</code>文件是参考文献数据库，以文献元数据的形式储存每条文献信息</p>
+<p>文献元数据以<code>@article&#123;&#125;</code>标识期刊论文，<code>@inproceedings&#123;&#125;</code>标识会议论文集等等。</p>
+<p>括号内第一个条目（如上图 Ganiz2011Higher ）是该文献的书签，在tex源代码中通过<code>\cite&#123;Ganiz2011Higher&#125;</code>命令引用该条参考文献。bib格式的参考文献元数据可以从web of science 或者googlescholor导出，也可以直接编写bib信息条目（不推荐百度学术导出的元数据，因为多数不准确） 使用bib参考文献首先需要在TEX源文件中语句<code>\end&#123;document&#125;</code>前加入以下代码：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs latex"><span class="hljs-keyword">\bibliographystyle</span>&#123;IEEEtran&#125;   <span class="hljs-comment">%指定参考文献样式文件为IEEEtran.bst</span><br><span class="hljs-keyword">\bibliography</span>&#123;IEEEexample&#125;   <span class="hljs-comment">%指定所使用的bib文件为IEEEexample</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>在Overleaf中采用<code>.bib</code>文件批量添加参考文献的主要步骤：</p>
+<blockquote>
+<ol>
+<li><p>新建<code>.bib</code>文件，具体的步骤就是 New File — name.tex (前缀改为ref，后缀名改为.bib)—<code>ref.bib</code>；</p>
+</li>
+<li><p>在谷歌学术或百度学术中找到相应文献的  “ 引用 ”功能，然后在导入链接那点击 “ BibTex ”。复制其中的内容至新建立的文件 <code>ref.bib</code></p>
+</li>
+<li><p>在开头导入要用的包： <code>\usepackage&#123;cite&#125;</code></p>
+</li>
+<li><p>、参考文献一般都在文章末尾，所以在Overleaf中一般把下面两句放在\end{document} 之前）：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs latex"><span class="hljs-keyword">\bibliographystyle</span>&#123;ieeetr&#125; <span class="hljs-comment">%ieeetr国际电气电子工程师协会期刊</span><br><span class="hljs-keyword">\bibliography</span>&#123;ref&#125; <span class="hljs-comment">% ref就是之前建立的ref.bib文件的前缀</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>在文中添加引用，引用格式如下：</p>
+</li>
+</ol>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs latex"><span class="hljs-keyword">\cite</span>&#123;Han&#125;。 <span class="hljs-comment">%在 ref.bib文件中的Han 与\cite&#123;Han&#125; 保持一致</span><br></code></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>举例说明：比如在这句话 “ We are family ” 引用文献。那么可以在Overleaf 中写成“  We are family \cite{Han} . ” 即可。然后点击右边 Recompile 编译即可生成具备参考文献的 .pdf文件。</li>
+</ol>
+</blockquote>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2105807">https://cloud.tencent.com/developer/article/2105807</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44984664/article/details/106174318">https://blog.csdn.net/weixin_44984664/article/details/106174318</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cxyzjd.com/article/weixin_45576923/114076558">https://www.cxyzjd.com/article/weixin_45576923/114076558</a></li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Research/" class="category-chain-item">Research</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Research/">#Research</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Latex写论文</div>
+      <div>http://example.com/2023/06/12/06/Latex写论文/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Leon</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年6月12日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/06/17/06/Python%E9%97%AD%E5%8C%85%E4%B8%8E%E8%A3%85%E9%A5%B0%E5%99%A8/" title="Python闭包与装饰器">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Python闭包与装饰器</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/06/12/06/Docker%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" title="Docker使用笔记">
+                        <span class="hidden-mobile">Docker使用笔记</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>I</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>ITS</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
