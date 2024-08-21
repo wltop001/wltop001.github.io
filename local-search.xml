@@ -4,11 +4,30 @@
   
   
   <entry>
+    <title>dt解决办法</title>
+    <link href="/2024/08/22/dt%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/"/>
+    <url>/2024/08/22/dt%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</url>
+    
+    <content type="html"><![CDATA[<h1 id="MySQL8-0-Invalid-default-value-for-‘dt’解决办法"><a href="#MySQL8-0-Invalid-default-value-for-‘dt’解决办法" class="headerlink" title="MySQL8.0 Invalid default value for ‘dt’解决办法"></a>MySQL8.0 Invalid default value for ‘dt’解决办法</h1><p>这是因为 SQL 模式设置为 <code>NO_ZERO_DATE</code>。</p><p><code>NO_ZERO_DATE</code> - 在<code>srict</code>模式下，不允许 <code>&#39;0000-00-00&#39;</code> 作为有效日期。</p><p>仍然可以使用 IGNORE 选项插入零日期。</p><p>当不在严格模式下时，日期会被接受，但会生成一个警告。</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"># Workbench编辑的脚本可以添加这个<br><span class="hljs-keyword">SET</span> <span class="hljs-variable">@OLD</span>_SQL_MODE<span class="hljs-operator">=</span>@<span class="hljs-variable">@SQL</span>_MODE, SQL_MODE<span class="hljs-operator">=</span><span class="hljs-string">&#x27;TRADITIONAL,ALLOW_INVALID_DATES&#x27;</span>;<br><br># 非全局设置<br><br># 设置全局允许Invalid <span class="hljs-type">date</span><br><span class="hljs-keyword">SET</span> <span class="hljs-keyword">GLOBAL</span> SQL_MODE <span class="hljs-operator">=</span><span class="hljs-string">&#x27;ALLOW_INVALID_DATES&#x27;</span>;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>MySQL</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Word表格使用问题：自动断开到下一页</title>
     <link href="/2024/08/21/Word%E8%A1%A8%E6%A0%BC%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98%EF%BC%9A%E8%87%AA%E5%8A%A8%E6%96%AD%E5%BC%80%E5%88%B0%E4%B8%8B%E4%B8%80%E9%A1%B5/"/>
     <url>/2024/08/21/Word%E8%A1%A8%E6%A0%BC%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98%EF%BC%9A%E8%87%AA%E5%8A%A8%E6%96%AD%E5%BC%80%E5%88%B0%E4%B8%8B%E4%B8%80%E9%A1%B5/</url>
     
-    <content type="html"><![CDATA[<h1 id="Word表格使用问题：表格自动断开到下一页，当页显示空白"><a href="#Word表格使用问题：表格自动断开到下一页，当页显示空白" class="headerlink" title="Word表格使用问题：表格自动断开到下一页，当页显示空白"></a>Word表格使用问题：表格自动断开到下一页，当页显示空白</h1><p><strong>问题描述：</strong></p><p>word在编辑表格的时候，表格框内填写内容会自动断开到下一页，当前页的表格内显示空白</p><p><strong>解决思路：</strong></p><p>其实很简单一件事，不要设置表格的高度就可以。</p><p>选中表格后，按照以下方式设置：</p><p><img src="https://i-blog.csdnimg.cn/blog_migrate/cd29fee69b93bfcbc6259a888863a597.png" alt="img"></p>]]></content>
+    <content type="html"><![CDATA[<h1 id="Word表格使用问题：表格自动断开到下一页，当页显示空白"><a href="#Word表格使用问题：表格自动断开到下一页，当页显示空白" class="headerlink" title="Word表格使用问题：表格自动断开到下一页，当页显示空白"></a>Word表格使用问题：表格自动断开到下一页，当页显示空白</h1><p><strong>问题描述：</strong></p><p>word在编辑表格的时候，表格框内填写内容会自动断开到下一页，当前页的表格内显示空白</p><p><strong>解决思路：</strong></p><p>其实很简单一件事，不要设置表格的高度就可以。</p><p>选中表格后，按照以下方式设置：</p><p><img src="/Users/weilu/PycharmProjects/02-PRIV/wei-blog/source/_posts/2024/08/assets/image-20240822074954423.png" alt="image-20240822074954423"></p>]]></content>
     
     
     <categories>
