@@ -4,11 +4,11 @@
   
   
   <entry>
-    <title>C# Log4Net使用</title>
+    <title></title>
     <link href="/2025/01/10/C-Log4Net%E4%BD%BF%E7%94%A8/"/>
     <url>/2025/01/10/C-Log4Net%E4%BD%BF%E7%94%A8/</url>
     
-    <content type="html"><![CDATA[]]></content>
+    <content type="html"><![CDATA[<h1 id="Log4Net日志组建使用方法"><a href="#Log4Net日志组建使用方法" class="headerlink" title="Log4Net日志组建使用方法"></a>Log4Net日志组建使用方法</h1><p>我的log4net使用手册</p><p><a href="http://blog.csdn.net/lyjcn/article/details/4432833">http://blog.csdn.net/lyjcn/article/details/4432833</a></p><p><strong>1、添加Log4Net组件</strong></p><p>   - 通过NuGet管理器安装</p><p>   - Apache网站下载相关dll，添加引用</p><p><strong>2、添加Log4Net配置文件</strong></p><p>   新建log4net配置文件</p><p><strong>3、 将log4net的【文件属性】中的复制到输出目录改为【始终复制】</strong></p><p><img src="/Users/weilu/Library/Application Support/typora-user-images/image-20250110194848857.png" alt="image-20250110194848857" style="zoom: 25%;" /></p><p><strong>4、动态加载配置文件</strong></p><p>   可以实现配置文件热修改，不用重新启动程序，即可实现重配置</p><p>   添加如下内容到AssemblyInfo.cs</p><p>   [assembly: log4net.Config.XmlConfigurator(ConfigFile=”Log4Net.config”, Watch=<strong>true</strong>)]  </p><p>   注意：ConfigFile 可以指定绝对路径 和 相对路径  eg: /log/xxxx.log 或者 d://log//xxxx.log</p><p><strong>5、代码封装</strong></p><p><img src="/Users/weilu/Library/Application Support/typora-user-images/image-20250110194929929.png" alt="image-20250110194929929" style="zoom: 33%;" /></p>]]></content>
     
     
     
