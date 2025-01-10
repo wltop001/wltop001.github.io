@@ -16,24 +16,24 @@
   <meta name="author" content="Leon">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Log4Net日志组建使用方法我的log4net使用手册 http:&#x2F;&#x2F;blog.csdn.net&#x2F;lyjcn&#x2F;article&#x2F;details&#x2F;4432833 1、添加Log4Net组件    - 通过NuGet管理器安装    - Apache网站下载相关dll，添加引用 2、添加Log4Net配置文件    新建log4net配置文件 3、 将log4net的【文件属性】中的复制到输出目录改为">
+    <meta name="description" content="Python中的模块导入参考资料： https:&#x2F;&#x2F;blog.csdn.net&#x2F;weixin_38256474&#x2F;article&#x2F;details&#x2F;81228492 https:&#x2F;&#x2F;blog.csdn.net&#x2F;sky453589103&#x2F;article&#x2F;details&#x2F;78863050 理解基本概念* 模块：一般是以py为后缀的文件，还可以包括.pyo, .pyc, .pyd, .so, .dll等文件">
 <meta property="og:type" content="article">
-<meta property="og:title" content="不鹜虚声">
-<meta property="og:url" content="http://example.com/2025/01/10/C-Log4Net%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:title" content="Python中的模块导入">
+<meta property="og:url" content="http://example.com/2025/01/10/Python%E4%B8%AD%E7%9A%84%E6%A8%A1%E5%9D%97%E5%AF%BC%E5%85%A5/index.html">
 <meta property="og:site_name" content="不鹜虚声">
-<meta property="og:description" content="Log4Net日志组建使用方法我的log4net使用手册 http:&#x2F;&#x2F;blog.csdn.net&#x2F;lyjcn&#x2F;article&#x2F;details&#x2F;4432833 1、添加Log4Net组件    - 通过NuGet管理器安装    - Apache网站下载相关dll，添加引用 2、添加Log4Net配置文件    新建log4net配置文件 3、 将log4net的【文件属性】中的复制到输出目录改为">
+<meta property="og:description" content="Python中的模块导入参考资料： https:&#x2F;&#x2F;blog.csdn.net&#x2F;weixin_38256474&#x2F;article&#x2F;details&#x2F;81228492 https:&#x2F;&#x2F;blog.csdn.net&#x2F;sky453589103&#x2F;article&#x2F;details&#x2F;78863050 理解基本概念* 模块：一般是以py为后缀的文件，还可以包括.pyo, .pyc, .pyd, .so, .dll等文件">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/Users/weilu/Library/Application%20Support/typora-user-images/image-20250110194848857.png">
-<meta property="og:image" content="http://example.com/Users/weilu/Library/Application%20Support/typora-user-images/image-20250110194929929.png">
-<meta property="article:published_time" content="2025-01-10T11:27:55.145Z">
-<meta property="article:modified_time" content="2025-01-10T11:49:47.000Z">
+<meta property="og:image" content="http://example.com/Users/weilu/Library/Application%20Support/typora-user-images/image-20250110195613734.png">
+<meta property="article:published_time" content="2025-01-10T11:52:39.000Z">
+<meta property="article:modified_time" content="2025-01-10T11:56:25.243Z">
 <meta property="article:author" content="Leon">
+<meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/Users/weilu/Library/Application%20Support/typora-user-images/image-20250110194848857.png">
+<meta name="twitter:image" content="http://example.com/Users/weilu/Library/Application%20Support/typora-user-images/image-20250110195613734.png">
   
   
   
-  <title>不鹜虚声</title>
+  <title>Python中的模块导入 - 不鹜虚声</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -215,7 +215,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text=""></span>
+            <span id="subtitle" data-typed-text="Python中的模块导入"></span>
           
         </div>
 
@@ -226,7 +226,7 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-01-10 19:27" pubdate>
+        <time datetime="2025-01-10 19:52" pubdate>
           2025年1月10日 晚上
         </time>
       </span>
@@ -239,7 +239,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          395 字
+          936 字
         
       </span>
     
@@ -251,7 +251,7 @@
         
         
           <!-- compatible with older versions-->
-          4 分钟
+          8 分钟
         
       </span>
     
@@ -297,27 +297,46 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none"></h1>
+            <h1 style="display: none">Python中的模块导入</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Log4Net日志组建使用方法"><a href="#Log4Net日志组建使用方法" class="headerlink" title="Log4Net日志组建使用方法"></a>Log4Net日志组建使用方法</h1><p>我的log4net使用手册</p>
-<p><a target="_blank" rel="noopener" href="http://blog.csdn.net/lyjcn/article/details/4432833">http://blog.csdn.net/lyjcn/article/details/4432833</a></p>
-<p><strong>1、添加Log4Net组件</strong></p>
-<p>   - 通过NuGet管理器安装</p>
-<p>   - Apache网站下载相关dll，添加引用</p>
-<p><strong>2、添加Log4Net配置文件</strong></p>
-<p>   新建log4net配置文件</p>
-<p><strong>3、 将log4net的【文件属性】中的复制到输出目录改为【始终复制】</strong></p>
-<p><img src="/Users/weilu/Library/Application Support/typora-user-images/image-20250110194848857.png" srcset="/img/loading.gif" lazyload alt="image-20250110194848857" style="zoom: 25%;" /></p>
-<p><strong>4、动态加载配置文件</strong></p>
-<p>   可以实现配置文件热修改，不用重新启动程序，即可实现重配置</p>
-<p>   添加如下内容到AssemblyInfo.cs</p>
-<p>   [assembly: log4net.Config.XmlConfigurator(ConfigFile=”Log4Net.config”, Watch=<strong>true</strong>)]  </p>
-<p>   注意：ConfigFile 可以指定绝对路径 和 相对路径  eg: /log/xxxx.log 或者 d://log//xxxx.log</p>
-<p><strong>5、代码封装</strong></p>
-<p><img src="/Users/weilu/Library/Application Support/typora-user-images/image-20250110194929929.png" srcset="/img/loading.gif" lazyload alt="image-20250110194929929" style="zoom: 33%;" /></p>
+                <h1 id="Python中的模块导入"><a href="#Python中的模块导入" class="headerlink" title="Python中的模块导入"></a>Python中的模块导入</h1><p>参考资料：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38256474/article/details/81228492">https://blog.csdn.net/weixin_38256474/article/details/81228492</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/sky453589103/article/details/78863050">https://blog.csdn.net/sky453589103/article/details/78863050</a></p>
+<h2 id="理解基本概念"><a href="#理解基本概念" class="headerlink" title="理解基本概念"></a>理解基本概念</h2><p>* 模块：一般是以py为后缀的文件，还可以包括.pyo, .pyc, .pyd, .so, .dll等文件</p>
+<p>* 包：包含python模块的文件夹</p>
+<p>* <strong>init.py\</strong>：用于指示该文件夹是一个包，其中__all__是一个重要的变量，用来指定import *时，哪些模块会被import进到当前作用域。__path__也是一个常用的列表变量，默认是当前包的路径</p>
+<h2 id="import运行流程"><a href="#import运行流程" class="headerlink" title="import运行流程"></a>import运行流程</h2><ol>
+<li>首先在sys.modules缓存中寻找</li>
+<li>如果没有，则在内置模块列表中寻找</li>
+<li>内置模块中如果没找到，则在sys.path定义的路径中搜索该模块</li>
+</ol>
+<p><img src="/Users/weilu/Library/Application Support/typora-user-images/image-20250110195613734.png" srcset="/img/loading.gif" lazyload alt="image-20250110195613734" style="zoom:33%;" /></p>
+<p>import的标准写法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-string">&quot;&quot;&quot;PEP8建议的导入模块标准&quot;&quot;&quot;</span><br><br><span class="hljs-comment"># 内置模块</span><br><br><span class="hljs-keyword">import</span> os<br><br><span class="hljs-keyword">import</span> time<br><br><span class="hljs-comment"># 第三方模块</span><br><br><span class="hljs-keyword">import</span> flask<br><br><span class="hljs-comment"># 本地模块</span><br><br><span class="hljs-keyword">from</span> test <span class="hljs-keyword">import</span> test1<br></code></pre></td></tr></table></figure>
+<h2 id="绝对导入"><a href="#绝对导入" class="headerlink" title="绝对导入"></a>绝对导入</h2><p>无论是绝对导入还是相对导入，都需要一个参照物；</p>
+<p>绝对导入参照的就是项目的根文件夹。即绝对导入要求必须从最顶层的文件夹开始，为每个包和每个模块提供完整详细的导入路径</p>
+<p>在Python3中，绝对导入是默认的导入形式</p>
+<h2 id="相对导入"><a href="#相对导入" class="headerlink" title="相对导入"></a>相对导入</h2><ul>
+<li><p>隐式相对导入</p>
+</li>
+<li><p>显示相对导入</p>
+</li>
+</ul>
+<p><strong>包路径跟运行脚本所在的路径有关系 .是当前路径，..是上一路径，…是上两层路径</strong></p>
+<h2 id="以模块方式运行"><a href="#以模块方式运行" class="headerlink" title="以模块方式运行"></a>以模块方式运行</h2><p>参考资料：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/wonengguwozai/article/details/80480034">https://blog.csdn.net/wonengguwozai/article/details/80480034</a></p>
+<p><code>python xxx/xxx.py</code> 直接启动运行</p>
+<p><code>python -m xxx.xxx</code> 以模块方式启动运行</p>
+<p>两种启动方式的差异：</p>
+<ul>
+<li><p>所加载的系统路径不同（sys.path）。直接运行后添加到path中的路径为脚本文件所在路径；而以模块方式运行后多了一个’’，这个’’代表了python执行环境的当前路径。</p>
+</li>
+<li><p>加上-m后，python会先将模块或者包导入，然后再执行</p>
+</li>
+</ul>
 
                 
               </div>
@@ -326,6 +345,34 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Python/" class="category-chain-item">Python</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Python/">#Python</a>
+      
+    </div>
   
 </div>
 
@@ -335,8 +382,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div></div>
-      <div>http://example.com/2025/01/10/C-Log4Net使用/</div>
+      <div>Python中的模块导入</div>
+      <div>http://example.com/2025/01/10/Python中的模块导入/</div>
     </div>
     <div class="license-meta">
       
@@ -380,18 +427,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/01/10/Python%E4%B8%AD%E7%9A%84%E6%A8%A1%E5%9D%97%E5%AF%BC%E5%85%A5/" title="Python中的模块导入">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Python中的模块导入</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/08/22/dt%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" title="dt解决办法">
-                        <span class="hidden-mobile">dt解决办法</span>
+                      <a href="/2025/01/10/C-Log4Net%E4%BD%BF%E7%94%A8/" title="">
+                        <span class="hidden-mobile"></span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

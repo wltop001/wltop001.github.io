@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>Python中的模块导入</title>
+    <link href="/2025/01/10/Python%E4%B8%AD%E7%9A%84%E6%A8%A1%E5%9D%97%E5%AF%BC%E5%85%A5/"/>
+    <url>/2025/01/10/Python%E4%B8%AD%E7%9A%84%E6%A8%A1%E5%9D%97%E5%AF%BC%E5%85%A5/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Python中的模块导入"><a href="#Python中的模块导入" class="headerlink" title="Python中的模块导入"></a>Python中的模块导入</h1><p>参考资料：</p><p><a href="https://blog.csdn.net/weixin_38256474/article/details/81228492">https://blog.csdn.net/weixin_38256474/article/details/81228492</a></p><p><a href="https://blog.csdn.net/sky453589103/article/details/78863050">https://blog.csdn.net/sky453589103/article/details/78863050</a></p><h2 id="理解基本概念"><a href="#理解基本概念" class="headerlink" title="理解基本概念"></a>理解基本概念</h2><p>* 模块：一般是以py为后缀的文件，还可以包括.pyo, .pyc, .pyd, .so, .dll等文件</p><p>* 包：包含python模块的文件夹</p><p>* <strong>init.py\</strong>：用于指示该文件夹是一个包，其中__all__是一个重要的变量，用来指定import *时，哪些模块会被import进到当前作用域。__path__也是一个常用的列表变量，默认是当前包的路径</p><h2 id="import运行流程"><a href="#import运行流程" class="headerlink" title="import运行流程"></a>import运行流程</h2><ol><li>首先在sys.modules缓存中寻找</li><li>如果没有，则在内置模块列表中寻找</li><li>内置模块中如果没找到，则在sys.path定义的路径中搜索该模块</li></ol><p><img src="/Users/weilu/Library/Application Support/typora-user-images/image-20250110195613734.png" alt="image-20250110195613734" style="zoom:33%;" /></p><p>import的标准写法</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-string">&quot;&quot;&quot;PEP8建议的导入模块标准&quot;&quot;&quot;</span><br><br><span class="hljs-comment"># 内置模块</span><br><br><span class="hljs-keyword">import</span> os<br><br><span class="hljs-keyword">import</span> time<br><br><span class="hljs-comment"># 第三方模块</span><br><br><span class="hljs-keyword">import</span> flask<br><br><span class="hljs-comment"># 本地模块</span><br><br><span class="hljs-keyword">from</span> test <span class="hljs-keyword">import</span> test1<br></code></pre></td></tr></table></figure><h2 id="绝对导入"><a href="#绝对导入" class="headerlink" title="绝对导入"></a>绝对导入</h2><p>无论是绝对导入还是相对导入，都需要一个参照物；</p><p>绝对导入参照的就是项目的根文件夹。即绝对导入要求必须从最顶层的文件夹开始，为每个包和每个模块提供完整详细的导入路径</p><p>在Python3中，绝对导入是默认的导入形式</p><h2 id="相对导入"><a href="#相对导入" class="headerlink" title="相对导入"></a>相对导入</h2><ul><li><p>隐式相对导入</p></li><li><p>显示相对导入</p></li></ul><p><strong>包路径跟运行脚本所在的路径有关系 .是当前路径，..是上一路径，…是上两层路径</strong></p><h2 id="以模块方式运行"><a href="#以模块方式运行" class="headerlink" title="以模块方式运行"></a>以模块方式运行</h2><p>参考资料：</p><p><a href="https://blog.csdn.net/wonengguwozai/article/details/80480034">https://blog.csdn.net/wonengguwozai/article/details/80480034</a></p><p><code>python xxx/xxx.py</code> 直接启动运行</p><p><code>python -m xxx.xxx</code> 以模块方式启动运行</p><p>两种启动方式的差异：</p><ul><li><p>所加载的系统路径不同（sys.path）。直接运行后添加到path中的路径为脚本文件所在路径；而以模块方式运行后多了一个’’，这个’’代表了python执行环境的当前路径。</p></li><li><p>加上-m后，python会先将模块或者包导入，然后再执行</p></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>Python</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Python</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title></title>
     <link href="/2025/01/10/C-Log4Net%E4%BD%BF%E7%94%A8/"/>
     <url>/2025/01/10/C-Log4Net%E4%BD%BF%E7%94%A8/</url>
