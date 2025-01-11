@@ -4,6 +4,194 @@
   
   
   <entry>
+    <title>NTCIP协议</title>
+    <link href="/2025/01/10/NTCIP%E5%8D%8F%E8%AE%AE/"/>
+    <url>/2025/01/10/NTCIP%E5%8D%8F%E8%AE%AE/</url>
+    
+    <content type="html"><![CDATA[<h1 id="NTCIP协议理解"><a href="#NTCIP协议理解" class="headerlink" title="NTCIP协议理解"></a>NTCIP协议理解</h1><h1 id="术语定义"><a href="#术语定义" class="headerlink" title="术语定义"></a>术语定义</h1><ul><li>OSI, Open System Interconnection Reference Model, 开放系统互联通信参考模型</li><li>ASN.1, Abstract Syntax Notation One, 抽象语法符号</li><li>BER, Basic Encoding Rules</li><li>DER, Distinguished Encoding Rules, 可辨别编码规则</li></ul><h1 id="抽象语法符号-ASN-1"><a href="#抽象语法符号-ASN-1" class="headerlink" title="抽象语法符号 ASN.1"></a>抽象语法符号 ASN.1</h1><h1 id="基本编码规则-BER"><a href="#基本编码规则-BER" class="headerlink" title="基本编码规则 BER"></a>基本编码规则 BER</h1><p>使用BER，一个ASN.1的值有三种编码方法，选择哪种取决于值的类型和值的长度是否已知。</p><ul><li>简单定长编码</li><li>结构化定长编码</li><li>结构化不定长编码</li></ul><p>每个BER编码有三或四部分：</p><ul><li>Identifier octets: 定义了ASN.1值的类和标签值，指明编码方法是简单还是结构化的</li><li>Length octets: 对于定长的编码，它指出了内容字节个数；对于结构化非定长编码，它指明长度是不确定的</li><li>Contents octets: 对于简单定长编码方法，它给出了值的具体表示；对于结构化的方法，它给出了值内容的BER编码的串联</li><li>End-of-contents octets: 对于结构化非定长的编码方法，它表示内容结束；对于其他方法，没有该部分</li></ul><h2 id="控制模式"><a href="#控制模式" class="headerlink" title="控制模式"></a>控制模式</h2><p>Control Source</p><ul><li>systemControl - control by master or central UTC computer commands</li><li>systemStandby - control by local based on master or central command to use local control</li><li>backupMode - Backup Mode</li><li>Manual - control by entry other than zero in coordOperationalMode</li><li>Timebase - control by the local controller’s Time Base scheduler.</li><li>Interconnect - control by the local Interconnect inputs.</li><li>InterconnectBackup - fallback control to local TBC scheduler due to invalid Interconnect inputs or loss of sync.</li><li>LangisPattern - control by the Langis background plan generator adaptive software.</li><li>LangisAdapt - control by the Langis adaptive real-time software.</li><li>Other - control by a source other than those listed above.</li></ul><h2 id="状态相关"><a href="#状态相关" class="headerlink" title="状态相关"></a>状态相关</h2><h3 id="Coord-Status"><a href="#Coord-Status" class="headerlink" title="Coord Status"></a>Coord Status</h3><ul><li><strong>Local Cycle</strong> -Represents the current position in the local coordination cycle of the running pattern (0 to 510 sec). This value counts down from patternCycleTime to Zero. This value may exceed the patternCycleTime during a coord cycle with offset correction (patternCycleTime + correction).</li><li><strong>Sync (Master Cycle)</strong> - Represents the time since the system Sync reference point for the running pattern (0 to 510 sec). This value counts down from the current Cycle Time selected to the next system reference Sync point (patternCycleTime). This value may exceed the patternCycleTime during a coord cycle in which the system reference point has changed.</li><li><strong>Free Status</strong> -</li><li><strong>Flash Status</strong> -</li></ul><h2 id="参数相关"><a href="#参数相关" class="headerlink" title="参数相关"></a>参数相关</h2><h3 id="相位"><a href="#相位" class="headerlink" title="相位"></a>相位</h3><ul><li>Walk</li><li>PedClear</li><li>Don’t Walk</li><li>MinGreen</li><li>Passage</li><li>Max 1- Phase Maximum 1 Parameter in seconds (NEMA TS 2 range: 1-255 sec). This time setting shall determine the maximum length of time this phase may be held Green in the presence of a serviceable conflicting call. In the absence of a serviceable conflicting call the Maximum Green timer shall be held reset unless Max Vehicle Recall is enabled for this phase. This is the default maximum value to use. It may be overridden via an external input, coordMaximumMode or other method.</li><li>Max 2 -</li><li>Yellow Change</li><li>Red Clear</li><li>Red Revert - Red revert time parameter in tenth seconds. A minimum Red indication to be timed following the Yellow Change interval and prior to the next display of Green on the same signal output driver group. The unitRedRevert parameter shall act as a minimum red revert time for all signal displays. The phaseRedRevert parameter may increase the red revert time for a specific phase. If the phaseRedRevert parameter is less than the unitRedRevert the unitRedRevert time shall be used.</li><li></li></ul><h2 id="协调参数"><a href="#协调参数" class="headerlink" title="协调参数"></a>协调参数</h2><h3 id="Operation-Mode"><a href="#Operation-Mode" class="headerlink" title="Operation Mode"></a>Operation Mode</h3><ul><li>Automatic - this mode provides for coord operation, free, and flash to be determined automatically by the possible sources (i.e. Interconnect, Time Base, or System Commands).</li><li>Manual Free - this mode provides for Free operation without coordination or Automatic Flash from any source.</li><li>Manual Flash -</li><li>All Red Flash -</li><li>Pattern 1-128 - these modes provides for Coord operation running this pattern. This selection of pattern overrides all other pattern commands.</li></ul><h3 id="Correction-Mode"><a href="#Correction-Mode" class="headerlink" title="Correction Mode"></a>Correction Mode</h3><ul><li>Other</li><li>Dwell - when changing offset, the coordinator shall establish a new offset by dwelling in the coord phase(s) until the desired offset is reached.</li><li>Shortway (Smooth) - when changing offset, the coordinator shall establish a new offset by adding or subtracting to/from the timings in a manner that limits the cycle change. This operation is performed in a device specific manner.</li><li>AddOnly - when changing offset, the coordinator shall establish a new offset by adding to the timings in a manner that limits the cycle change. This operation is performed in a device specific manner.</li></ul><h3 id="Max-Mode"><a href="#Max-Mode" class="headerlink" title="Max Mode"></a>Max Mode</h3><ul><li>Other</li><li>Max1</li><li>Max2</li><li>MaxInhibit</li></ul><h3 id="Force-Mode"><a href="#Force-Mode" class="headerlink" title="Force Mode"></a>Force Mode</h3><ul><li>Other - the CU implements the default force mode (default is Fixed as defined below).</li><li>Floating - each phase will be forced the split time after it becomes active. This allows unused split time to revert to the coord phase.</li><li>Fixed - each phase will be forced at a fixed position in the cycle. This allows unused split time to revert to the following phase.</li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>ITS</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>ITS</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>SCOOT修改登录密码</title>
+    <link href="/2025/01/10/SCOOT%E4%BF%AE%E6%94%B9%E7%99%BB%E5%BD%95%E5%AF%86%E7%A0%81/"/>
+    <url>/2025/01/10/SCOOT%E4%BF%AE%E6%94%B9%E7%99%BB%E5%BD%95%E5%AF%86%E7%A0%81/</url>
+    
+    <content type="html"><![CDATA[<h1 id="SCOOT修改登录密码"><a href="#SCOOT修改登录密码" class="headerlink" title="SCOOT修改登录密码"></a>SCOOT修改登录密码</h1><p>进入SCOOT虚拟机目录 C:\Program Files\Siemens Traffic Controls\UTC\bin\win32\</p><p>DBAS命令的EXE：datprp.exe</p><p>修改完成后，在用户界面记得输入 X 保存修改的数据</p><p>UPDA命令的EXE：PrepareAllData.exe</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>ITS</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>ITS</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Android开发 ImageView内存溢出（OOM）的解决办法</title>
+    <link href="/2025/01/10/Android%E5%BC%80%E5%8F%91-ImageView%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%EF%BC%88OOM%EF%BC%89%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/"/>
+    <url>/2025/01/10/Android%E5%BC%80%E5%8F%91-ImageView%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%EF%BC%88OOM%EF%BC%89%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Android开发-ImageView内存溢出（OOM）的解决办法"><a href="#Android开发-ImageView内存溢出（OOM）的解决办法" class="headerlink" title="Android开发 ImageView内存溢出（OOM）的解决办法"></a>Android开发 ImageView内存溢出（OOM）的解决办法</h1><p>参考资源：</p><p><a href="http://mzh3344258.blog.51cto.com/1823534/804237/">http://mzh3344258.blog.51cto.com/1823534/804237/</a><br><a href="http://www.aiuxian.com/article/p-1910955.html">http://www.aiuxian.com/article/p-1910955.html</a></p><p><strong>获取图像的来源一般有三种：</strong><br>    1）从网络加载  BitmapFactory.decodeStream<br>    2）从文件读取  BitmapFactory.decodeFile<br>    3）从资源文件加载  BitmapFactory.decodeResource</p><p><strong>内存到哪里去了，为什么被消耗这么多？</strong><br>    内存就是去了bitmap，BitmapFactory的每个函数都会生成一个bitmap对象，用于存放解码后的图像，然后返回该引用，如果图像数据较大就会造成bitmap对象申请的内存较多，如果图像过多就会造成内存不够用自然就会出现out of memory的现象。</p><p><strong>如何正确的加载图像？</strong><br>    BitmapFactory提供了BitmapFactory.Option，用途设置图像的相关参数，在调用decode的时候我们可以将其传入来对图像进行相关设置。主要介绍两个成员：<br>    1）inJustDecodeBounds（Boolean）<br>    2）inSampleSize（int类型）</p><ul><li>尽量不要把scaleType设置为fitXY。</li></ul><p><img src="/Users/weilu/Library/Application Support/typora-user-images/image-20250110201137636.png" alt="image-20250110201137636"></p><ul><li>onDestroy函数中注意回收资源。</li><li>在内存引用上做处理，常用的有软引用、强化引用、弱引用</li><li>在内存中加载图片时直接在内存中做处理，如：边界压缩等</li><li>动态回收内存</li><li>优化Dalvik虚拟机的堆内存分配</li><li><p>自定义堆内存大小</p><p>  缓存管理办法<br>  图片处理办法<br>  界面回收图片办法<br>  工具Jar包办法</p></li></ul><p>方案一：<br>    使用Android-Universal-Image-Loader开源框架</p><p>方案二：<br>    及时动态回收内存，Activity销毁时回收资源</p><p>方案三：</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Andriod</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Andriod</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>GMap.NET 开发使用记录</title>
+    <link href="/2025/01/10/GMap-NET-%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/"/>
+    <url>/2025/01/10/GMap-NET-%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</url>
+    
+    <content type="html"><![CDATA[<h1 id="GMap-net使用"><a href="#GMap-net使用" class="headerlink" title="GMap.net使用"></a>GMap.net使用</h1><p><strong>如何解决GMap.NET遮挡其他窗体，自动成为焦点的问题：</strong></p><p><a href="http://bbs.csdn.net/topics/391832033">http://bbs.csdn.net/topics/391832033</a></p><p><a href="https://stackoverflow.com/questions/25762177/why-is-my-form-on-top-when-i-hover-over-a-gmap-net-control">https://stackoverflow.com/questions/25762177/why-is-my-form-on-top-when-i-hover-over-a-gmap-net-control</a></p><p>解决方法：GMap1.DisableFocusOnMouseEnter = true;</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Python中的CRC计算</title>
+    <link href="/2025/01/10/Python%E4%B8%AD%E7%9A%84CRC%E8%AE%A1%E7%AE%97/"/>
+    <url>/2025/01/10/Python%E4%B8%AD%E7%9A%84CRC%E8%AE%A1%E7%AE%97/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Python中实现CRC计算"><a href="#Python中实现CRC计算" class="headerlink" title="Python中实现CRC计算"></a>Python中实现CRC计算</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs python">crc_poly = <span class="hljs-number">0x1005</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">calc_crc16</span>(<span class="hljs-params">data</span>):<br>    crc16 = <span class="hljs-number">0x0000</span><br>    len_data = <span class="hljs-built_in">len</span>(data)<br>    pt = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(len_data):<br>        num = <span class="hljs-number">0x80</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">8</span>):<br>            <span class="hljs-keyword">if</span> crc16 &amp; <span class="hljs-number">0x8000</span> != <span class="hljs-number">0</span>:<br>                crc16 = crc16 &lt;&lt; <span class="hljs-number">1</span><br>                crc16 = crc16 &amp; <span class="hljs-number">0xffff</span><br>                <span class="hljs-built_in">print</span>(k, <span class="hljs-string">&quot;**&quot;</span>, num, <span class="hljs-string">&quot;**&quot;</span>, crc16)<br>                crc16 = crc16 ^ crc_poly<br>                crc16 = crc16 &amp; <span class="hljs-number">0xffff</span><br>                <span class="hljs-built_in">print</span>(k, <span class="hljs-string">&quot;**&quot;</span>, num, <span class="hljs-string">&quot;**&quot;</span>, crc16)<br>            <span class="hljs-keyword">else</span>:<br>                crc16 = crc16 &lt;&lt; <span class="hljs-number">1</span><br>                crc16 = crc16 &amp; <span class="hljs-number">0xffff</span><br>                <span class="hljs-built_in">print</span>(k, <span class="hljs-string">&quot;**&quot;</span>, num, <span class="hljs-string">&quot;**&quot;</span>, crc16)<br>            <span class="hljs-keyword">if</span> (data[k] &amp; num) != <span class="hljs-number">0</span>:<br>                crc16 = crc16 ^ crc_poly<br>                crc16 = crc16 &amp; <span class="hljs-number">0xffff</span><br>                <span class="hljs-built_in">print</span>(k, <span class="hljs-string">&quot;**&quot;</span>, num, <span class="hljs-string">&quot;**&quot;</span>, crc16)<br>            num = num &gt;&gt; <span class="hljs-number">1</span><br>    <span class="hljs-keyword">return</span> crc16<br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    result = calc_crc16([<span class="hljs-number">0x00</span>, <span class="hljs-number">0x1a</span>])<br>    <span class="hljs-built_in">print</span>(result)<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>Python</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Python</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>原码, 反码, 补码 详解</title>
+    <link href="/2025/01/10/%E5%8E%9F%E7%A0%81-%E5%8F%8D%E7%A0%81-%E8%A1%A5%E7%A0%81-%E8%AF%A6%E8%A7%A3/"/>
+    <url>/2025/01/10/%E5%8E%9F%E7%A0%81-%E5%8F%8D%E7%A0%81-%E8%A1%A5%E7%A0%81-%E8%AF%A6%E8%A7%A3/</url>
+    
+    <content type="html"><![CDATA[<h1 id="计算机中原码、反码和补码"><a href="#计算机中原码、反码和补码" class="headerlink" title="计算机中原码、反码和补码"></a>计算机中原码、反码和补码</h1><p>本篇文章讲解了计算机的原码, 反码和补码. 并且进行了深入探求了为何要使用反码和补码, 以及更进一步的论证了为何可以用反码, 补码的加法计算原码的减法. 论证部分如有不对的地方请各位牛人帮忙指正! 希望本文对大家学习计算机基础有所帮助!</p><p><strong>一. 机器数和真值</strong></p><p>在学习原码, 反码和补码之前, 需要先了解机器数和真值的概念.<br>1、机器数<br>一个数在计算机中的二进制表示形式,  叫做这个数的机器数。机器数是带符号的，在计算机用一个数的最高位存放符号, 正数为0, 负数为1.<br>比如，十进制中的数 +3 ，计算机字长为8位，转换成二进制就是00000011。如果是 -3 ，就是 10000011 。<br>那么，这里的 00000011 和 10000011 就是机器数。<br>2、真值<br>因为第一位是符号位，所以机器数的形式值就不等于真正的数值。例如上面的有符号数 10000011，其最高位1代表负，其真正数值是 -3 而不是形式值131（10000011转换成十进制等于131）。所以，为区别起见，将带符号位的机器数对应的真正数值称为机器数的真值。<br>例：0000 0001的真值 = +000 0001 = +1，1000 0001的真值 = –000 0001 = –1</p><p><strong>二. 原码, 反码, 补码的基础概念和计算方法.</strong></p><p>在探求为何机器要使用补码之前, 让我们先了解原码, 反码和补码的概念.对于一个数, 计算机要使用一定的编码方式进行存储. 原码, 反码, 补码是机器存储一个具体数字的编码方式.</p><ol><li>原码<br>原码就是符号位加上真值的绝对值, 即用第一位表示符号, 其余位表示值. 比如如果是8位二进制:<br>[+1]原 = 0000 0001<br>[-1]原 = 1000 0001<br>第一位是符号位. 因为第一位是符号位, 所以8位二进制数的取值范围就是:<br>[1111 1111 , 0111 1111]<br>即<br>[-127 , 127]<br>原码是人脑最容易理解和计算的表示方式.</li><li>反码<br>反码的表示方法是:<br>正数的反码是其本身<br>负数的反码是在其原码的基础上, 符号位不变，其余各个位取反.<br>[+1] = [00000001]原 = [00000001]反<br>[-1] = [10000001]原 = [11111110]反<br>可见如果一个反码表示的是负数, 人脑无法直观的看出来它的数值. 通常要将其转换成原码再计算.</li><li>补码<br>补码的表示方法是:<br>正数的补码就是其本身<br>负数的补码是在其原码的基础上, 符号位不变, 其余各位取反, 最后+1. (即在反码的基础上+1)<br>[+1] = [00000001]原 = [00000001]反 = [00000001]补<br>[-1] = [10000001]原 = [11111110]反 = [11111111]补<br>对于负数, 补码表示方式也是人脑无法直观看出其数值的. 通常也需要转换成原码在计算其数值.</li></ol><p><strong>三. 为何要使用原码, 反码和补码</strong></p><p>在开始深入学习前, 我的学习建议是先”死记硬背”上面的原码, 反码和补码的表示方式以及计算方法.<br>现在我们知道了计算机可以有三种编码方式表示一个数. 对于正数因为三种编码方式的结果都相同:<br>[+1] = [00000001]原 = [00000001]反 = [00000001]补<br>所以不需要过多解释. 但是对于负数:<br>[-1] = [10000001]原 = [11111110]反 = [11111111]补<br>可见原码, 反码和补码是完全不同的. 既然原码才是被人脑直接识别并用于计算表示方式, 为何还会有反码和补码呢?<br>首先, 因为人脑可以知道第一位是符号位, 在计算的时候我们会根据符号位, 选择对真值区域的加减. (真值的概念在本文最开头). 但是对于计算机, 加减乘数已经是最基础的运算, 要设计的尽量简单. 计算机辨别”符号位”显然会让计算机的基础电路设计变得十分复杂! 于是人们想出了将符号位也参与运算的方法. 我们知道, 根据运算法则减去一个正数等于加上一个负数, 即: 1-1 = 1 + (-1) = 0 , 所以机器可以只有加法而没有减法, 这样计算机运算的设计就更简单了.<br>于是人们开始探索 将符号位参与运算, 并且只保留加法的方法. 首先来看原码:<br>计算十进制的表达式: 1-1=0<br>1 - 1 = 1 + (-1) = [00000001]原 + [10000001]原 = [10000010]原 = -2<br>如果用原码表示, 让符号位也参与计算, 显然对于减法来说, 结果是不正确的.这也就是为何计算机内部不使用原码表示一个数.<br>为了解决原码做减法的问题, 出现了反码:<br>计算十进制的表达式: 1-1=0<br>1 - 1 = 1 + (-1) = [0000 0001]原 + [1000 0001]原= [0000 0001]反 + [1111 1110]反 = [1111 1111]反 = [1000 0000]原 = -0<br>发现用反码计算减法, 结果的真值部分是正确的. 而唯一的问题其实就出现在”0”这个特殊的数值上. 虽然人们理解上+0和-0是一样的, 但是0带符号是没有任何意义的. 而且会有[0000 0000]原和[1000 0000]原两个编码表示0.<br>于是补码的出现, 解决了0的符号以及两个编码的问题:<br>1-1 = 1 + (-1) = [0000 0001]原 + [1000 0001]原 = [0000 0001]补 + [1111 1111]补 = [0000 0000]补=[0000 0000]原<br>这样0用[0000 0000]表示, 而以前出现问题的-0则不存在了.而且可以用[1000 0000]表示-128:<br>(-1) + (-127) = [1000 0001]原 + [1111 1111]原 = [1111 1111]补 + [1000 0001]补 = [1000 0000]补<br>-1-127的结果应该是-128, 在用补码运算的结果中, [1000 0000]补 就是-128. 但是注意因为实际上是使用以前的-0的补码来表示-128, 所以-128并没有原码和反码表示.(对-128的补码表示[1000 0000]补算出来的原码是[0000 0000]原, 这是不正确的)<br>使用补码, 不仅仅修复了0的符号以及存在两个编码的问题, 而且还能够多表示一个最低数. 这就是为什么8位二进制, 使用原码或反码表示的范围为[-127, +127], 而使用补码表示的范围为[-128, 127].<br>因为机器使用补码, 所以对于编程中常用到的32位int类型, 可以表示范围是: [-231, 231-1] 因为第一位表示的是符号位.而使用补码表示时又可以多保存一个最小值.</p><p><strong>四 原码, 反码, 补码 再深入</strong></p><p>计算机巧妙地把符号位参与运算, 并且将减法变成了加法, 背后蕴含了怎样的数学原理呢?<br>将钟表想象成是一个1位的12进制数. 如果当前时间是6点, 我希望将时间设置成4点, 需要怎么做呢?我们可以:</p><ol><li>往回拨2个小时: 6 - 2 = 4</li><li>往前拨10个小时: (6 + 10) mod 12 = 4</li><li>往前拨10+12=22个小时: (6+22) mod 12 =4<br>2,3方法中的mod是指取模操作, 16 mod 12 =4 即用16除以12后的余数是4.<br>所以钟表往回拨(减法)的结果可以用往前拨(加法)替代!<br>现在的焦点就落在了如何用一个正数, 来替代一个负数. 上面的例子我们能感觉出来一些端倪, 发现一些规律. 但是数学是严谨的. 不能靠感觉.<br>首先介绍一个数学中相关的概念: 同余</li></ol><p>同余的概念<br>两个整数a，b，若它们除以整数m所得的余数相等，则称a，b对于模m同余<br>记作 a ≡ b (mod m)<br>读作 a 与 b 关于模 m 同余。<br>举例说明:<br>4 mod 12 = 4<br>16 mod 12 = 4<br>28 mod 12 = 4<br>所以4, 16, 28关于模 12 同余.</p><p>负数取模<br>正数进行mod运算是很简单的. 但是负数呢?<br>下面是关于mod运算的数学定义:<br>上面是截图, “取下界”符号找不到如何输入(word中粘贴过来后乱码). 下面是使用”L”和”J”替换上图的”取下界”符号:<br>x mod y = x - y L x / y J<br>上面公式的意思是:<br>x mod y等于 x 减去 y 乘上 x与y的商的下界.<br>以 -3 mod 2 举例:<br>-3 mod 2<br>= -3 - 2xL -3/2 J<br>= -3 - 2xL-1.5J<br>= -3 - 2x(-2)<br>= -3 + 4 = 1<br>所以:<br>(-2) mod 12 = 12-2=10<br>(-4) mod 12 = 12-4 = 8<br>(-5) mod 12 = 12 - 5 = 7</p><p>开始证明<br>再回到时钟的问题上:<br>回拨2小时 = 前拨10小时<br>回拨4小时 = 前拨8小时<br>回拨5小时= 前拨7小时<br>注意, 这里发现的规律!<br>结合上面学到的同余的概念.实际上:<br>(-2) mod 12 = 10<br>10 mod 12 = 10<br>-2与10是同余的.<br>(-4) mod 12 = 8<br>8 mod 12 = 8<br>-4与8是同余的.<br>距离成功越来越近了. 要实现用正数替代负数, 只需要运用同余数的两个定理:<br>反身性:<br>a ≡ a (mod m)<br>这个定理是很显而易见的.<br>线性运算定理:<br>如果a ≡ b (mod m)，c ≡ d (mod m) 那么:<br>(1)a ± c ≡ b ± d (mod m)<br>(2)a <em> c ≡ b </em> d (mod m)<br>如果想看这个定理的证明, 请看:<a href="http://baike.baidu.com/view/79282.htm">http://baike.baidu.com/view/79282.htm</a><br>所以:<br>7 ≡ 7 (mod 12)<br>(-2) ≡ 10 (mod 12)<br>7 -2 ≡ 7 + 10 (mod 12)<br>现在我们为一个负数, 找到了它的正数同余数. 但是并不是7-2 = 7+10, 而是 7 -2 ≡ 7 + 10 (mod 12) , 即计算结果的余数相等.<br>接下来回到二进制的问题上, 看一下: 2-1=1的问题.<br>2-1=2+(-1) = [0000 0010]原 + [1000 0001]原= [0000 0010]反 + [1111 1110]反<br>先到这一步, -1的反码表示是1111 1110. 如果这里将[1111 1110]认为是原码, 则[1111 1110]原 = -126, 这里将符号位除去, 即认为是126.<br>发现有如下规律:<br>(-1) mod 127 = 126<br>126 mod 127 = 126<br>即:<br>(-1) ≡ 126 (mod 127)<br>2-1 ≡ 2+126 (mod 127)<br>2-1 与 2+126的余数结果是相同的! 而这个余数, 正式我们的期望的计算结果: 2-1=1<br>所以说一个数的反码, 实际上是这个数对于一个膜的同余数. 而这个膜并不是我们的二进制, 而是所能表示的最大值! 这就和钟表一样, 转了一圈后总能找到在可表示范围内的一个正确的数值!<br>而2+126很显然相当于钟表转过了一轮, 而因为符号位是参与计算的, 正好和溢出的最高位形成正确的运算结果.<br>既然反码可以将减法变成加法, 那么现在计算机使用的补码呢? 为什么在反码的基础上加1, 还能得到正确的结果?<br>2-1=2+(-1) = [0000 0010]原 + [1000 0001]原 = [0000 0010]补 + [1111 1111]补<br>如果把[1111 1111]当成原码, 去除符号位, 则:<br>[0111 1111]原 = 127<br>其实, 在反码的基础上+1, 只是相当于增加了膜的值:<br>(-1) mod 128 = 127<br>127 mod 128 = 127<br>2-1 ≡ 2+127 (mod 128)<br>此时, 表盘相当于每128个刻度转一轮. 所以用补码表示的运算结果最小值和最大值应该是[-128, 128].<br>但是由于0的特殊情况, 没有办法表示128, 所以补码的取值范围是[-128, 127]<br>本人一直不善于数学, 所以如果文中有不对的地方请大家多多包含, 多多指点!</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>IT</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>IT</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>解决Linux关闭终端（关闭SSH）后运行的程序自动停止的问题</title>
+    <link href="/2025/01/10/%E8%A7%A3%E5%86%B3Linux%E5%85%B3%E9%97%AD%E7%BB%88%E7%AB%AF%EF%BC%88%E5%85%B3%E9%97%ADSSH%EF%BC%89%E5%90%8E%E8%BF%90%E8%A1%8C%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%87%AA%E5%8A%A8%E5%81%9C%E6%AD%A2%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+    <url>/2025/01/10/%E8%A7%A3%E5%86%B3Linux%E5%85%B3%E9%97%AD%E7%BB%88%E7%AB%AF%EF%BC%88%E5%85%B3%E9%97%ADSSH%EF%BC%89%E5%90%8E%E8%BF%90%E8%A1%8C%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%87%AA%E5%8A%A8%E5%81%9C%E6%AD%A2%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+    
+    <content type="html"><![CDATA[<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>在服务器上写了一个python的程序，放到后台运行，当关闭SSH终端后，再次登入时使用<code>ps -ef|grep python</code>查不到对应的python进程。</p><h2 id="问题定位"><a href="#问题定位" class="headerlink" title="问题定位"></a>问题定位</h2><p>表象是跟SSH终端关闭有关，实际真正的元凶是SGIHUP信号导致的。<br>首先说几个基本概念：</p><ul><li>进程组：一个或多个进程的集合，每个进程组都有唯一的一个进程组ID，即进程组；</li><li>会话器：一个或多个进程的集合，有唯一一个会话期首进程，会话期ID为首进程的ID；</li><li>控制进程：与控制终端连接的会话期首进程叫做控制进程；</li></ul><p>当前与终端交互的进程称为前台进程组，其余进程组称为后台进程组。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell">PID = 进程ID，由内核根据延迟重用算法生成<br>PPID = 父进程ID，只能由内核修改<br>PGID = 进程组ID，子进程，父进程都能修改<br>SID = 会话ID，进程自身可以修改，但有限制<br>TPGID = 控制终端进程组ID，由控制终端修改，用于指示当前前台进程组<br></code></pre></td></tr></table></figure></p><p>会话和进程组的关系：</p><ul><li>每次用户登录时产生一个会话（session），从用户登录到退出为止，这段时间在该终端执行的进程都属于这一个会话</li><li>每个进程除了一个进程ID之外，还属于一个进程组（Process Group)。进程组是一个或多个进程的集合，每个进程组是一个或多个进程的集合，每个进程组有一个唯一的进程组ID。多个进程属于进程组的情况是多个进程用管道”|”号连接进行执行。如果在命令行执行单个进程时这个进程组只有这一个进程。</li></ul><p>挂断信号（SIGHUP）默认的动作是终止程序：</p><ul><li>当终端接口检测到网络连接断开，将挂断信号发送给控制进程（会话期首进程）</li><li>如果会话期首进程终止，则该信号发送到该会话期前台进程组</li><li>一个进程退出导致一个孤儿进程组产生时，如果任意一个孤儿进程组进程处于STOP状态，发送SIGHUP和SIGCONT信号到该进程组的所有进程。</li></ul><p><strong>结论</strong>：总而言之，当网络断开或终端窗口关闭时（也就是SSH断开后），控制进程收到SIGHUP信号退出，会导致该会话期的其他进程退出。也就是说，SSH打开后，bash等都是它的子程序，一旦SSH关闭，系统会将所有相关进程杀掉！</p><h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><h3 id="nohup命令"><a href="#nohup命令" class="headerlink" title="nohup命令"></a>nohup命令</h3><p>nohup就是不挂起的意思，该命令可以在你退出账户/关闭终端之后继续执行相应的进程。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">nohup python xxx.py &amp;<br></code></pre></td></tr></table></figure><p>此时，默认程序的输出信息会放到nohup.out中，加不加<code>&amp;</code>并不会影响这个命令，只是决定了让程序前台运行还是后台运行。</p><h3 id="screen命令"><a href="#screen命令" class="headerlink" title="screen命令"></a>screen命令</h3><p>如果除了要求关闭ssh后，期间启动的程序继续运行，还要求再次打开ssh后，可以看到程序之前的运行状态，这个时候就需要使用screen命令。</p><p>相关命令</p><ul><li><code>screen -dmS &lt;name&gt;</code></li><li><code>screen -ls</code></li><li><code>screen -r &lt;ID&gt;</code></li></ul><p>相关操作：</p><ul><li>Ctrl+A再按D = detached</li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>DevOps</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Python实现定时器</title>
+    <link href="/2025/01/10/Python%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E5%99%A8/"/>
+    <url>/2025/01/10/Python%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E5%99%A8/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Python中的定时器"><a href="#Python中的定时器" class="headerlink" title="Python中的定时器"></a>Python中的定时器</h1><p>在系统开发任务中，经常需要执行一些定时任务。定时任务包含两种类型：</p><ol><li>定时间点执行任务，比如每天午夜1点执行系统某项任务；</li><li>每间隔一段时间执行一个任务</li></ol><h4 id="循环-sleep"><a href="#循环-sleep" class="headerlink" title="循环+sleep"></a>循环+sleep</h4><p>该方法简单暴力，实现方法为在一个死循环中，使用线程睡眠函数sleep()来实现执行固定时间间隔的任务。<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc">from datetime import dateime<br>import time<br><br>&#x27;&#x27;&#x27;<br>每隔1秒打印系统时间<br>&#x27;&#x27;&#x27;<br><br>def printTime():<br><span class="hljs-code">    while True:</span><br><span class="hljs-code">        print(datetime.now().strftime(&#x27;%Y-%m-%d %H:%M:%S&#x27;))</span><br><span class="hljs-code">        time.sleep(1)</span><br><br>if <span class="hljs-emphasis">__main__</span> == <span class="hljs-emphasis">&#x27;__main__&#x27;</span>:<br><span class="hljs-code">    printTime()</span><br><br></code></pre></td></tr></table></figure></p><p>该方法的缺点是死循环+阻塞线程，会导致后续操作无法执行。所以该方法慎重使用。</p><h4 id="threading模块中的Timer"><a href="#threading模块中的Timer" class="headerlink" title="threading模块中的Timer"></a>threading模块中的Timer</h4><p>第二种实现方法是使用Python标准库中threading中的Timer类，它会启动一个新的线程来执行定时任务，所以这种方式是非阻塞方式。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MEC</span>():<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):<br>        self.<span class="hljs-built_in">id</span> = <span class="hljs-string">&#x27;MEC01&#x27;</span><br>        self.sendCnt = <span class="hljs-number">0</span><br>        self.udpCli = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)<br>        self.sendTimer = Timer(<span class="hljs-number">1</span>, self.sendmsg)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">start_send</span>(<span class="hljs-params">self</span>):<br>        self.sendTimer.start()<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">sendmsg</span>(<span class="hljs-params">self</span>):<br><br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;send message...&quot;</span>)<br>        self.sendTimer = Timer(<span class="hljs-number">1</span>, self.sendmsg)<br>        self.sendTimer.start()<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    mec = MEC()<br>    mec.start_send()<br><br></code></pre></td></tr></table></figure><h4 id="sched模块"><a href="#sched模块" class="headerlink" title="sched模块"></a>sched模块</h4><p>第三种方法是使用Python标准库中的sched模块。sched是事件调度器，它通过scheduler类来调度事件，从而达到定时执行任务的效果。</p><p><code>sched</code>库使用方式：<br>1）首先构造一个<code>sched.scheduler</code>类，它接收两个参数：<code>timefunc</code>和<code>delayfunc</code>。<code>timefunc</code>返回一个数字，代表当前时间；<code>delayfunc</code>接受一个参数，用于暂停运行的时间单元。<br>一般使用默认参数就行，即传入这两个参数<code>time.time</code>和<code>time.sleep</code>。当然，也可以自己实现时间暂停的函数。</p><p>2）添加调度任务<br><code>scheduler</code>提供了两个添加调度任务的函数：</p><ul><li><code>enter(delay, priority, action, argument=(), kwargs=&#123;&#125;)</code><br>表示延迟<code>delay</code>的时间，执行<code>action</code>函数</li><li><code>enterabs(time, priority, action, argument=(), kwargs=&#123;&#125;)</code><br>表示到了指定的<code>time</code>时刻，执行<code>action</code>函数</li></ul><p>3）运行任务<br><code>scheduler.run()</code></p><p>示例代码<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> datetime<br><span class="hljs-keyword">import</span> sched<br><span class="hljs-keyword">import</span> time<br><br><span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">每个 10 秒打印当前时间。</span><br><span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">timedTask</span>():<br>    <span class="hljs-comment"># 初始化 sched 模块的 scheduler 类</span><br>    scheduler = sched.scheduler(time.time, time.sleep)<br>    <span class="hljs-comment"># 增加调度任务</span><br>    scheduler.enter(<span class="hljs-number">10</span>, <span class="hljs-number">1</span>, task)<br>    <span class="hljs-comment"># 运行任务</span><br>    scheduler.run()****<br><br><span class="hljs-comment"># 定时任务</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">task</span>():<br>    <span class="hljs-built_in">print</span>(datetime.now().strftime(<span class="hljs-string">&quot;%Y-%m-%d %H:%M:%S&quot;</span>))<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    timedTask()<br><br></code></pre></td></tr></table></figure></p><p>值得注意的是： scheduler 中的每个调度任务只会工作一次，不会无限循环被调用。如果想重复执行同一任务， 需要重复添加调度任务即可。</p><h4 id="APScheduler定时框架"><a href="#APScheduler定时框架" class="headerlink" title="APScheduler定时框架"></a>APScheduler定时框架</h4>]]></content>
+    
+    
+    <categories>
+      
+      <category>python</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Python</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Python中的模块导入</title>
     <link href="/2025/01/10/Python%E4%B8%AD%E7%9A%84%E6%A8%A1%E5%9D%97%E5%AF%BC%E5%85%A5/"/>
     <url>/2025/01/10/Python%E4%B8%AD%E7%9A%84%E6%A8%A1%E5%9D%97%E5%AF%BC%E5%85%A5/</url>
@@ -603,6 +791,56 @@
     <tags>
       
       <tag>Data Mining</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Android混合开发--WebView与JS交互开发</title>
+    <link href="/2017/01/10/Android%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91-WebView%E4%B8%8EJS%E4%BA%A4%E4%BA%92%E5%BC%80%E5%8F%91/"/>
+    <url>/2017/01/10/Android%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91-WebView%E4%B8%8EJS%E4%BA%A4%E4%BA%92%E5%BC%80%E5%8F%91/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Android下Java与JavaScript的交互开发"><a href="#Android下Java与JavaScript的交互开发" class="headerlink" title="Android下Java与JavaScript的交互开发"></a><strong>Android下</strong>Java与JavaScript的交互开发</h1><p>Android下Java与JavaScript的交互开发<br>实现步骤：<br>    1）在mainfest.xml文件中加入网络权限<br>    2）WebView开启JavaScript脚本执行<br>        mWebView.getSettings().setJavaScriptEnable(true)<br>    3）WebView设置供JavaScript调用的交互接口<br>    4）客户端和网页端写调用对方的代码<br>    5）为方法添加注解（否则可能调用不成功，尤其是Android里定义的供JavaScript访问的对象）</p><p>相互调用方法：</p><ul><li>js（HTML）访问Android（Java）端代码是通过jsObj对象实现的，调用jsObj对象中的函数，如：window.jsObj.actionFromJs()，这里的jsObj就是Native中添加接口的别名。</li></ul><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java">注意添加注解。<br><br>- Android（Java）访问js（HTML）端代码是通过loadUrl函数实现的，访问格式如下：<br>    mWebView.loadUrl(“javascript:actionFromNative()”);<br>以上方法无法接收返回值。<br>在WebView中调用JS的新方法：<br>    - 旧的方法，不能获得<span class="hljs-keyword">return</span>值：mWebView.loadUrl(“javascript:fun()”);<br>    - 新的方法，可以获得<span class="hljs-keyword">return</span>值：mWebVIew.evaluateJavascript(“javascript:fun()”, <span class="hljs-keyword">new</span> <span class="hljs-title class_">ValueCallBack</span>&lt;string&gt;&#123;<br>        <span class="hljs-meta">@Override</span><br>        <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">onReceiveValue</span><span class="hljs-params">(String value)</span><br>        &#123;<br>        &#125;<br>    &#125;)<br>   - 上面限定了返回结果类型为String，如果是简单类型则转为字符串返回即可，如果是复杂的数据类型，建议以json字符串的形式返回。<br>    - evaluateJavascript方法必须在UI线程（主线程）调用，因此onReceiveValue也执行在主线程。<br>    （接收返回值）<br></code></pre></td></tr></table></figure><p>带参数调用：<br>    直接在调用方法里写参数即可。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Andriod</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Android</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Mac Mini安装VMware Esxi 5.5</title>
+    <link href="/2016/05/06/Mac-Mini%E5%AE%89%E8%A3%85VMware-Esxi-5-5/"/>
+    <url>/2016/05/06/Mac-Mini%E5%AE%89%E8%A3%85VMware-Esxi-5-5/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Mac-Mini安装VMware-Esxi-5-5"><a href="#Mac-Mini安装VMware-Esxi-5-5" class="headerlink" title="Mac Mini安装VMware Esxi 5.5"></a>Mac Mini安装VMware Esxi 5.5</h1><p>参考资源（镜像下载）</p><p><a href="http://www.virtuallyghetto.com/apple">http://www.virtuallyghetto.com/apple</a></p><p>1、制作U盘镜像</p><p>2、安装Esxi</p><p>   mini开机后按住Alt键，进入启动盘选择，选择刻录好的U盘，进入安装过程；</p><p>3、问题</p><p>   安装完成后，发现以下现象：</p><p>​     - 正常重启，可以顺利进入Esxi；</p><p>​     - 关机再启动、或者断电再启动，无法正常进入系统，需要按住Command+Alt+P+R，才可以正常进入系统；</p><p>​     - 网上求助，发现是“</p><ul><li><a href="http://www.virtuallyghetto.com/2013/02/enable-auto-startup-after-power-failure.html">Enable Auto Startup After Power Failure For Apple Mac Mini</a></li></ul><p>​        的问题，</p><p>​     - 解决方案：</p><p>​     <a href="http://www.iplaysoft.com/osx-yosemite-usb-install-drive.html">http://www.iplaysoft.com/osx-yosemite-usb-install-drive.html</a></p><p><img src="/Users/weilu/Library/Application Support/typora-user-images/image-20250110201342519.png" alt="image-20250110201342519"></p><p>依旧不奏效！</p><p>仿佛是参数没有永久写入，重启后autorestart参数仍然为0了！</p><p>换Ubuntu系统测试；</p><p> 搞定！！！！！！</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>DevOps</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>DevOps</tag>
       
     </tags>
     
