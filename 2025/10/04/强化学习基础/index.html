@@ -1,0 +1,356 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>强化学习基础 | Wei, ITS</title><noscript>开启JavaScript才能访问本站哦~</noscript><link rel="icon" href="/img/pwa/favicon.png"><link rel="stylesheet" href="/css/index.css?v=3.0.21"><link rel="canonical" href="http://example.com/2025/10/04/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/index.html"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css"><!-- Feature-specific CSS--><!-- aplayer--><!-- swiper--><!-- fancybox ui--><!-- katex--><!-- Open Graph--><meta name="description" content="强化学习理论术语及概念 状态, state: 动作, action: 即时奖励, reward: 回报, return t时刻选择行动a的价值，表示为 $$G_t&amp;#x3D;\sum_{k&amp;#x3D;0}^{N} \gamma^k r_{t+k+1}$$ 状态值函数, state value"><!-- pwa--><meta name="apple-mobile-web-app-capable" content="Wei, ITS"><meta name="theme-color" content="var(--efu-main)"><meta name="apple-mobile-web-app-status-bar-style" content="var(--efu-main)"><link rel="bookmark" href="/img/pwa/favicon.png"><link rel="apple-touch-icon" href="/img/pwa/favicon.png" sizes="180x180"><script>console.log(' %c Solitude %c ' + '3.0.21' + ' %c https://github.com/everfu/hexo-theme-solitude',
+    'background:#35495e ; padding: 1px; border-radius: 3px 0 0 3px;  color: #fff',
+    'background:#ff9a9a ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff',
+    'background:unset ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff')
+</script><script>(()=>{
+        const saveToLocal = {
+            set: function setWithExpiry(key, value, ttl) {
+                if (ttl === 0)
+                    return
+                const now = new Date()
+                const expiryDay = ttl * 86400000
+                const item = {
+                    value: value,
+                    expiry: now.getTime() + expiryDay
+                }
+                localStorage.setItem(key, JSON.stringify(item))
+            },
+            get: function getWithExpiry(key) {
+                const itemStr = localStorage.getItem(key)
+
+                if (!itemStr) {
+                    return undefined
+                }
+                const item = JSON.parse(itemStr)
+                const now = new Date()
+
+                if (now.getTime() > item.expiry) {
+                    localStorage.removeItem(key)
+                    return undefined
+                }
+                return item.value
+            }
+        };
+        window.utils = {
+            saveToLocal: saveToLocal,
+            getCSS: (url, id = false) => new Promise((resolve, reject) => {
+              const link = document.createElement('link')
+              link.rel = 'stylesheet'
+              link.href = url
+              if (id) link.id = id
+              link.onerror = reject
+              link.onload = link.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                link.onload = link.onreadystatechange = null
+                resolve()
+              }
+              document.head.appendChild(link)
+            }),
+            getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+              const script = document.createElement('script')
+              script.src = url
+              script.async = true
+              script.onerror = reject
+              script.onload = script.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                script.onload = script.onreadystatechange = null
+                resolve()
+              }
+
+              Object.keys(attr).forEach(key => {
+                script.setAttribute(key, attr[key])
+              })
+
+              document.head.appendChild(script)
+            }),
+            addGlobalFn: (key, fn, name = false, parent = window) => {
+                const globalFn = parent.globalFn || {}
+                const keyObj = globalFn[key] || {}
+
+                if (name && keyObj[name]) return
+
+                name = name || Object.keys(keyObj).length
+                keyObj[name] = fn
+                globalFn[key] = keyObj
+                parent.globalFn = globalFn
+            },
+            addEventListenerPjax: (ele, event, fn, option = false) => {
+              ele.addEventListener(event, fn, option)
+              utils.addGlobalFn('pjax', () => {
+                  ele.removeEventListener(event, fn, option)
+              })
+            },
+            diffDateFormat: (selector) => {
+                selector.forEach(item => {
+                    const date = new Date(item.getAttribute('datetime') || item.textContent);
+                    item.textContent = (date.getMonth() + 1).toString()+'/'+date.getDate().toString();
+                });
+            },
+        }
+    })()</script><!-- theme--><script>initTheme = () => {
+    let isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const cachedMode = utils.saveToLocal.get('theme');
+    if (cachedMode === undefined) {
+        const nowMode =
+            isDarkMode ? 'dark' : 'light'
+        document.documentElement.setAttribute('data-theme', nowMode);
+    } else {
+        document.documentElement.setAttribute('data-theme', cachedMode);
+    }
+    typeof rm === 'object' && rm.mode(cachedMode === 'dark' && isDarkMode)
+}
+initTheme()</script><script>const GLOBAL_CONFIG = {
+    root: '/',
+    algolia: undefined,
+    localsearch: undefined,
+    runtime: '2023-04-20 00:00:00',
+    lazyload: {
+        enable: false,
+        error: '/img/error_load.avif'
+    },
+    copyright: false,
+    highlight: {"limit":200,"expand":true,"copy":true,"syntax":"highlight.js"},
+    randomlink: false,
+    lang: {"theme":{"dark":"已切换至深色模式","light":"已切换至浅色模式"},"copy":{"success":"复制成功","error":"复制失败"},"backtop":"返回顶部","time":{"day":"天前","hour":"小时前","just":"刚刚","min":"分钟前","month":"个月前"},"day":" 天","f12":"开发者模式已打开，请遵循GPL协议。","totalk":"无需删除空行，直接输入评论即可"},
+    aside: {
+        state: {
+            morning: "✨ 早上好，新的一天开始了",
+            noon: "🍲 午餐时间",
+            afternoon: "🌞 下午好",
+            night: "早点休息",
+            goodnight: "晚安 😴",
+        },
+        witty_words: [],
+        witty_comment: {
+            prefix: '好久不见，',
+            back: '欢迎再次回来，',
+        },
+    },
+    covercolor: {
+        enable: false
+    },
+    comment: false,
+    lightbox: 'null',
+    right_menu: false,
+    translate: {"translateDelay":0,"defaultEncoding":2},
+    lure: false,
+    expire: false,
+};</script><script id="config-diff">var PAGE_CONFIG = {
+    is_post: true,
+    is_page: false,
+    is_home: false,
+    page: '',
+    toc: true,
+    comment: false,
+    ai_text: false,
+    color: false,
+}</script><meta name="generator" content="Hexo 8.0.0"></head><body id="body"><div id="console"><div class="close-btn" onclick="sco.hideConsole()"><i class="solitude fas fa-xmark"></i></div><div class="console-card-group"><div class="console-card-group-right"><div class="console-card tags" onclick="sco.hideConsole()"><div class="card-content"><div class="author-content-item-tips">标签</div><div class="author-content-item-title">寻找感兴趣的领域</div></div><div class="card-tag-cloud"><a href="/tags/Docker/">Docker<sup>1</sup></a><a href="/tags/Linux/">Linux<sup>1</sup></a><a href="/tags/Python/">Python<sup>4</sup></a><a href="/tags/RL/">RL<sup>1</sup></a><a href="/tags/Algorithm/">Algorithm<sup>1</sup></a></div></div><div class="console-card history" onclick="sco.hideConsole()"><ul class="card-archive-list"><li class="item"><a href="/archives/2025/10/"><span class="date">2025/10</span><div class="count-group"><span class="count">10</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/"><span class="date">全部文章</span><div class="count-group"><span class="count">10</span><span class="unit">篇</span></div></a></li></ul></div></div></div><div class="button-group"><div class="console-btn-item"><span class="darkmode_switchbutton" onclick="sco.switchDarkMode()" title="昼夜切换"><i class="solitude fas fa-circle-half-stroke"></i></span></div><div class="console-btn-item" id="consoleHideAside"><span class="asideSwitch" onclick="sco.switchHideAside()" title="边栏显示控制"><i class="solitude fas fa-arrows-left-right-to-line"></i></span></div></div><div class="console-mask" onclick="sco.hideConsole()"></div></div><div id="sidebar" style="zoom: 1;"><div id="menu-mask" style="display: none;"></div><div id="sidebar-menus"><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a></div></div></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><span class="darkmode_switchbutton menu-child" onclick="sco.switchDarkMode()"><i class="solitude fas fa-circle-half-stroke"></i><span>显示模式</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span>首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span>文章</span></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="solitude  fas fa-folder-closed"></i><span>归档</span></a></li><li><a class="site-page child" href="/categories/"><i class="solitude  fas fa-clone"></i><span>分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="solitude  fas fa-tags"></i><span>标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span>友链</span></a><ul class="menus_item_child"><li><a class="site-page child" href="/moments/"><i class="solitude  fas fa-wifi"></i><span>朋友圈</span></a></li><li><a class="site-page child" href="/links/"><i class="solitude  fas fa-user-group"></i><span>友情链接</span></a></li><li><a class="site-page child" href="javascript:travelling()"><i class="solitude  fas fa-gift"></i><span>宝藏博主</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span>我的</span></a><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><i class="solitude  fas fa-user"></i><span>关于</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="card-tag-cloud"><a href="/tags/Docker/">Docker<sup>1</sup></a><a href="/tags/Linux/">Linux<sup>1</sup></a><a href="/tags/Python/">Python<sup>4</sup></a><a href="/tags/RL/">RL<sup>1</sup></a><a href="/tags/Algorithm/">Algorithm<sup>1</sup></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="show" id="nav"><div id="nav-group"><div id="blog_name"><a href="/" title="返回博客主页" id="site-name"><span class="title">Solitude</span><i class="solitude fas fa-home"></i></a></div><div id="page-name-mask"><div id="page-name"><a id="page-name-text" onclick="sco.toTop()">强化学习基础</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span>首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span>文章</span></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="solitude  fas fa-folder-closed"></i><span>归档</span></a></li><li><a class="site-page child" href="/categories/"><i class="solitude  fas fa-clone"></i><span>分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="solitude  fas fa-tags"></i><span>标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span>友链</span></a><ul class="menus_item_child"><li><a class="site-page child" href="/moments/"><i class="solitude  fas fa-wifi"></i><span>朋友圈</span></a></li><li><a class="site-page child" href="/links/"><i class="solitude  fas fa-user-group"></i><span>友情链接</span></a></li><li><a class="site-page child" href="javascript:travelling()"><i class="solitude  fas fa-gift"></i><span>宝藏博主</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span>我的</span></a><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><i class="solitude  fas fa-user"></i><span>关于</span></a></li></ul></div></div></div><div id="nav-left"></div><div id="nav-right"><div class="nav-button" id="nav-totop" onclick="sco.toTop()"><a class="totopbtn"><i class="solitude fas fa-arrow-up"></i><span id="percent">0</span></a></div><div id="toggle-menu"><a class="site-page"><i class="solitude fas fa-bars"></i></a></div></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original" title="该文章为原创文章，注意版权协议">原创</a><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/RL/"><span class="tags-name tags-punctuation"><i class="solitude fas fa-hashtag"></i>RL</span></a></div></div></div></div><h1 class="post-title">强化学习基础</h1><div id="post-meta"><div class="meta-secondline"></div></div></div><div class="post-radius-bottom"></div><article class="post-content article-container"><h1 id="强化学习理论"><a href="#强化学习理论" class="headerlink" title="强化学习理论"></a>强化学习理论</h1><h2 id="术语及概念"><a href="#术语及概念" class="headerlink" title="术语及概念"></a>术语及概念</h2><ul>
+<li><strong>状态, state</strong>: </li>
+<li><strong>动作, action</strong>: </li>
+<li><strong>即时奖励, reward</strong>:</li>
+<li><strong>回报, return</strong> t时刻选择行动a的价值，表示为</li>
+</ul>
+<p>$$<br>G_t&#x3D;\sum_{k&#x3D;0}^{N} \gamma^k r_{t+k+1}<br>$$</p>
+<ul>
+<li><strong>状态值函数, state value function</strong>: 期望值<br>$$<br>V_{\pi}(s_t)&#x3D;E_{\pi}[G_t]&#x3D;E[r_{t+1}+\gamma V_{\pi}(s_{t+1}<br>$$</li>
+</ul>
+<p>【基于策略的贝尔曼方程】在某状态$s$下，可能选择动作；选择完动作后，可能进入的状态$s’$<br>$$V_{\pi}(s_t)&#x3D;\sum_{a} \pi(a|s)\sum_{s’}T(s|s,a)[R(s,s’)+\gamma V_\pi(s’)]$$</p>
+<p>【基于价值的贝尔曼方程】在基于价值最大化选择行动的情况下（此时就不是基于策略选择动作，而是价值最大化），公式也可以写为：<br>$$V_\pi(s_t)&#x3D;\max_a\sum_s’T(s’|s,a)[R(s,s’)+\gamma V_\pi(s’)]$$</p>
+<ul>
+<li><p><strong>状态-动作值函数, state-action value</strong></p>
+</li>
+<li><p><strong>贝尔曼方程, Bellman equation</strong>: 通过把价值以递归及期望值的方式表示，所建立的公式就叫做贝尔曼方程。</p>
+</li>
+<li><p><strong>策略（policy）:</strong> 用$\pi$表示，</p>
+</li>
+<li><p><strong>随机性策略（random policy）:</strong> 用$\pi$表示，</p>
+</li>
+<li><p><strong>确定性策略（deteministic policy）:</strong> 用$\pi$表示，</p>
+</li>
+<li><p><strong>回合制任务</strong>: 有明确的结束状态或者终止状态的任务</p>
+</li>
+<li><p><strong>连续型任务</strong>: 没有明确的结束状态或者终止状态，持续不断的任务</p>
+</li>
+<li><p><strong>基于模型（model-based）方法：</strong> 基于迁移函数和奖励函数来学习行动的方法，可以理解为状态迁移函数和奖励函数就是环境</p>
+</li>
+<li><p><strong>无模型（model-free）方法：</strong> 状态迁移函数和奖励函数未知</p>
+</li>
+</ul>
+<p>强化学习要学习的是<em>行动的评价方法</em>和<em>行动的选择方法（策略）</em></p>
+<ul>
+<li><strong>基于策略（policy-based）的方法：</strong> 根据策略来决定行动，在评价和更新时才用到行动的评价的方法属于基于策略的方法。</li>
+<li><strong>基于价值（valud-based）的方法：</strong> 只学习行动的评价方法，根据评价来决定行动的方法属于基于价值的方法。</li>
+</ul>
+<p>基于价值和基于策略的一大不同在于选择动作的基准：</p>
+<ul>
+<li><p><strong>异策略 Off-policy</strong>: 在选择动作的时候，不使用策略进行选择。如基于价值的方法，选择使价值最大化的状态进行迁移</p>
+</li>
+<li><p><strong>同策略 On-policy</strong>: 在选择动作的时候，按照策略进行选择</p>
+</li>
+<li><p><strong>直接强化学习 direct RL</strong>: 把智能体与环境交互的实际经验直接用于学习值函数或者策略。</p>
+</li>
+<li><p><strong>间接强化学习 indirect RL</strong>: 把智能体与环境交互的实际经验用于学习模型，叫做模型学习。当前模型不一定非要学习，基于物理定理也能构建模型，但基于数据驱动的模型学习也是一个方法。在学习到模型之后，可以用学习到的模型产生经验，叫做仿真经验，然后利用仿真经验来辅助策略学习，叫做间接强化学习。</p>
+</li>
+</ul>
+<p>智能体选择动作的方式：</p>
+<ul>
+<li>基于策略进行动作的选择</li>
+<li>基于价值最大化进行动作的选择</li>
+</ul>
+<h2 id="算法分类-value-based-vs-policy-based"><a href="#算法分类-value-based-vs-policy-based" class="headerlink" title="算法分类 - value-based vs policy-based"></a>算法分类 - value-based vs policy-based</h2><h3 id="基于价值的方法"><a href="#基于价值的方法" class="headerlink" title="基于价值的方法"></a>基于价值的方法</h3><p><strong>基本思路</strong>：计算出各种状态下的价值，然后迁移到价值最大的状态上，以保证最终的收益。<br><strong>问题</strong>：在状态数量较多的情况下，一个一个的计算价值是非常困难的<br><strong>解决思路</strong>：动态规划（给$V(s’)设定一个适当的值$，然后多次迭代计算，将这个值的精度提高，接近最优解；可以证明，见UCL course）</p>
+<p>基于动态规划法的价值近似的学习：</p>
+<h4 id="价值迭代"><a href="#价值迭代" class="headerlink" title="价值迭代"></a>价值迭代</h4><p>利用动态规划法来计算各种状态下的价值（对价值近似进行学习）的方法叫做价值迭代（value iteration）。</p>
+<p>在判断价值计算是否已经接近正确值时，只要判断前后两次状态值的差值|V_{i+1}(s)-V_i(s)|是否小于某个阈值即可。如果小于阈值，则不再更新。</p>
+<h3 id="基于策略的方法"><a href="#基于策略的方法" class="headerlink" title="基于策略的方法"></a>基于策略的方法</h3><p><strong>基本思路</strong>：智能体根据策略来选择行动（策略可以根据当前状态输出选择每个行动的概率）。</p>
+<h4 id="策略迭代"><a href="#策略迭代" class="headerlink" title="策略迭代"></a>策略迭代</h4><p>根据行动概率计算价值（期望值），为了让价值最大化而不断更新策略。持续重复这个过程，可以提高价值近似和策略的精度。获取最优策略。这个不断重复的过程就叫做策略迭代。</p>
+<p><strong>1.策略评价</strong></p>
+<p><strong>2.策略提升&#x2F;改进</strong></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><h2 id="算法分类-model-based-vs-model-free"><a href="#算法分类-model-based-vs-model-free" class="headerlink" title="算法分类 - model-based vs model-free"></a>算法分类 - model-based vs model-free</h2><p>在基于模型的方法（如动态规划）中，完全没有用到智能体的位置信息，即只依靠环境信息就能找到最优的策略（只要有迁移函数和奖励函数，就可以在不移动智能体的情况下进行模拟，得到最优解）。</p>
+<p>一般来说，由于建模的复杂性和准确性问题，无模型的方法用的多些。但随着深度学习的发展，能够建模的情况逐渐增加。基于模型的方法往往比无模型方法学习效率更高。</p>
+<p>基于模型的方法和无模型的方法并不是对立的，二者可以结合使用。</p>
+<p>基于模型的强化学习思路很清晰，而且还有不要和环境持续交互优化的优点，但是用于实际产品还是有很多差距的。主要是我们的模型绝大多数时候不能准确的描述真正的环境的转化模型，那么使用基于模型的强化学习算法得到的解大多数时候也不是很实用。那么是不是基于模型的强化学习就不能用了呢？也不是，我们可以将基于模型的强化学习和不基于模型的强化学习集合起来，取长补短，这样做最常见的就是Dyna算法框架。</p>
+<h3 id="无模型方法（model-free）"><a href="#无模型方法（model-free）" class="headerlink" title="无模型方法（model-free）"></a>无模型方法（model-free）</h3><p>需要研究以下三点：</p>
+<ol>
+<li>平衡经验的积累和利用</li>
+<li>是根据实际奖励还是预测来修正计划（策略）</li>
+<li>用经验来更新 价值近似 还是 策略</li>
+</ol>
+<h4 id="根据实际奖励修正还是根据预测"><a href="#根据实际奖励修正还是根据预测" class="headerlink" title="根据实际奖励修正还是根据预测"></a>根据实际奖励修正还是根据预测</h4><ul>
+<li><p>蒙特卡罗方法</p>
+</li>
+<li><p>时间差分方法</p>
+</li>
+</ul>
+<p><strong>总结</strong>：<br>蒙特卡罗方法实际上只能基于一个回合结束后得到的实际奖励对状态值进行更新。<br>Q学习可以在每次行动之后立即更新，对回合的结果依赖性降低。但是，由于其更新是根据估计值进行的，所以没有蒙特卡罗方法那么可靠。</p>
+<p>近年来，介于MC和TD方法之间的Multi-step learning方法被广泛应用，包括Rainbow, A3C&#x2F;A2C, DDPG和APE-X DQN等。</p>
+<h4 id="更新价值近似-or-更新策略"><a href="#更新价值近似-or-更新策略" class="headerlink" title="更新价值近似 or 更新策略"></a>更新价值近似 or 更新策略</h4><p>off-policy: Q-Learning<br>on-policy: SARSA-State-Action-Reward-State-Action</p>
+<p>SARSA 与 策略迭代的不同：</p>
+<ul>
+<li>SARSA将行动的选择和价值近似通过同一个self.Q进行</li>
+<li>策略迭代意味着对策略和价值近似分开考虑</li>
+</ul>
+<p><strong>Actor-Critic方法</strong><br>我们知道，使用策略迭代会将价值近似和策略分开考虑。基于这种想法，使Actor（决策者）负责策略，Critic（评价者）负责价值近似，这种Actor与Critic交替更新来进行学习的方法称为Actor-Critic方法。</p>
+<h2 id="深度强化学习（将神经网络应用于强化学习）"><a href="#深度强化学习（将神经网络应用于强化学习）" class="headerlink" title="深度强化学习（将神经网络应用于强化学习）"></a>深度强化学习（将神经网络应用于强化学习）</h2><p>学习要点：</p>
+<ul>
+<li>使用神经网络作为函数的优点</li>
+<li>使用含有参数的函数实现价值近似的方法</li>
+<li>使用含有参数的函数实现策略的方法</li>
+</ul>
+<p>DQN为后续强化学习研究带来的重大影响：</p>
+<ol>
+<li>可以使用CNN将画面直接用作状态</li>
+<li>基于画面的学习也有可能获得与人类匹敌的行动</li>
+</ol>
+<h3 id="DQN及其变种"><a href="#DQN及其变种" class="headerlink" title="DQN及其变种"></a>DQN及其变种</h3><ol>
+<li><p>DQN NIPS,2013</p>
+</li>
+<li><p>Double DQN</p>
+</li>
+</ol>
+<p>（1）为什么提出Double DQN？<br>为了解决原始DQN中存在过估计问题。<br>（2）什么是过估计？<br>过估计是指估计的值函数比真实的值函数大<br>（3）为什么DQN存在过估计问题？<br>因为DQN是一种off-policy的方法，每次学习的时候，使用的不是下一次交互的真实动作，而是使用当前认为价值最大的动作来更新目标值函数，所以会出现对Q值的过高估计。</p>
+<h3 id="价值函数近似"><a href="#价值函数近似" class="headerlink" title="价值函数近似"></a>价值函数近似</h3><p>通过含有参数的函数来实现Q表的价值近似。</p>
+<p>价值函数：进行价值近似的函数称为价值函数（value function）<br>价值函数近似：学习（估计）价值函数的处理称为价值函数近似（value function approximation）</p>
+<h3 id="策略梯度"><a href="#策略梯度" class="headerlink" title="策略梯度"></a>策略梯度</h3><p>策略也可以通过含有参数的函数来表示。这是一种以状态为自变量并输出行动或行动概率的函数。</p>
+<h2 id="联合基于模型的方法和无模型方法"><a href="#联合基于模型的方法和无模型方法" class="headerlink" title="联合基于模型的方法和无模型方法"></a>联合基于模型的方法和无模型方法</h2><h3 id="Dyna算法框架"><a href="#Dyna算法框架" class="headerlink" title="Dyna算法框架"></a>Dyna算法框架</h3><p>直接强化学习和间接强化学习的概念，参见术语定义。<br>接RL和间接RL都有自己的优缺点。间接RL可以充分的利用经验，减少和环境的交互。可以类比为人类的冥想，mental rehearsal。就是说我没必要都去试一下，才知道怎么做，我想一想可能就知道答案了，这样就节省了体力。当然，直接RL更简单，并且不会受到模型偏差的影响。试想如果一个精神病患者，你让他冥想，不知道他会做出什么举动来。<br>对于这二者哪个好，一直争论不休。这种争论在AI和心理学领域可以归结为：认知和试错学习的争执，精细编程和反应式决策的争执。其实我的理解还在于：model-based 和model-free的争执。所谓认知就是人类的领域知识（domain knowledge），可以看做是有模型的。试错当然就是Model-free的。从人类来看，我们能够从少样本中快速学习，写说明人类肯定不是完全基于试错的学习。有些研究者将此刻画为生成模型（generative model），认为人类的学习是一个生成模型。这样我们就可以在生成模型中注入先验，从而解释少样本学习的现象，我则更倾向于认为人类是基于模型的学习。</p>
+<p>这里涉及到三个问题：</p>
+<ul>
+<li>direct RL怎么学，用什么算法？</li>
+<li>怎么学习模型？</li>
+<li>基于学习的模型，用什么规划算法来改善策略？</li>
+</ul>
+<ol>
+<li>Dyna-Q算法<br>在Dyna-Q中，直接RL就使用Q学习(one-step tabular Q-learning)。规划算法那就使用Q-规划算法(one-step random sample tabular Q-learning)。学习模型其实就是存储经验。</li>
+</ol>
+<h2 id="强化学习的弱点"><a href="#强化学习的弱点" class="headerlink" title="强化学习的弱点"></a>强化学习的弱点</h2><p>深度强化学习的弱点：</p>
+<ul>
+<li>获取样本的效率低（如需要准备一个像OpenAI Gym那样可以进行无数次游戏的模拟器）</li>
+<li>容易陷入局部最优和过拟合</li>
+<li>复现性差</li>
+</ul>
+<p>对策：</p>
+<ol>
+<li>降低弱点的影响</li>
+<li>直接克服&#x2F;规避弱点的对策</li>
+</ol>
+<h2 id="参考资料汇总"><a href="#参考资料汇总" class="headerlink" title="参考资料汇总"></a>参考资料汇总</h2><ol>
+<li>《用Python动手强化学习》久保隆宏著</li>
+</ol>
+<p>Dyna算法框架：</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/59896757">https://zhuanlan.zhihu.com/p/59896757</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/28563483">https://zhuanlan.zhihu.com/p/28563483</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/111869532">https://zhuanlan.zhihu.com/p/111869532</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/44573428">https://zhuanlan.zhihu.com/p/44573428</a></li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author_group"><div class="post-copyright__author_img"><img class="post-copyright__author_img_front" src="/img/logo.png"></div><div class="post-copyright__author_name">Leon</div><div class="post-copyright__author_desc"></div></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div id="quit-box" onclick="RemoveRewardMask()"></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本文是原创文章，采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans">CC BY-NC-SA 4.0</a>协议，完整转载请注明来自<a href="/">Wei, ITS</a></span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/RL/"><span class="tags-punctuation"><i class="solitude fas fa-hashtag"></i>RL<span class="tagsPageCount">1</span></span></a></div></div></div><nav class="needEndHide pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2025/10/04/%E7%BB%8F%E9%AA%8C%E8%B4%9D%E5%8F%B6%E6%96%AF/"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">经验贝叶斯</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><div class="top-group"><div class="sayhi" id="sayhi" onclick="sco.changeWittyWord()"></div></div></div><div class="avatar"><img alt="头像" src="/img/logo.png"></div><div class="description"></div><div class="bottom-group"><span class="left"><div class="name">Leon</div><div class="desc">只有迎风，风筝才能飞得更高。</div></span><div class="social-icons is-center"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="solitude fas fa-bars"></i><span>文章目录</span></div><div class="toc-content" id="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%90%86%E8%AE%BA"><span class="toc-text">强化学习理论</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AF%E8%AF%AD%E5%8F%8A%E6%A6%82%E5%BF%B5"><span class="toc-text">术语及概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E5%88%86%E7%B1%BB-value-based-vs-policy-based"><span class="toc-text">算法分类 - value-based vs policy-based</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E4%BB%B7%E5%80%BC%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-text">基于价值的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%B7%E5%80%BC%E8%BF%AD%E4%BB%A3"><span class="toc-text">价值迭代</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E7%AD%96%E7%95%A5%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-text">基于策略的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AD%96%E7%95%A5%E8%BF%AD%E4%BB%A3"><span class="toc-text">策略迭代</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E5%88%86%E7%B1%BB-model-based-vs-model-free"><span class="toc-text">算法分类 - model-based vs model-free</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E6%A8%A1%E5%9E%8B%E6%96%B9%E6%B3%95%EF%BC%88model-free%EF%BC%89"><span class="toc-text">无模型方法（model-free）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B9%E6%8D%AE%E5%AE%9E%E9%99%85%E5%A5%96%E5%8A%B1%E4%BF%AE%E6%AD%A3%E8%BF%98%E6%98%AF%E6%A0%B9%E6%8D%AE%E9%A2%84%E6%B5%8B"><span class="toc-text">根据实际奖励修正还是根据预测</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E4%BB%B7%E5%80%BC%E8%BF%91%E4%BC%BC-or-%E6%9B%B4%E6%96%B0%E7%AD%96%E7%95%A5"><span class="toc-text">更新价值近似 or 更新策略</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%B0%86%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E4%BA%8E%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%EF%BC%89"><span class="toc-text">深度强化学习（将神经网络应用于强化学习）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DQN%E5%8F%8A%E5%85%B6%E5%8F%98%E7%A7%8D"><span class="toc-text">DQN及其变种</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%B7%E5%80%BC%E5%87%BD%E6%95%B0%E8%BF%91%E4%BC%BC"><span class="toc-text">价值函数近似</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6"><span class="toc-text">策略梯度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%81%94%E5%90%88%E5%9F%BA%E4%BA%8E%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%96%B9%E6%B3%95%E5%92%8C%E6%97%A0%E6%A8%A1%E5%9E%8B%E6%96%B9%E6%B3%95"><span class="toc-text">联合基于模型的方法和无模型方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Dyna%E7%AE%97%E6%B3%95%E6%A1%86%E6%9E%B6"><span class="toc-text">Dyna算法框架</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%BC%B1%E7%82%B9"><span class="toc-text">强化学习的弱点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB"><span class="toc-text">参考资料汇总</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="solitude fas fa-map"></i><span>最近发布</span></div><div class="aside-list"><a class="aside-list-item" href="/2025/10/04/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" title="强化学习基础"><div class="content"><span class="title" href="/2025/10/04/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" title="强化学习基础">强化学习基础</span></div></a><a class="aside-list-item" href="/2025/10/04/%E7%BB%8F%E9%AA%8C%E8%B4%9D%E5%8F%B6%E6%96%AF/" title="经验贝叶斯"><div class="content"><span class="title" href="/2025/10/04/%E7%BB%8F%E9%AA%8C%E8%B4%9D%E5%8F%B6%E6%96%AF/" title="经验贝叶斯">经验贝叶斯</span></div></a><a class="aside-list-item" href="/2025/10/04/Python%E4%B8%AD%E7%9A%84%E6%A8%A1%E5%9D%97%E5%BC%95%E7%94%A8%E4%B8%8E%E6%89%A7%E8%A1%8C%E8%B7%AF%E5%BE%84/" title="Python中的模块引用与执行路径"><div class="content"><span class="title" href="/2025/10/04/Python%E4%B8%AD%E7%9A%84%E6%A8%A1%E5%9D%97%E5%BC%95%E7%94%A8%E4%B8%8E%E6%89%A7%E8%A1%8C%E8%B7%AF%E5%BE%84/" title="Python中的模块引用与执行路径">Python中的模块引用与执行路径</span></div></a><a class="aside-list-item" href="/2025/10/04/Matplotlb%E7%94%A8%E6%B3%95/" title="Matplotlb用法"><div class="content"><span class="title" href="/2025/10/04/Matplotlb%E7%94%A8%E6%B3%95/" title="Matplotlb用法">Matplotlb用法</span></div></a><a class="aside-list-item" href="/2025/10/04/Python%E4%B8%AD%E7%9A%84%E8%A3%85%E9%A5%B0%E5%99%A8/" title="Python中的装饰器"><div class="content"><span class="title" href="/2025/10/04/Python%E4%B8%AD%E7%9A%84%E8%A3%85%E9%A5%B0%E5%99%A8/" title="Python中的装饰器">Python中的装饰器</span></div></a></div></div></div></div></main><footer id="footer"><div id="st-footer"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div class="copyright">© 2023 - 2025 By<a class="footer-bar-link" href="/" title="Leon">Leon</a></div><div class="beian-group"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://hexo.io/" title="框架：Hexo">框架：Hexo</a><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/everfu/hexo-theme-solitude" title="主题：Solitude">主题：Solitude</a></div></div><div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://www.zhihu.com/people/wltop001-9" title="">知乎</a></div></div></div></div><div class="comment-barrage needEndHide"></div></footer></div><div><!-- Critical scripts loaded synchronously--><script src="/js/utils.js?v=3.0.21"></script><script src="/js/main.js?v=3.0.21"></script><!-- Non-critical scripts loaded asynchronously--><script async src="/js/third_party/waterfall.min.js?v=3.0.21"></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><!-- Feature-specific scripts loaded asynchronously--><script defer src="/js/tw_cn.js?v=3.0.21"></script><!-- UI enhancement scripts--><script defer src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><!-- Music player scripts--><!-- Cover color processing scripts--><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+utils.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+</script><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!-- Search functionality--><!-- Right menu functionality--><div class="js-pjax"></div></div><!-- pjax--><script>let pjax = null;
+
+function initPjax() {
+    if (typeof Pjax === 'undefined') {
+        console.warn('Pjax is not loaded yet, retrying...');
+        setTimeout(initPjax, 100);
+        return;
+    }
+
+    pjax = new Pjax({
+        elements: 'a:not([target="_blank"])',
+        selectors: ["title","#body-wrap","#site-config","meta[name=\"description\"]",".js-pjax","meta[property^=\"og:\"]","#config-diff",".rs_show",".rs_hide"],
+        cacheBust: false,
+        analytics: false,
+        scrollRestoration: false
+    })
+
+    // 将 pjax 实例挂载到全局
+    window.pjax = pjax;
+
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+        const newScript = document.createElement('script')
+        const content = item.text || item.textContent || item.innerHTML || ""
+        Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+        newScript.appendChild(document.createTextNode(content))
+        item.parentNode.replaceChild(newScript, item)
+    })
+
+    document.addEventListener('pjax:complete', () => {
+        window.refreshFn()
+
+        document.querySelectorAll('script[data-pjax]').forEach(item => {
+            const newScript = document.createElement('script')
+            const content = item.text || item.textContent || item.innerHTML || ""
+            Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+            newScript.appendChild(document.createTextNode(content))
+            item.parentNode.replaceChild(newScript, item)
+        })
+
+        GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+    })
+
+    document.addEventListener('pjax:error', (e) => {
+        if (e.request.status === 404) {
+            pjax.loadUrl('/404.html')
+        }
+    })
+}
+
+// 初始化 Pjax
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPjax);
+} else {
+    initPjax();
+}</script><!-- google adsense--></body></html>
+        <script>
+            const posts = ["2025/10/04/强化学习基础/","2025/10/04/经验贝叶斯/","2025/10/04/Python中的模块引用与执行路径/","2025/10/04/Matplotlb用法/","2025/10/04/Python中的装饰器/","2025/10/04/Python网络通信/","2025/10/04/Python时间操作/","2025/10/04/Linux基础/","2025/10/04/Docker使用学习/","2025/10/04/CentOS开发环境配置/"];
+            function toRandomPost() {
+                const randomPost = posts[Math.floor(Math.random() * posts.length)];
+                pjax.loadUrl(GLOBAL_CONFIG.root + randomPost);
+            }
+        </script>
