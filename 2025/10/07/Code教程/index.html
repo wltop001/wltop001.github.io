@@ -1,0 +1,261 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Code教程 | Wei, ITS</title><noscript>开启JavaScript才能访问本站哦~</noscript><link rel="icon" href="/img/pwa/favicon.png"><link rel="stylesheet" href="/css/index.css?v=3.0.21"><link rel="canonical" href="http://example.com/2025/10/07/Code%E6%95%99%E7%A8%8B/index.html"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css"><!-- Feature-specific CSS--><!-- aplayer--><!-- swiper--><!-- fancybox ui--><!-- katex--><!-- Open Graph--><meta name="description" content="AI编程利器！通过 AnyRouter 免费使用 Claude Code 的教程AI 编程助手在开发者社区越来越受欢迎，其中 Claude Code 作为 Anthropic 推出的智能编程助手，以自然语言编程、智能补全和代码调试等能力受到广泛关注。本文将介绍如何通过 AnyRouter 免费使用"><!-- pwa--><meta name="apple-mobile-web-app-capable" content="Wei, ITS"><meta name="theme-color" content="var(--efu-main)"><meta name="apple-mobile-web-app-status-bar-style" content="var(--efu-main)"><link rel="bookmark" href="/img/pwa/favicon.png"><link rel="apple-touch-icon" href="/img/pwa/favicon.png" sizes="180x180"><script>console.log(' %c Solitude %c ' + '3.0.21' + ' %c https://github.com/everfu/hexo-theme-solitude',
+    'background:#35495e ; padding: 1px; border-radius: 3px 0 0 3px;  color: #fff',
+    'background:#ff9a9a ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff',
+    'background:unset ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff')
+</script><script>(()=>{
+        const saveToLocal = {
+            set: function setWithExpiry(key, value, ttl) {
+                if (ttl === 0)
+                    return
+                const now = new Date()
+                const expiryDay = ttl * 86400000
+                const item = {
+                    value: value,
+                    expiry: now.getTime() + expiryDay
+                }
+                localStorage.setItem(key, JSON.stringify(item))
+            },
+            get: function getWithExpiry(key) {
+                const itemStr = localStorage.getItem(key)
+
+                if (!itemStr) {
+                    return undefined
+                }
+                const item = JSON.parse(itemStr)
+                const now = new Date()
+
+                if (now.getTime() > item.expiry) {
+                    localStorage.removeItem(key)
+                    return undefined
+                }
+                return item.value
+            }
+        };
+        window.utils = {
+            saveToLocal: saveToLocal,
+            getCSS: (url, id = false) => new Promise((resolve, reject) => {
+              const link = document.createElement('link')
+              link.rel = 'stylesheet'
+              link.href = url
+              if (id) link.id = id
+              link.onerror = reject
+              link.onload = link.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                link.onload = link.onreadystatechange = null
+                resolve()
+              }
+              document.head.appendChild(link)
+            }),
+            getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+              const script = document.createElement('script')
+              script.src = url
+              script.async = true
+              script.onerror = reject
+              script.onload = script.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                script.onload = script.onreadystatechange = null
+                resolve()
+              }
+
+              Object.keys(attr).forEach(key => {
+                script.setAttribute(key, attr[key])
+              })
+
+              document.head.appendChild(script)
+            }),
+            addGlobalFn: (key, fn, name = false, parent = window) => {
+                const globalFn = parent.globalFn || {}
+                const keyObj = globalFn[key] || {}
+
+                if (name && keyObj[name]) return
+
+                name = name || Object.keys(keyObj).length
+                keyObj[name] = fn
+                globalFn[key] = keyObj
+                parent.globalFn = globalFn
+            },
+            addEventListenerPjax: (ele, event, fn, option = false) => {
+              ele.addEventListener(event, fn, option)
+              utils.addGlobalFn('pjax', () => {
+                  ele.removeEventListener(event, fn, option)
+              })
+            },
+            diffDateFormat: (selector) => {
+                selector.forEach(item => {
+                    const date = new Date(item.getAttribute('datetime') || item.textContent);
+                    item.textContent = (date.getMonth() + 1).toString()+'/'+date.getDate().toString();
+                });
+            },
+        }
+    })()</script><!-- theme--><script>initTheme = () => {
+    let isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const cachedMode = utils.saveToLocal.get('theme');
+    if (cachedMode === undefined) {
+        const nowMode =
+            isDarkMode ? 'dark' : 'light'
+        document.documentElement.setAttribute('data-theme', nowMode);
+    } else {
+        document.documentElement.setAttribute('data-theme', cachedMode);
+    }
+    typeof rm === 'object' && rm.mode(cachedMode === 'dark' && isDarkMode)
+}
+initTheme()</script><script>const GLOBAL_CONFIG = {
+    root: '/',
+    algolia: undefined,
+    localsearch: undefined,
+    runtime: '2023-04-20 00:00:00',
+    lazyload: {
+        enable: false,
+        error: '/img/error_load.avif'
+    },
+    copyright: false,
+    highlight: {"limit":200,"expand":true,"copy":true,"syntax":"highlight.js"},
+    randomlink: false,
+    lang: {"theme":{"dark":"已切换至深色模式","light":"已切换至浅色模式"},"copy":{"success":"复制成功","error":"复制失败"},"backtop":"返回顶部","time":{"day":"天前","hour":"小时前","just":"刚刚","min":"分钟前","month":"个月前"},"day":" 天","f12":"开发者模式已打开，请遵循GPL协议。","totalk":"无需删除空行，直接输入评论即可"},
+    aside: {
+        state: {
+            morning: "✨ 早上好，新的一天开始了",
+            noon: "🍲 午餐时间",
+            afternoon: "🌞 下午好",
+            night: "早点休息",
+            goodnight: "晚安 😴",
+        },
+        witty_words: [],
+        witty_comment: {
+            prefix: '好久不见，',
+            back: '欢迎再次回来，',
+        },
+    },
+    covercolor: {
+        enable: false
+    },
+    comment: false,
+    lightbox: 'null',
+    right_menu: false,
+    translate: {"translateDelay":0,"defaultEncoding":2},
+    lure: false,
+    expire: false,
+};</script><script id="config-diff">var PAGE_CONFIG = {
+    is_post: true,
+    is_page: false,
+    is_home: false,
+    page: '',
+    toc: false,
+    comment: false,
+    ai_text: false,
+    color: false,
+}</script><meta name="generator" content="Hexo 8.0.0"></head><body id="body"><div id="console"><div class="close-btn" onclick="sco.hideConsole()"><i class="solitude fas fa-xmark"></i></div><div class="console-card-group"><div class="console-card-group-right"><div class="console-card tags" onclick="sco.hideConsole()"><div class="card-content"><div class="author-content-item-tips">标签</div><div class="author-content-item-title">寻找感兴趣的领域</div></div><div class="card-tag-cloud"><a href="/tags/ITS/">ITS<sup>4</sup></a><a href="/tags/Docker/">Docker<sup>1</sup></a><a href="/tags/Linux/">Linux<sup>1</sup></a><a href="/tags/MacOS/">MacOS<sup>1</sup></a><a href="/tags/Python/">Python<sup>5</sup></a><a href="/tags/SUMO/">SUMO<sup>2</sup></a><a href="/tags/RL/">RL<sup>1</sup></a><a href="/tags/Algorithm/">Algorithm<sup>1</sup></a><a href="/tags/AI/">AI<sup>1</sup></a><a href="/tags/Development/">Development<sup>1</sup></a><a href="/tags/Programming/">Programming<sup>1</sup></a><a href="/tags/Code/">Code<sup>1</sup></a></div></div><div class="console-card history" onclick="sco.hideConsole()"><ul class="card-archive-list"><li class="item"><a href="/archives/2025/10/"><span class="date">2025/10</span><div class="count-group"><span class="count">16</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/"><span class="date">全部文章</span><div class="count-group"><span class="count">16</span><span class="unit">篇</span></div></a></li></ul></div></div></div><div class="button-group"><div class="console-btn-item"><span class="darkmode_switchbutton" onclick="sco.switchDarkMode()" title="昼夜切换"><i class="solitude fas fa-circle-half-stroke"></i></span></div><div class="console-btn-item" id="consoleHideAside"><span class="asideSwitch" onclick="sco.switchHideAside()" title="边栏显示控制"><i class="solitude fas fa-arrows-left-right-to-line"></i></span></div></div><div class="console-mask" onclick="sco.hideConsole()"></div></div><div id="sidebar" style="zoom: 1;"><div id="menu-mask" style="display: none;"></div><div id="sidebar-menus"><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">16</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a></div></div></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><span class="darkmode_switchbutton menu-child" onclick="sco.switchDarkMode()"><i class="solitude fas fa-circle-half-stroke"></i><span>显示模式</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span>首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span>文章</span></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="solitude  fas fa-folder-closed"></i><span>归档</span></a></li><li><a class="site-page child" href="/categories/"><i class="solitude  fas fa-clone"></i><span>分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="solitude  fas fa-tags"></i><span>标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span>友链</span></a><ul class="menus_item_child"><li><a class="site-page child" href="/moments/"><i class="solitude  fas fa-wifi"></i><span>朋友圈</span></a></li><li><a class="site-page child" href="/links/"><i class="solitude  fas fa-user-group"></i><span>友情链接</span></a></li><li><a class="site-page child" href="javascript:travelling()"><i class="solitude  fas fa-gift"></i><span>宝藏博主</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span>我的</span></a><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><i class="solitude  fas fa-user"></i><span>关于</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="card-tag-cloud"><a href="/tags/ITS/">ITS<sup>4</sup></a><a href="/tags/Docker/">Docker<sup>1</sup></a><a href="/tags/Linux/">Linux<sup>1</sup></a><a href="/tags/MacOS/">MacOS<sup>1</sup></a><a href="/tags/Python/">Python<sup>5</sup></a><a href="/tags/SUMO/">SUMO<sup>2</sup></a><a href="/tags/RL/">RL<sup>1</sup></a><a href="/tags/Algorithm/">Algorithm<sup>1</sup></a><a href="/tags/AI/">AI<sup>1</sup></a><a href="/tags/Development/">Development<sup>1</sup></a><a href="/tags/Programming/">Programming<sup>1</sup></a><a href="/tags/Code/">Code<sup>1</sup></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav class="show" id="nav"><div id="nav-group"><div id="blog_name"><a href="/" title="返回博客主页" id="site-name"><span class="title">Wei, ITS</span><i class="solitude fas fa-home"></i></a></div><div id="page-name-mask"><div id="page-name"><a id="page-name-text" onclick="sco.toTop()">Code教程</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span>首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span>文章</span></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="solitude  fas fa-folder-closed"></i><span>归档</span></a></li><li><a class="site-page child" href="/categories/"><i class="solitude  fas fa-clone"></i><span>分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="solitude  fas fa-tags"></i><span>标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span>友链</span></a><ul class="menus_item_child"><li><a class="site-page child" href="/moments/"><i class="solitude  fas fa-wifi"></i><span>朋友圈</span></a></li><li><a class="site-page child" href="/links/"><i class="solitude  fas fa-user-group"></i><span>友情链接</span></a></li><li><a class="site-page child" href="javascript:travelling()"><i class="solitude  fas fa-gift"></i><span>宝藏博主</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span>我的</span></a><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><i class="solitude  fas fa-user"></i><span>关于</span></a></li></ul></div></div></div><div id="nav-left"></div><div id="nav-right"><div class="nav-button" id="nav-totop" onclick="sco.toTop()"><a class="totopbtn"><i class="solitude fas fa-arrow-up"></i><span id="percent">0</span></a></div><div id="toggle-menu"><a class="site-page"><i class="solitude fas fa-bars"></i></a></div></div></div></nav><div class="coverdiv" id="coverdiv"><img class="nolazyload" id="post-cover" src="/" alt="Code教程"></div><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original" title="该文章为原创文章，注意版权协议">原创</a><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/AI/"><span class="tags-name tags-punctuation"><i class="solitude fas fa-hashtag"></i>AI</span></a><a class="post-meta__tags" href="/tags/Development/"><span class="tags-name tags-punctuation"><i class="solitude fas fa-hashtag"></i>Development</span></a><a class="post-meta__tags" href="/tags/Programming/"><span class="tags-name tags-punctuation"><i class="solitude fas fa-hashtag"></i>Programming</span></a><a class="post-meta__tags" href="/tags/Code/"><span class="tags-name tags-punctuation"><i class="solitude fas fa-hashtag"></i>Code</span></a></div></div></div></div><h1 class="post-title">Code教程</h1><div id="post-meta"><div class="meta-secondline"></div></div></div><div class="post-radius-bottom"></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content article-container"><h1 id="AI编程利器！通过-AnyRouter-免费使用-Claude-Code-的教程"><a href="#AI编程利器！通过-AnyRouter-免费使用-Claude-Code-的教程" class="headerlink" title="AI编程利器！通过 AnyRouter 免费使用 Claude Code 的教程"></a>AI编程利器！通过 AnyRouter 免费使用 Claude Code 的教程</h1><p>AI 编程助手在开发者社区越来越受欢迎，其中 Claude Code 作为 Anthropic 推出的智能编程助手，以自然语言编程、智能补全和代码调试等能力受到广泛关注。本文将介绍如何通过 AnyRouter 免费使用 Claude Code，让你无需复杂配置即可体验这款强大的 AI 工具。</p>
+<h2 id="一、什么是-Claude-Code？"><a href="#一、什么是-Claude-Code？" class="headerlink" title="一、什么是 Claude Code？"></a>一、什么是 Claude Code？</h2><p>Claude Code 是 Anthropic 的 Claude 模型 面向开发者的特别版本，专注于代码生成、调试和解释，常见功能包括：</p>
+<ul>
+<li>自然语言转代码（Python、JavaScript、C++ 等多语言支持） </li>
+<li>自动补全和优化已有代码</li>
+<li>错误调试和解释</li>
+<li>与开发环境集成（IDE 插件、命令行等）<br>与 ChatGPT 相比，Claude Code 更注重 编程场景下的上下文理解，非常适合开发者日常工作。</li>
+</ul>
+<h2 id="二、什么是-AnyRouter？"><a href="#二、什么是-AnyRouter？" class="headerlink" title="二、什么是 AnyRouter？"></a>二、什么是 AnyRouter？</h2><p><img src="/Code%E6%95%99%E7%A8%8B/1.png" alt="img"></p>
+<p><strong>AnyRouter</strong> 是一个提供多模型聚合访问的代理平台，支持接入 <strong>Claude、ChatGPT、Gemini、通义千问</strong> 等多个大模型。通过它，用户可以：</p>
+<ul>
+<li>免费体验部分模型（包括 Claude Code） </li>
+<li>统一 API 接入，无需单独申请各大模型的账号 </li>
+<li>便捷切换不同模型，满足多样化需求</li>
+</ul>
+<h2 id="三、通过-AnyRouter-免费使用-Claude-Code"><a href="#三、通过-AnyRouter-免费使用-Claude-Code" class="headerlink" title="三、通过 AnyRouter 免费使用 Claude Code"></a>三、通过 AnyRouter 免费使用 Claude Code</h2><h3 id="1-注册并登录-AnyRouter"><a href="#1-注册并登录-AnyRouter" class="headerlink" title="1. 注册并登录 AnyRouter"></a>1. 注册并登录 AnyRouter</h3><ul>
+<li>打开邀请链接：<a target="_blank" rel="noopener" href="https://anyrouter.top/register?aff=QBCB">https://anyrouter.top/register?aff=QBCB</a> </li>
+<li>使用邮箱注册并完成登录。 </li>
+<li>注册的时候用GitHub账号登录比较方便，如果没有GitHub账号的话先去注册一个。</li>
+</ul>
+<p>**注册奖励:**新用户注册得$50,通过我的邀请链接额外的$50,就是$100了。</p>
+<h3 id="2-获取-API-Key"><a href="#2-获取-API-Key" class="headerlink" title="2. 获取 API Key"></a>2. 获取 API Key</h3><ul>
+<li>登录后进入 <strong>个人中心</strong> </li>
+<li>在 API Key 管理页面生成一个新的 Key。 </li>
+<li>复制保存，后续调用时需要用到。</li>
+</ul>
+<p><img src="/Code%E6%95%99%E7%A8%8B/2.png" alt="img"></p>
+<h3 id="3-使用或在代码中调用-Claude-Code-模型"><a href="#3-使用或在代码中调用-Claude-Code-模型" class="headerlink" title="3. 使用或在代码中调用 Claude Code 模型"></a>3. 使用或在代码中调用 Claude Code 模型</h3><p>打开代码工程目录，在控制台输入claude，就可以打开对话窗口，直接使用claude code写代码：<br><img src="/Code%E6%95%99%E7%A8%8B/3.png" alt="img"><br>也可以集成到vscode中进行使用，非常方便。</p>
+<p>AnyRouter 提供了统一的 API 接口，调用方式与 OpenAI API 类似。</p>
+<p>示例（Python 代码）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;https://api.anyrouter.ai/v1/chat/completions&quot;</span></span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">&quot;Authorization&quot;</span>: <span class="string">&quot;你自己的API_KEY&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Content-Type&quot;</span>: <span class="string">&quot;application/json&quot;</span></span><br><span class="line">&#125;</span><br><span class="line">data = &#123;</span><br><span class="line">    <span class="string">&quot;model&quot;</span>: <span class="string">&quot;claude-code&quot;</span>,</span><br><span class="line">    <span class="string">&quot;messages&quot;</span>: [</span><br><span class="line">        &#123;<span class="string">&quot;role&quot;</span>: <span class="string">&quot;user&quot;</span>, <span class="string">&quot;content&quot;</span>: <span class="string">&quot;写一个快速排序的Python代码&quot;</span>&#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">response = requests.post(url, headers=headers, json=data)</span><br><span class="line"><span class="built_in">print</span>(response.json()[<span class="string">&quot;choices&quot;</span>][<span class="number">0</span>][<span class="string">&quot;message&quot;</span>][<span class="string">&quot;content&quot;</span>])</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+
+<p>运行后，Claude Code 将返回对应的 Python 快速排序实现。</p>
+<h3 id="4-在命令行直接使用"><a href="#4-在命令行直接使用" class="headerlink" title="4. 在命令行直接使用"></a>4. 在命令行直接使用</h3><p>如果你习惯在命令行下工作，也可以用 curl 进行快速调用：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">curl https://api.anyrouter.ai/v1/chat/completions \</span><br><span class="line">  -H &quot;Authorization: Bearer YOUR_API_KEY&quot; \</span><br><span class="line">  -H &quot;Content-Type: application/json&quot; \</span><br><span class="line">  -d &#x27;&#123;</span><br><span class="line">        &quot;model&quot;: &quot;claude-code&quot;,</span><br><span class="line">        &quot;messages&quot;: [&#123;&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;帮我写一个冒泡排序的Java代码&quot;&#125;]</span><br><span class="line">      &#125;&#x27;</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+
+<h2 id="四、使用场景示例"><a href="#四、使用场景示例" class="headerlink" title="四、使用场景示例"></a>四、使用场景示例</h2><ol>
+<li><strong>代码生成</strong> 输入自然语言描述算法需求，Claude Code 会直接输出完整实现。 </li>
+<li><strong>代码解释</strong> 将一段陌生代码粘贴进去，Claude Code 会逐行解释功能和逻辑。 </li>
+<li><strong>错误调试</strong> 粘贴报错信息，Claude Code 能分析原因并给出修复建议。</li>
+</ol>
+<h2 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h2><p>通过 <strong>AnyRouter</strong>，我们可以非常方便地 <strong>免费体验 Claude Code</strong>，无需复杂注册和环境配置。对于开发者而言，这不仅节省了时间和成本，还能在日常工作中提高效率。</p>
+<p>如果你正在寻找一个 <strong>强大的 AI 编程助手</strong>，不妨试试 Claude Code + AnyRouter 的组合！</p>
+</article><div class="post-copyright"><div class="post-copyright__author_group"><div class="post-copyright__author_img"><img class="post-copyright__author_img_front" src="/img/logo.png"></div><div class="post-copyright__author_name">Leon</div><div class="post-copyright__author_desc"></div></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div id="quit-box" onclick="RemoveRewardMask()"></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本文是原创文章，采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans">CC BY-NC-SA 4.0</a>协议，完整转载请注明来自<a href="/">Wei, ITS</a></span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/AI/"><span class="tags-punctuation"><i class="solitude fas fa-hashtag"></i>AI<span class="tagsPageCount">1</span></span></a><a class="post-meta__tags" href="/tags/Development/"><span class="tags-punctuation"><i class="solitude fas fa-hashtag"></i>Development<span class="tagsPageCount">1</span></span></a><a class="post-meta__tags" href="/tags/Programming/"><span class="tags-punctuation"><i class="solitude fas fa-hashtag"></i>Programming<span class="tagsPageCount">1</span></span></a><a class="post-meta__tags" href="/tags/Code/"><span class="tags-punctuation"><i class="solitude fas fa-hashtag"></i>Code<span class="tagsPageCount">1</span></span></a></div></div></div><nav class="needEndHide pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2025/10/04/SUMO-TraCI%E6%8E%A5%E5%8F%A3/"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">SUMO-TraCI接口</div></div></a></div></nav></div></main><footer id="footer"><div id="st-footer"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div class="copyright">© 2023 - 2025 By<a class="footer-bar-link" href="/" title="Leon">Leon</a></div><div class="beian-group"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://hexo.io/" title="框架：Hexo">框架：Hexo</a><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/everfu/hexo-theme-solitude" title="主题：Solitude">主题：Solitude</a></div></div><div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://www.zhihu.com/people/wltop001-9" title="">知乎</a></div></div></div></div><div class="comment-barrage needEndHide"></div></footer></div><div><!-- Critical scripts loaded synchronously--><script src="/js/utils.js?v=3.0.21"></script><script src="/js/main.js?v=3.0.21"></script><!-- Non-critical scripts loaded asynchronously--><script async src="/js/third_party/waterfall.min.js?v=3.0.21"></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><!-- Feature-specific scripts loaded asynchronously--><script defer src="/js/tw_cn.js?v=3.0.21"></script><!-- UI enhancement scripts--><script defer src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><!-- Music player scripts--><!-- Cover color processing scripts--><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+utils.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+</script><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!-- Search functionality--><!-- Right menu functionality--><div class="js-pjax"></div></div><!-- pjax--><script>let pjax = null;
+
+function initPjax() {
+    if (typeof Pjax === 'undefined') {
+        console.warn('Pjax is not loaded yet, retrying...');
+        setTimeout(initPjax, 100);
+        return;
+    }
+
+    pjax = new Pjax({
+        elements: 'a:not([target="_blank"])',
+        selectors: ["title","#body-wrap","#site-config","meta[name=\"description\"]",".js-pjax","meta[property^=\"og:\"]","#config-diff",".rs_show",".rs_hide"],
+        cacheBust: false,
+        analytics: false,
+        scrollRestoration: false
+    })
+
+    // 将 pjax 实例挂载到全局
+    window.pjax = pjax;
+
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+        const newScript = document.createElement('script')
+        const content = item.text || item.textContent || item.innerHTML || ""
+        Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+        newScript.appendChild(document.createTextNode(content))
+        item.parentNode.replaceChild(newScript, item)
+    })
+
+    document.addEventListener('pjax:complete', () => {
+        window.refreshFn()
+
+        document.querySelectorAll('script[data-pjax]').forEach(item => {
+            const newScript = document.createElement('script')
+            const content = item.text || item.textContent || item.innerHTML || ""
+            Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+            newScript.appendChild(document.createTextNode(content))
+            item.parentNode.replaceChild(newScript, item)
+        })
+
+        GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+    })
+
+    document.addEventListener('pjax:error', (e) => {
+        if (e.request.status === 404) {
+            pjax.loadUrl('/404.html')
+        }
+    })
+}
+
+// 初始化 Pjax
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPjax);
+} else {
+    initPjax();
+}</script><!-- google adsense--></body></html>
+        <script>
+            const posts = ["2025/10/07/Code教程/","2025/10/04/SUMO-TraCI接口/","2025/10/04/SUMO学习/","2025/10/04/2021中的变化/","2025/10/04/MacOS安装SUMO/","2025/10/04/CityFlow交通仿真/","2025/10/04/强化学习基础/","2025/10/04/经验贝叶斯/","2025/10/04/Python中的模块引用与执行路径/","2025/10/04/Matplotlb用法/","2025/10/04/Python中的装饰器/","2025/10/04/Python网络通信/","2025/10/04/Python时间操作/","2025/10/04/Linux基础/","2025/10/04/Docker使用学习/","2025/10/04/CentOS开发环境配置/"];
+            function toRandomPost() {
+                const randomPost = posts[Math.floor(Math.random() * posts.length)];
+                pjax.loadUrl(GLOBAL_CONFIG.root + randomPost);
+            }
+        </script>
