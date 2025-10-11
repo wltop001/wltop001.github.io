@@ -3123,7 +3123,7 @@ body {
   min-height: 100%;
   background: var(--efu-background);
   color: var(--efu-fontcolor);
-  font-size: 16px;
+  font-size: 15px;
   font-family: PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif;
   line-height: 2;
   -webkit-tap-highlight-color: transparent;
@@ -3240,7 +3240,7 @@ kbd,
 samp,
 pre {
   font-family: "monospace", monospace;
-  font-size: 16px;
+  font-size: 15px;
 }
 small {
   font-size: 80%;
